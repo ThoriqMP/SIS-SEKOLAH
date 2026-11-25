@@ -1,0 +1,149 @@
+@extends('layouts.app')
+
+@section('title', 'Tambah Siswa')
+
+@section('content')
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Tambah Siswa Baru</h2>
+                    <a href="{{ route('students.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition">
+                        Kembali
+                    </a>
+                </div>
+
+                @if ($errors->any())
+        <div class="mb-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg p-4">
+            <div class="flex">
+                <svg class="h-5 w-5 text-red-400 dark:text-red-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800 dark:text-red-300">Terjadi kesalahan</h3>
+                    <div class="mt-1 text-sm text-red-700 dark:text-red-200">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+                <form method="POST" action="{{ route('students.store') }}">
+                    @csrf
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <label for="nama_siswa" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama Siswa</label>
+                            <input type="text" id="nama_siswa" name="nama_siswa" value="{{ old('nama_siswa') }}" required placeholder="Masukkan nama lengkap siswa"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400">
+                        </div>
+                        
+                        <div>
+                            <label for="nama_orang_tua" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama Orang Tua</label>
+                            <input type="text" id="nama_orang_tua" name="nama_orang_tua" value="{{ old('nama_orang_tua') }}" required placeholder="Masukkan nama orang tua/wali"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400">
+                        </div>
+
+                        <div>
+                            <label for="nis" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">NIS</label>
+                            <input type="text" id="nis" name="nis" value="{{ old('nis') }}" placeholder="Nomor Induk Siswa"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400">
+                        </div>
+
+                        @php
+                            $studentEducationLevel = '';
+                            $studentClassNum = '';
+                            if (old('class')) {
+                                $parts = explode(' ', old('class'));
+                                if (count($parts) === 2) {
+                                    $studentClassNum = $parts[0];
+                                    $studentEducationLevel = $parts[1];
+                                }
+                            }
+                        @endphp
+                        
+                        <div x-data="{ 
+                            educationLevel: '{{ old('education_level', $studentEducationLevel) }}',
+                            classNum: '{{ old('class_num', $studentClassNum) }}'
+                        }" class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="hidden" name="class" :value="classNum && educationLevel ? classNum + ' ' + educationLevel : ''">
+                            
+                            <div>
+                                <label for="education_level" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Jenjang Pendidikan</label>
+                                <select id="education_level" x-model="educationLevel" @change="classNum = ''"
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base cursor-pointer">
+                                    <option value="">-- Pilih Jenjang --</option>
+                                    <option value="SD">Sekolah Dasar (SD)</option>
+                                    <option value="SMP">Sekolah Menengah Pertama (SMP)</option>
+                                    <option value="SMA">Sekolah Menengah Atas (SMA)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="class_num" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tingkat Kelas</label>
+                                <select id="class_num" x-model="classNum" :disabled="!educationLevel"
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <option value="">-- Pilih Kelas --</option>
+                                    
+                                    <!-- SD Options -->
+                                    <option value="1" x-show="educationLevel === 'SD'">Kelas 1</option>
+                                    <option value="2" x-show="educationLevel === 'SD'">Kelas 2</option>
+                                    <option value="3" x-show="educationLevel === 'SD'">Kelas 3</option>
+                                    <option value="4" x-show="educationLevel === 'SD'">Kelas 4</option>
+                                    <option value="5" x-show="educationLevel === 'SD'">Kelas 5</option>
+                                    <option value="6" x-show="educationLevel === 'SD'">Kelas 6</option>
+                                    
+                                    <!-- SMP Options -->
+                                    <option value="7" x-show="educationLevel === 'SMP'">Kelas 7</option>
+                                    <option value="8" x-show="educationLevel === 'SMP'">Kelas 8</option>
+                                    <option value="9" x-show="educationLevel === 'SMP'">Kelas 9</option>
+                                    
+                                    <!-- SMA Options -->
+                                    <option value="10" x-show="educationLevel === 'SMA'">Kelas 10</option>
+                                    <option value="11" x-show="educationLevel === 'SMA'">Kelas 11</option>
+                                    <option value="12" x-show="educationLevel === 'SMA'">Kelas 12</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-md font-semibold mb-4 text-gray-800 dark:text-gray-200">Akun Siswa (Opsional)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            </div>
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Default: password123"
+                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <label for="alamat_tagihan" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Alamat Tagihan</label>
+                        <textarea id="alamat_tagihan" name="alamat_tagihan" rows="3" required
+                                  class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">{{ old('alamat_tagihan') }}</textarea>
+                    </div>
+
+                    <div class="flex justify-end space-x-3">
+                        <a href="{{ route('students.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                            Batal
+                        </a>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

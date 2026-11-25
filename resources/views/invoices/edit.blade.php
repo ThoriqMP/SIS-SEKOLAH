@@ -1,0 +1,511 @@
+@extends('layouts.app')
+
+@section('title', 'Edit Invoice')
+
+@section('content')
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Edit Invoice</h2>
+                    <a href="{{ route('invoices.show', $invoice) }}" class="inline-flex items-center justify-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Kembali
+                    </a>
+                </div>
+
+                @if ($errors->any())
+                    <div class="mb-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                        <div class="flex">
+                            <svg class="h-5 w-5 text-red-400 dark:text-red-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800 dark:text-red-200">Terjadi kesalahan</h3>
+                                <div class="mt-1 text-sm text-red-700 dark:text-red-300">
+                                    @foreach ($errors->all() as $error)
+                                        <p>{{ $error }}</p>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @php
+                    $existingItems = $invoice->invoiceDetails->map(function($detail) {
+                        return [
+                            'id_layanan' => $detail->id_layanan,
+                            'deskripsi_tambahan' => $detail->deskripsi_tambahan,
+                            'kuantitas' => $detail->kuantitas,
+                            'harga_satuan' => $detail->harga_satuan,
+                            'total' => $detail->total_biaya
+                        ];
+                    })->values()->toArray();
+
+                    $currentStudentName = $invoice->siswa ? $invoice->siswa->nama_siswa . ' - ' . $invoice->siswa->nama_orang_tua : '';
+                @endphp
+
+                <form method="POST" action="{{ route('invoices.update', $invoice) }}" 
+                      id="invoiceEditForm"
+                      data-services='@json($services)'
+                      data-existing-items='@json($existingItems)'
+                      data-student-name="@json($currentStudentName)"
+                      x-data="invoiceEditForm()" 
+                      @submit.prevent="submitForm">
+                    @csrf
+                    @method('PUT')
+                    
+                    <!-- Informasi Utama -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div>
+                            <label for="id_siswa" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ml-1">Siswa</label>
+                            
+                            <div class="relative" @click.outside="showResults = false">
+                                <input type="text" 
+                                       x-model.debounce.300ms="searchQuery"
+                                       @focus="if(searchQuery.length >= 2) showResults = true"
+                                       placeholder="Cari nama siswa atau orang tua..."
+                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-all"
+                                       autocomplete="off">
+                                <input type="hidden" name="id_siswa" x-model="form.id_siswa">
+                                
+                                <!-- Loading Indicator -->
+                                <div x-show="isSearching" class="absolute right-3 top-2.5" style="display: none;">
+                                    <svg class="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </div>
+
+                                <!-- Results Dropdown -->
+                                <div x-show="showResults && searchResults.length > 0" 
+                                     class="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+                                     style="display: none;">
+                                    <ul>
+                                        <template x-for="student in searchResults" :key="student.id">
+                                            <li @click="selectStudent(student)"
+                                                class="px-4 py-2 hover:bg-blue-50 dark:hover:bg-gray-600 cursor-pointer text-gray-900 dark:text-gray-100 border-b border-gray-100 dark:border-gray-600 last:border-0">
+                                                <div class="font-medium" x-text="student.nama_siswa"></div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400" x-text="student.nama_orang_tua"></div>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                                
+                                <div x-show="showResults && searchQuery.length >= 2 && searchResults.length === 0 && !isSearching" 
+                                     class="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg px-4 py-2 text-gray-500 dark:text-gray-400"
+                                     style="display: none;">
+                                    Tidak ada data ditemukan
+                                </div>
+                                <div x-show="form.id_siswa" class="mt-1 text-xs text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Siswa terpilih
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="tanggal_invoice" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ml-1">Tanggal Invoice</label>
+                            <input type="date" id="tanggal_invoice" name="tanggal_invoice" x-model="form.tanggal_invoice" required
+                                   value="{{ old('tanggal_invoice', $invoice->tanggal_invoice->format('Y-m-d')) }}"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base transition-all">
+                        </div>
+                        
+                        <div>
+                            <label for="jatuh_tempo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ml-1">Jatuh Tempo</label>
+                            <input type="date" id="jatuh_tempo" name="jatuh_tempo" x-model="form.jatuh_tempo" required
+                                   value="{{ old('jatuh_tempo', $invoice->jatuh_tempo->format('Y-m-d')) }}"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Status Invoice -->
+                    <div class="mb-8">
+                        <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ml-1">Status Invoice</label>
+                        <select id="status" name="status" x-model="form.status" required
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base transition-all">
+                            <option value="draft" {{ $invoice->status == 'draft' ? 'selected' : '' }} class="text-gray-900 dark:text-gray-100">Draft</option>
+                            <option value="sent" {{ $invoice->status == 'sent' ? 'selected' : '' }} class="text-gray-900 dark:text-gray-100">Terkirim</option>
+                            <option value="paid" {{ $invoice->status == 'paid' ? 'selected' : '' }} class="text-gray-900 dark:text-gray-100">Lunas</option>
+                            <option value="partially_paid" {{ $invoice->status == 'partially_paid' ? 'selected' : '' }} class="text-gray-900 dark:text-gray-100">Dibayar Setengah</option>
+                            <option value="overdue" {{ $invoice->status == 'overdue' ? 'selected' : '' }} class="text-gray-900 dark:text-gray-100">Jatuh Tempo</option>
+                        </select>
+                        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400 ml-1">
+                            Status invoice: 
+                            <span class="font-medium">
+                                <span x-text="getStatusLabel(form.status)"></span>
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- Tabel Item -->
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">Item Invoice</h3>
+                            <button type="button" @click="addItem" 
+                                    class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Tambah Item
+                            </button>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Layanan</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Deskripsi</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Kuantitas</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Harga Satuan</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                    <template x-for="(item, index) in items" :key="index">
+                                        <tr>
+                                            <td class="px-6 py-4">
+                                                <select :name="`items[${index}][id_layanan]`" x-model="item.id_layanan" required
+                                                        @change="updateHarga(index)"
+                                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base transition-all">
+                                                    <option value="" class="text-gray-900 dark:text-gray-100">Pilih Layanan</option>
+                                                    <template x-for="service in services" :key="service.id">
+                                                        <option :value="service.id" :selected="service.id == item.id_layanan" x-text="service.nama_layanan" class="text-gray-900 dark:text-gray-100"></option>
+                                                    </template>
+                                                </select>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="text" :name="`items[${index}][deskripsi_tambahan]`" x-model="item.deskripsi_tambahan"
+                                                       @input="item.is_custom = true"
+                                                       :class="item.is_custom ? 'border-amber-400 focus:ring-amber-500 focus:border-amber-500' : 'border-gray-300 dark:border-gray-600'"
+                                                       class="w-full px-4 py-3 border rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-all"
+                                                       placeholder="Deskripsi tambahan (opsional)">
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="number" :name="`items[${index}][kuantitas]`" x-model="item.kuantitas" required min="1"
+                                                       @input="calculateTotal(index)"
+                                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base transition-all">
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="text" inputmode="numeric" :name="`items[${index}][harga_satuan]`" x-model="item.harga_satuan" required placeholder="Contoh: 50.000"
+                                                       @input="calculateTotal(index)"
+                                                       class="rupiah-input w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base transition-all">
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="text" inputmode="numeric" :name="`items[${index}][total_biaya]`" x-model="item.total" required placeholder="0"
+                                                       @input="onManualTotalInput(index)"
+                                                       title="Total baris (dapat diubah manual tanpa mengubah harga satuan)"
+                                                       class="rupiah-input w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base font-bold transition-all">
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <button type="button" @click="removeItem(index)" 
+                                                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-red-600 text-white hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                                        :disabled="items.length <= 1">
+                                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                    </svg>
+                                                    Hapus
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Grand Total -->
+                        <div class="mt-6 flex justify-end">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg min-w-[280px]">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-medium text-gray-700 dark:text-gray-300">Grand Total:</span>
+                                    <span class="text-2xl font-bold text-blue-600 dark:text-blue-400" x-text="formatRupiah(grandTotal)"></span>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-500 dark:text-gray-400" x-text="terbilang"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <button type="submit" 
+                                class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Update Invoice
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+function invoiceEditForm() {
+    return {
+        services: [],
+        items: [],
+        form: {
+            id_siswa: '{{ old("id_siswa", $invoice->id_siswa) }}',
+            tanggal_invoice: '{{ old("tanggal_invoice", $invoice->tanggal_invoice->format("Y-m-d")) }}',
+            jatuh_tempo: '{{ old("jatuh_tempo", $invoice->jatuh_tempo->format("Y-m-d")) }}',
+            status: '{{ old("status", $invoice->status) }}',
+        },
+        subtotal: 0,
+        potongan: parseFloat('{{ old("potongan", $invoice->potongan ?? 0) }}') || 0,
+        grandTotal: 0,
+        terbilang: '',
+
+        // Search functionality
+        searchQuery: '',
+        searchResults: [],
+        isSearching: false,
+        showResults: false,
+        isSelectingStudent: false,
+        
+        init() {
+            try {
+                this.services = JSON.parse(this.$el.dataset.services || '[]');
+                const existingItems = JSON.parse(this.$el.dataset.existingItems || '[]');
+                const studentName = JSON.parse(this.$el.dataset.studentName || '""');
+                
+                this.searchQuery = studentName;
+
+                if (existingItems.length > 0) {
+                    this.items = existingItems.map(item => ({
+                        id_layanan: item.id_layanan || '',
+                        deskripsi_tambahan: item.deskripsi_tambahan || '',
+                        kuantitas: parseFloat(item.kuantitas) || 1,
+                        harga_satuan: window.formatRupiahNumber ? window.formatRupiahNumber(item.harga_satuan) : (item.harga_satuan || ''),
+                        total: window.formatRupiahNumber ? window.formatRupiahNumber(item.total) : (item.total || ''),
+                        is_custom: false
+                    }));
+                } else {
+                    this.addItem();
+                }
+            } catch (e) {
+                console.error('Error parsing dataset in invoiceEditForm:', e);
+            }
+
+            this.calculateGrandTotal();
+
+            let initialDate = this.form.tanggal_invoice;
+
+            // Watch for search query changes (only when user types)
+            this.$watch('searchQuery', (value) => {
+                if (this.isSelectingStudent) {
+                    this.isSelectingStudent = false;
+                    return;
+                }
+                if (value && value.length >= 2) {
+                    this.performSearch();
+                } else {
+                    this.searchResults = [];
+                    this.showResults = false;
+                }
+            });
+
+            this.$watch('form.tanggal_invoice', (value) => {
+                if (value && value !== initialDate) {
+                    initialDate = value;
+                    this.form.jatuh_tempo = this.calculateDueDate(value);
+                }
+            });
+
+            this.$watch('form.jatuh_tempo', (value) => {
+                this.items.forEach((item, index) => {
+                    const service = this.services.find(s => s.id == item.id_layanan);
+                    // Only update if it's SPP and description is currently empty
+                    if (service && service.nama_layanan.toUpperCase().includes('SPP') && !item.deskripsi_tambahan) {
+                        this.updateItemSPPDescription(index);
+                    }
+                });
+            });
+        },
+
+        performSearch() {
+            this.isSearching = true;
+            fetch(`{{ route('students.search') }}?query=${encodeURIComponent(this.searchQuery)}`)
+                .then(res => res.json())
+                .then(data => {
+                    this.searchResults = data;
+                    this.showResults = true;
+                })
+                .catch(err => {
+                    console.error('Search error:', err);
+                })
+                .finally(() => {
+                    this.isSearching = false;
+                });
+        },
+
+        selectStudent(student) {
+            this.isSelectingStudent = true;
+            this.form.id_siswa = student.id;
+            this.searchQuery = `${student.nama_siswa} - ${student.nama_orang_tua}`;
+            this.showResults = false;
+        },
+
+        calculateDueDate(dateStr) {
+            const date = new Date(dateStr);
+            if (isNaN(date)) {
+                return this.form.jatuh_tempo;
+            }
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            month += 1; // Next month
+            if (month > 12) {
+                month = 1;
+                year += 1;
+            }
+            const day = 10;
+            const mm = String(month).padStart(2, '0');
+            const dd = String(day).padStart(2, '0');
+            return `${year}-${mm}-${dd}`;
+        },
+        
+        createEmptyItem() {
+            return {
+                id_layanan: '',
+                deskripsi_tambahan: '',
+                kuantitas: 1,
+                harga_satuan: '',
+                total: '',
+                is_custom: false
+            };
+        },
+        
+        addItem() {
+            this.items.push(this.createEmptyItem());
+        },
+        
+        removeItem(index) {
+            if (this.items.length > 1) {
+                this.items.splice(index, 1);
+                this.calculateGrandTotal();
+            }
+        },
+        
+        updateHarga(index) {
+            const item = this.items[index];
+            const service = this.services.find(s => s.id == item.id_layanan);
+            
+            if (service) {
+                item.harga_satuan = window.formatRupiahNumber ? window.formatRupiahNumber(service.harga_standar) : service.harga_standar;
+                this.calculateTotal(index);
+
+                if (service.nama_layanan.toUpperCase().includes('SPP') && !item.deskripsi_tambahan) {
+                    this.updateItemSPPDescription(index);
+                }
+            }
+        },
+
+        updateItemSPPDescription(index) {
+            if (!this.form.jatuh_tempo) return;
+            const parts = this.form.jatuh_tempo.split('-');
+            if (parts.length === 3) {
+                const year = parts[0];
+                const monthIdx = parseInt(parts[1], 10) - 1;
+                const months = [
+                    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                ];
+                if (monthIdx >= 0 && monthIdx < 12) {
+                    this.items[index].deskripsi_tambahan = `SPP ${months[monthIdx]} ${year}`;
+                }
+            }
+        },
+        
+        calculateTotal(index) {
+            const item = this.items[index];
+            const kuantitas = parseFloat(item.kuantitas) || 0;
+            const rawHarga = (item.harga_satuan || 0).toString().replace(/\./g, '');
+            const harga = parseFloat(rawHarga) || 0;
+            const computedTotal = kuantitas * harga;
+            item.total = window.formatRupiahNumber ? window.formatRupiahNumber(computedTotal) : (computedTotal || '');
+            this.calculateGrandTotal();
+        },
+
+        onManualTotalInput(index) {
+            // User mengubah total baris secara manual tanpa mengubah harga satuan
+            this.calculateGrandTotal();
+        },
+        
+        calculateGrandTotal() {
+            this.grandTotal = Math.max(0, this.items.reduce((sum, item) => {
+                const rawTotal = (item.total || 0).toString().replace(/\./g, '');
+                return sum + (parseFloat(rawTotal) || 0);
+            }, 0));
+            this.terbilang = this.generateTerbilang(this.grandTotal);
+        },
+        
+        formatRupiah(angka) {
+            const val = parseFloat(angka) || 0;
+            if (val < 0) {
+                return '-Rp ' + Math.abs(val).toLocaleString('id-ID', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            }
+            return 'Rp ' + val.toLocaleString('id-ID', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        },
+        
+        generateTerbilang(angka) {
+            return 'Terbilang: Rupiah ' + (parseFloat(angka) || 0).toLocaleString('id-ID') + ',-';
+        },
+        
+        getStatusLabel(status) {
+            const labels = {
+                'draft': 'Draft - Invoice belum dikirim',
+                'sent': 'Terkirim - Invoice sudah dikirim ke siswa',
+                'paid': 'Lunas - Invoice sudah dibayar',
+                'partially_paid': 'Dibayar Setengah - Sebagian item telah dibayar',
+                'overdue': 'Jatuh Tempo - Invoice melewati batas pembayaran'
+            };
+            return labels[status] || status;
+        },
+        
+        submitForm(event) {
+            if (!this.form.id_siswa) {
+                alert('Silakan pilih siswa terlebih dahulu.');
+                return;
+            }
+            if (this.items.length === 0) {
+                alert('Minimal harus ada satu item.');
+                return;
+            }
+            
+            for (let i = 0; i < this.items.length; i++) {
+                const item = this.items[i];
+                if (!item.id_layanan || item.kuantitas === null || item.kuantitas === '' || item.kuantitas < 1) {
+                    alert(`Item ke-${i + 1} belum lengkap.`);
+                    return;
+                }
+                if (item.harga_satuan === null || item.harga_satuan === '' || item.harga_satuan < 0) {
+                    alert(`Harga satuan pada item ke-${i + 1} tidak boleh kosong / negatif.`);
+                    return;
+                }
+                if (item.total === null || item.total === '') {
+                    this.calculateTotal(i);
+                }
+            }
+            
+            const rupiahInputs = event.target.querySelectorAll('.rupiah-input');
+            rupiahInputs.forEach(input => {
+                if (window.unformatRupiahNumber) {
+                    input.value = window.unformatRupiahNumber(input.value);
+                }
+            });
+
+            event.target.submit();
+        }
+    };
+}
+</script>
+@endpush
+@endsection
