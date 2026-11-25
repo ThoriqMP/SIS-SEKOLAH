@@ -50,6 +50,7 @@ Route::middleware(['guest:web'])->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
     // Alias routes for teacher login compatibility
+    Route::get('/teacher', [AuthController::class, 'showLoginForm'])->name('teacher.index');
     Route::get('/teacher/login', [AuthController::class, 'showLoginForm'])->name('teacher.login');
     Route::post('/teacher/login', [AuthController::class, 'login'])->name('teacher.login.submit');
 });

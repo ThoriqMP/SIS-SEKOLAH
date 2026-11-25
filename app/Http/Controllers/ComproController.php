@@ -17,16 +17,29 @@ class ComproController extends Controller
 {
     public function index()
     {
-        $settings       = SchoolHeroSetting::getAllSettings();
-        $pillars        = SchoolPillar::orderBy('urutan')->get();
-        $programs       = SchoolProgram::orderBy('urutan')->get();
-        $curriculumLoads = CurriculumLoad::with('activities')->orderBy('urutan')->get();
-        $investmentItems = InvestmentItem::where('aktif', true)->orderBy('urutan')->get();
-        $activePromo    = InvestmentPromo::where('aktif', true)->with('discounts.investmentItem')->first();
-        $galleryAlbums  = GalleryAlbum::where('aktif', true)->with('photos')->orderBy('urutan')->get();
-        $learningMethods    = LearningMethod::orderBy('urutan')->get();
-        $learningHighlights = LearningHighlight::orderBy('urutan')->get();
-        $schoolProfile      = \App\Models\ProfilSekolah::first();
+        try {
+            $settings           = SchoolHeroSetting::getAllSettings();
+            $pillars            = SchoolPillar::orderBy('urutan')->get();
+            $programs           = SchoolProgram::orderBy('urutan')->get();
+            $curriculumLoads    = CurriculumLoad::with('activities')->orderBy('urutan')->get();
+            $investmentItems    = InvestmentItem::where('aktif', true)->orderBy('urutan')->get();
+            $activePromo        = InvestmentPromo::where('aktif', true)->with('discounts.investmentItem')->first();
+            $galleryAlbums      = GalleryAlbum::where('aktif', true)->with('photos')->orderBy('urutan')->get();
+            $learningMethods    = LearningMethod::orderBy('urutan')->get();
+            $learningHighlights = LearningHighlight::orderBy('urutan')->get();
+            $schoolProfile      = \App\Models\ProfilSekolah::first();
+        } catch (\Throwable $e) {
+            $settings           = [];
+            $pillars            = collect();
+            $programs           = collect();
+            $curriculumLoads    = collect();
+            $investmentItems    = collect();
+            $activePromo        = null;
+            $galleryAlbums      = collect();
+            $learningMethods    = collect();
+            $learningHighlights = collect();
+            $schoolProfile      = null;
+        }
 
         // Dynamically translate DB entries if locale is set to English
         if (app()->getLocale() === 'en') {
