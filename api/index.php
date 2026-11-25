@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+
 /**
  * Vercel Serverless Entry Point untuk Laravel (Modul Sekolah)
  * Filesystem Vercel bersifat read-only kecuali /tmp.
@@ -19,13 +22,15 @@ foreach ($tmpDirs as $dir) {
     }
 }
 
-$publicIndex = __DIR__ . '/../public/index.php';
+define('LARAVEL_START', microtime(true));
 
-if (!file_exists($publicIndex)) {
-    http_response_code(500);
-    header('Content-Type: text/plain; charset=utf-8');
-    echo 'Laravel public/index.php tidak ditemukan. Pastikan kerangka utama Laravel (public/, bootstrap/, config/, composer.json) sudah dilengkapi.';
-    exit;
+if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
+    require $maintenance;
 }
 
-require $publicIndex;
+require __DIR__ . '/../vendor/autoload.php';
+
+/** @var Application $app */
+$app = require_once __DIR__ . '/../bootstrap/app.php';
+
+$app->handleRequest(Request::capture());
