@@ -51,18 +51,18 @@
 
             {{-- Quick nav pills --}}
             <div class="mt-5 flex flex-wrap gap-2">
-                <a href="{{ route('teacher.activities.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    📝 Tugas & Ujian
+                <a href="{{ route('teacher.activities.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-pen-to-square text-teal-300"></i> Tugas & Ujian
                 </a>
-                <a href="{{ route('teacher.lessons.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    📚 Ruang Belajar
+                <a href="{{ route('teacher.lessons.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-book-open text-teal-300"></i> Ruang Belajar
                 </a>
-                <a href="{{ route('attendances.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    ✅ Absensi
+                <a href="{{ route('attendances.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-clipboard-check text-teal-300"></i> Absensi
                 </a>
                 @if ($canViewFinance ?? false)
-                <a href="{{ route('invoices.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    💰 Tagihan SPP
+                <a href="{{ route('invoices.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-file-invoice-dollar text-teal-300"></i> Tagihan SPP
                 </a>
                 @endif
             </div>
@@ -91,7 +91,7 @@
         <div class="sm:col-span-1 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl p-4 text-white shadow-md shadow-teal-500/20">
             <div class="flex items-start justify-between">
                 <span class="text-[10px] font-bold uppercase tracking-widest opacity-80">Siswa Aktif</span>
-                <span class="text-lg">🎓</span>
+                <i class="fa-solid fa-user-graduate text-base opacity-85"></i>
             </div>
             <p class="mt-2 text-3xl font-black">{{ $totalStudents ?? 0 }}</p>
             <p class="text-[10px] opacity-70 mt-1">Total terdaftar</p>
@@ -101,7 +101,7 @@
         <div class="sm:col-span-1 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl p-4 text-white shadow-md shadow-amber-400/20">
             <div class="flex items-start justify-between">
                 <span class="text-[10px] font-bold uppercase tracking-widest opacity-80">Berprestasi</span>
-                <span class="text-lg">🏆</span>
+                <i class="fa-solid fa-trophy text-base opacity-85"></i>
             </div>
             <p class="mt-2 text-3xl font-black">{{ $studentsWithHighScore ?? 0 }}</p>
             <p class="text-[10px] opacity-70 mt-1">Rata-rata ≥ 90</p>
@@ -111,7 +111,7 @@
         <div class="sm:col-span-1 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl p-4 text-white shadow-md shadow-emerald-500/20">
             <div class="flex items-start justify-between">
                 <span class="text-[10px] font-bold uppercase tracking-widest opacity-80">Hadir Hari Ini</span>
-                <span class="text-lg">📋</span>
+                <i class="fa-solid fa-clipboard-user text-base opacity-85"></i>
             </div>
             <p class="mt-2 text-3xl font-black">{{ $hadirToday ?? 0 }}<span class="text-base font-semibold opacity-70">/{{ $totalExpectedToday ?? 0 }}</span></p>
             <p class="text-[10px] opacity-70 mt-1">Kehadiran siswa</p>
@@ -121,7 +121,7 @@
         <div class="sm:col-span-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-4 text-white shadow-md shadow-indigo-500/20">
             <div class="flex items-start justify-between">
                 <span class="text-[10px] font-bold uppercase tracking-widest opacity-80">Layanan</span>
-                <span class="text-lg">⚙️</span>
+                <i class="fa-solid fa-sliders text-base opacity-85"></i>
             </div>
             <p class="mt-2 text-3xl font-black">{{ $totalServices ?? 0 }}</p>
             <p class="text-[10px] opacity-70 mt-1">Paket aktif</p>
@@ -131,7 +131,7 @@
         <div class="sm:col-span-1 bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm">
             <div class="flex items-start justify-between">
                 <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Lunas Bulan Ini</span>
-                <span class="text-lg">✅</span>
+                <i class="fa-solid fa-circle-check text-base text-emerald-500"></i>
             </div>
             <p class="mt-2 text-3xl font-black text-emerald-600">{{ $paidInvoices ?? 0 }}</p>
             <p class="text-[10px] text-slate-400 mt-1">Tagihan terbayar</p>
@@ -141,7 +141,7 @@
         <div class="sm:col-span-1 bg-white border border-rose-100 rounded-2xl p-4 shadow-sm">
             <div class="flex items-start justify-between">
                 <span class="text-[10px] font-bold uppercase tracking-widest text-rose-400">Menunggak</span>
-                <span class="text-lg">⚠️</span>
+                <i class="fa-solid fa-triangle-exclamation text-base text-rose-500"></i>
             </div>
             <p class="mt-2 text-3xl font-black text-rose-600">{{ $overdueInvoices ?? 0 }}</p>
             <p class="text-[10px] text-slate-400 mt-1">Perlu tindakan</p>
@@ -162,7 +162,9 @@
                 {{-- Tugas & Ujian --}}
                 <a href="{{ route('teacher.activities.index') }}"
                    class="group relative overflow-hidden bg-white hover:bg-purple-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-purple-500/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-purple-100 group-hover:bg-white/20 text-purple-600 group-hover:text-white flex items-center justify-center transition text-lg">📝</div>
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 group-hover:bg-white/20 text-purple-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Tugas & Ujian</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-purple-200 leading-tight mt-0.5">Kelola penugasan siswa</p>
@@ -175,7 +177,9 @@
                 {{-- Ruang Belajar --}}
                 <a href="{{ route('teacher.lessons.index') }}"
                    class="group relative overflow-hidden bg-white hover:bg-teal-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-teal-500/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-teal-100 group-hover:bg-white/20 text-teal-600 group-hover:text-white flex items-center justify-center transition text-lg">📚</div>
+                    <div class="w-10 h-10 rounded-xl bg-teal-100 group-hover:bg-white/20 text-teal-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Ruang Belajar</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-teal-200 leading-tight mt-0.5">Kursus & materi interaktif</p>
@@ -185,7 +189,9 @@
                 {{-- Absensi --}}
                 <a href="{{ route('attendances.index') }}"
                    class="group overflow-hidden bg-white hover:bg-emerald-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-emerald-500/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 group-hover:bg-white/20 text-emerald-600 group-hover:text-white flex items-center justify-center transition text-lg">✅</div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 group-hover:bg-white/20 text-emerald-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Absensi</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-emerald-200 leading-tight mt-0.5">Rekap kehadiran harian</p>
@@ -195,7 +201,9 @@
                 {{-- Data Siswa --}}
                 <a href="{{ route('students.index') }}"
                    class="group overflow-hidden bg-white hover:bg-indigo-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-indigo-500/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-100 group-hover:bg-white/20 text-indigo-600 group-hover:text-white flex items-center justify-center transition text-lg">👨‍🎓</div>
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 group-hover:bg-white/20 text-indigo-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Data Siswa</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-indigo-200 leading-tight mt-0.5">Profil & kelas siswa</p>
@@ -205,7 +213,9 @@
                 {{-- Manajemen Rapor --}}
                 <a href="{{ route('admin.reports.index') }}"
                    class="group overflow-hidden bg-white hover:bg-amber-500 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-amber-400/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 group-hover:bg-white/20 text-amber-600 group-hover:text-white flex items-center justify-center transition text-lg">📊</div>
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 group-hover:bg-white/20 text-amber-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Manajemen Rapor</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-amber-100 leading-tight mt-0.5">Rapor akademik & diniyah</p>
@@ -216,7 +226,9 @@
                 @if ($canViewFinance ?? false)
                 <a href="{{ route('invoices.index') }}"
                    class="group overflow-hidden bg-white hover:bg-green-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-green-500/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-green-100 group-hover:bg-white/20 text-green-600 group-hover:text-white flex items-center justify-center transition text-lg">💰</div>
+                    <div class="w-10 h-10 rounded-xl bg-green-100 group-hover:bg-white/20 text-green-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Tagihan SPP</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-green-200 leading-tight mt-0.5">Kelola SPP & pembayaran</p>
@@ -227,7 +239,9 @@
                 {{-- Kelas Video WebRTC --}}
                 <a href="{{ route('teacher.video-conferences.index') }}"
                    class="group overflow-hidden bg-white hover:bg-rose-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-rose-500/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-rose-100 group-hover:bg-white/20 text-rose-600 group-hover:text-white flex items-center justify-center transition text-lg">🎥</div>
+                    <div class="w-10 h-10 rounded-xl bg-rose-100 group-hover:bg-white/20 text-rose-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Kelas Video</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-rose-200 leading-tight mt-0.5">Ruang WebRTC online</p>
@@ -237,7 +251,9 @@
                 {{-- Pendaftaran PPDB --}}
                 <a href="{{ route('admin.registrations.index') }}"
                    class="group overflow-hidden bg-white hover:bg-slate-800 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-slate-700/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-slate-100 group-hover:bg-white/20 text-slate-600 group-hover:text-white flex items-center justify-center transition text-lg">📋</div>
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 group-hover:bg-white/20 text-slate-600 group-hover:text-white flex items-center justify-center transition text-base">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">PPDB</p>
                         <p class="text-[11px] text-slate-400 group-hover:text-slate-300 leading-tight mt-0.5">Pendaftaran siswa baru</p>
@@ -279,7 +295,7 @@
 
                 @if(($recentAttendances ?? collect())->isEmpty())
                 <div class="text-center py-4">
-                    <span class="text-3xl">📋</span>
+                    <i class="fa-solid fa-clipboard-list text-2xl text-slate-300"></i>
                     <p class="text-xs text-slate-400 mt-2">Belum ada absensi hari ini</p>
                 </div>
                 @else
@@ -310,7 +326,7 @@
                 </div>
                 @if(($todayConferences ?? collect())->isEmpty())
                 <div class="text-center py-4">
-                    <span class="text-3xl">🎥</span>
+                    <i class="fa-solid fa-video-slash text-2xl text-slate-300"></i>
                     <p class="text-xs text-slate-400 mt-2">Tidak ada kelas terjadwal</p>
                 </div>
                 @else
