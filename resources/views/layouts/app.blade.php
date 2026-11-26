@@ -265,10 +265,72 @@
                 </div>
             </header>
 
-            <main class="flex-1">
+            <main class="flex-1 pb-24 lg:pb-0">
                 @yield('content')
             </main>
         </div>
+
+        {{-- Mobile Floating Bottom Navigation Bar (Student & Teacher/Admin) --}}
+        <nav id="tour-mobile-nav"
+             class="lg:hidden fixed bottom-3 inset-x-3 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl shadow-xl shadow-slate-900/10 px-2 py-1.5">
+            @if (auth()->user()->isStudent())
+                <div class="grid grid-cols-5 gap-1 text-[10px] font-bold">
+                    <a href="{{ route('student.dashboard') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('student.dashboard') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-house text-sm mb-0.5"></i>
+                        <span>Beranda</span>
+                    </a>
+                    <a href="{{ route('student.activities.index') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('student.activities.*') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-pen-to-square text-sm mb-0.5"></i>
+                        <span>Tugas</span>
+                    </a>
+                    <a href="{{ route('student.lessons.index') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('student.lessons.*') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-book-open text-sm mb-0.5"></i>
+                        <span>Belajar</span>
+                    </a>
+                    <a href="{{ route('student.reports') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('student.reports*') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-award text-sm mb-0.5"></i>
+                        <span>Rapor</span>
+                    </a>
+                    <button type="button" @click="sidebarOpen = true"
+                            class="flex flex-col items-center justify-center py-1.5 rounded-xl text-slate-500 hover:text-sky-700 transition cursor-pointer">
+                        <i class="fa-solid fa-bars text-sm mb-0.5"></i>
+                        <span>Menu</span>
+                    </button>
+                </div>
+            @else
+                <div class="grid grid-cols-5 gap-1 text-[10px] font-bold">
+                    <a href="{{ route('dashboard') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('dashboard') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-chart-pie text-sm mb-0.5"></i>
+                        <span>Beranda</span>
+                    </a>
+                    <a href="{{ route('teacher.activities.index') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('teacher.activities.*', 'teacher.assignments.*', 'teacher.exams.*') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-pen-to-square text-sm mb-0.5"></i>
+                        <span>Tugas</span>
+                    </a>
+                    <a href="{{ route('teacher.lessons.index') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('teacher.lessons.*', 'teacher.courses.*') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-book-open text-sm mb-0.5"></i>
+                        <span>Belajar</span>
+                    </a>
+                    <a href="{{ route('attendances.index') }}"
+                       class="flex flex-col items-center justify-center py-1.5 rounded-xl transition {{ request()->routeIs('attendances.*') ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:text-sky-700' }}">
+                        <i class="fa-solid fa-clipboard-check text-sm mb-0.5"></i>
+                        <span>Absensi</span>
+                    </a>
+                    <button type="button" @click="sidebarOpen = true"
+                            class="flex flex-col items-center justify-center py-1.5 rounded-xl text-slate-500 hover:text-sky-700 transition cursor-pointer">
+                        <i class="fa-solid fa-bars text-sm mb-0.5"></i>
+                        <span>Menu</span>
+                    </button>
+                </div>
+            @endif
+        </nav>
     </div>
 @else
     @yield('content')
