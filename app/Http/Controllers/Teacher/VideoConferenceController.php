@@ -131,4 +131,54 @@ class VideoConferenceController extends Controller
 
         return redirect()->route('teacher.video-conferences.index')->with('success', 'Pertemuan kelas online telah diakhiri untuk semua peserta.');
     }
+
+    public function startServer()
+    {
+        $signalingUrl = config('app.signaling_server_url');
+
+        // Jika berjalan di Vercel Serverless, PM2 lokal tidak tersedia; cek status server eksternal
+        if (env('VERCEL') || !$this->isPm2Available()) {
+            if ($signalingUrl) {
+                try {
+                    $healthUrl = rtrim($signalingUrl, '/') . '/health';
+                    $ctx = stream_context_create(['http' => ['timeout' => 3]]);
+                    $resp = @file_get_contents($healthUrl, false, $ctx);
+                    if ($resp !== false) {
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Server signaling eksternal aktif dan siap dihubungkan.',
+                        ]);
+                    }
+                } catch (\Throwable $e) {
+                    // lanjut ke pesan instruksi
+                }
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Vercel serverless tidak mendukung daemon PM2 secara lokal. Jalankan script signaling-server/ via PM2 di VPS/Railway/Render lalu isi SIGNALING_SERVER_URL di Vercel.',
+            ], 422);
+        }
+
+        // Jalankan via PM2 di server/VPS lokal
+        $ecosystemPath = base_path('signaling-server/ecosystem.config.cjs');
+        $cmd = 'pm2 start ' . escapeshellarg($ecosystemPath) . ' --update-env || pm2 restart sis-sekolah-signaling';
+        exec($cmd . ' 2>&1', $output, $exitCode);
+
+        return response()->json([
+            'success' => $exitCode === 0,
+            'message' => $exitCode === 0
+                ? 'Server signaling PM2 berhasil dijalankan.'
+                : 'Gagal menjalankan PM2: ' . implode("\n", $output),
+        ], $exitCode === 0 ? 200 : 500);
+    }
+
+    private function isPm2Available(): bool
+    {
+        if (!function_exists('exec')) {
+            return false;
+        }
+        @exec('command -v pm2', $out, $code);
+        return $code === 0;
+    }
 }
