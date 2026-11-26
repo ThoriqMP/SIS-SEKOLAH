@@ -16,6 +16,7 @@ use App\Models\Siswa;
 use App\Models\StudentReport;
 use App\Models\Subject;
 use App\Models\User;
+use App\Models\VideoConference;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -76,20 +77,43 @@ class DatabaseSeeder extends Seeder
             ReportCategory::firstOrCreate(['name' => $cat]);
         }
 
-        // 4. Mata Pelajaran
+        // 4. Mata Pelajaran Lengkap (Umum / Akademi Negeri & Madrasah Aliyah / MA)
         $subjectNames = [
+            // Umum / Akademi Negeri
             ['name' => 'Matematika', 'code' => 'MTK', 'kkm' => 75],
             ['name' => 'Bahasa Indonesia', 'code' => 'BIND', 'kkm' => 75],
-            ['name' => 'IPA Terpadu', 'code' => 'IPA', 'kkm' => 75],
             ['name' => 'Bahasa Inggris', 'code' => 'BING', 'kkm' => 75],
+            ['name' => 'IPA Terpadu', 'code' => 'IPA', 'kkm' => 75],
+            ['name' => 'IPS Terpadu', 'code' => 'IPS', 'kkm' => 75],
+            ['name' => 'Pendidikan Pancasila (PPKn)', 'code' => 'PPKN', 'kkm' => 75],
+            ['name' => 'Fisika', 'code' => 'FIS', 'kkm' => 75],
+            ['name' => 'Kimia', 'code' => 'KIM', 'kkm' => 75],
+            ['name' => 'Biologi', 'code' => 'BIO', 'kkm' => 75],
+            ['name' => 'Ekonomi', 'code' => 'EKO', 'kkm' => 75],
+            ['name' => 'Sosiologi', 'code' => 'SOS', 'kkm' => 75],
+            ['name' => 'Geografi', 'code' => 'GEO', 'kkm' => 75],
+            ['name' => 'Sejarah Indonesia', 'code' => 'SEJ', 'kkm' => 75],
+            ['name' => 'Informatika / TIK', 'code' => 'TIK', 'kkm' => 75],
+            ['name' => 'Seni Budaya', 'code' => 'SBD', 'kkm' => 75],
+            ['name' => 'Pendidikan Jasmani (PJOK)', 'code' => 'PJOK', 'kkm' => 75],
+            // Madrasah Aliyah (MA) & Keagamaan
+            ['name' => "Al-Qur'an Hadits", 'code' => 'QH', 'kkm' => 75],
+            ['name' => 'Akidah Akhlak', 'code' => 'AA', 'kkm' => 75],
+            ['name' => 'Fikih', 'code' => 'FIK', 'kkm' => 75],
+            ['name' => 'Sejarah Kebudayaan Islam (SKI)', 'code' => 'SKI', 'kkm' => 75],
+            ['name' => 'Bahasa Arab', 'code' => 'BAR', 'kkm' => 75],
+            ['name' => "Tahfidz Al-Qur'an", 'code' => 'THZ', 'kkm' => 80],
         ];
         $reportSubjects = [];
         foreach ($subjectNames as $idx => $s) {
             Subject::firstOrCreate(['name' => $s['name']], $s);
-            $reportSubjects[] = ReportSubject::firstOrCreate(
+            $rSub = ReportSubject::firstOrCreate(
                 ['name' => $s['name'], 'report_category_id' => $akademikCat->id],
                 ['kkm' => $s['kkm'], 'order' => $idx + 1]
             );
+            if ($idx < 4) {
+                $reportSubjects[] = $rSub;
+            }
         }
 
         // 5. Layanan Sekolah
@@ -258,6 +282,38 @@ class DatabaseSeeder extends Seeder
                     'status' => 'hadir',
                     'notes' => null,
                     'recorded_by' => $teacher->id,
+                ]
+            );
+        }
+
+        // 10. Data Dummy Ruangan WebRTC (Video Conference)
+        $rooms = [
+            [
+                'room_name' => 'room-matematika-interaktif',
+                'title' => 'Kelas Matematika Interaktif (Akademi Negeri)',
+                'scheduled_at' => now()->addMinutes(30),
+            ],
+            [
+                'room_name' => 'room-tahfidz-fikih-ma',
+                'title' => 'Bimbingan Tahfidz & Fikih (MA)',
+                'scheduled_at' => now()->addHours(2),
+            ],
+            [
+                'room_name' => 'room-english-speaking-1on1',
+                'title' => 'English Speaking Club 1-on-1',
+                'scheduled_at' => now()->addDay(),
+            ],
+        ];
+
+        foreach ($rooms as $room) {
+            VideoConference::firstOrCreate(
+                ['room_name' => $room['room_name']],
+                [
+                    'teacher_id' => $teacher->id,
+                    'title' => $room['title'],
+                    'class' => [(int) $studentUser->id],
+                    'scheduled_at' => $room['scheduled_at'],
+                    'is_active' => DB::raw('true'),
                 ]
             );
         }
