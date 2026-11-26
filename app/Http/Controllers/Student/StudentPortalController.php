@@ -71,7 +71,7 @@ class StudentPortalController extends Controller
             'is_profile_completed' => true,
         ]);
 
-        return redirect()->route('student.dashboard')->with('success', 'Data pribadi berhasil dilengkapi! Selamat datang di Sayyidah School Portal.');
+        return redirect()->route('student.dashboard')->with('success', 'Data pribadi berhasil dilengkapi! Selamat datang di SIS SEKOLAH.');
     }
 
     public function dashboard()

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 min-h-screen" 
+<div class="py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-sky-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 min-h-screen" 
      x-data="{ 
         activeSection: localStorage.getItem('student_reports_active_tab') || 'academic', 
         selectedPeriod: '' 
@@ -9,7 +9,7 @@
      x-init="$watch('activeSection', val => localStorage.setItem('student_reports_active_tab', val))">
     <!-- Immersive Header -->
     <div class="mb-8 sm:mb-12">
-        <span class="px-3 py-1 bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 rounded-full text-[9px] font-black uppercase tracking-widest border border-purple-200/20 shadow-sm">
+        <span class="px-3 py-1 bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400 rounded-full text-[9px] font-black uppercase tracking-widest border border-sky-200/20 shadow-sm">
             Portal Akademik
         </span>
         <h2 class="text-3xl md:text-5xl font-black text-gray-955 dark:text-white mt-3 mb-4 tracking-tight leading-tight font-display">Dashboard Perkembangan</h2>
@@ -17,19 +17,19 @@
     </div>
 
     <!-- Dashboard Navigation Tabs -->
-    <div class="flex gap-3 mb-8 sm:mb-10 overflow-x-auto pb-2 scrollbar-hide border-b border-purple-100/50 dark:border-purple-900/40">
+    <div class="flex gap-3 mb-8 sm:mb-10 overflow-x-auto pb-2 scrollbar-hide border-b border-sky-100/50 dark:border-sky-900/40">
         <button @click="activeSection = 'academic'" 
-                :class="activeSection === 'academic' ? 'bg-purple-650 text-white shadow-lg shadow-purple-500/20' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-100 dark:border-gray-700/60'" 
+                :class="activeSection === 'academic' ? 'bg-sky-600 text-white shadow-lg shadow-sky-500/20' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-100 dark:border-gray-700/60'" 
                 class="px-6 py-3 rounded-full font-black transition-all duration-300 whitespace-nowrap uppercase tracking-widest text-[9px] sm:text-xs">
             Tren Akademik
         </button>
         <button @click="activeSection = 'spiritual'" 
-                :class="activeSection === 'spiritual' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-100 dark:border-gray-700/60'" 
+                :class="activeSection === 'spiritual' ? 'bg-sky-600 text-white shadow-lg shadow-sky-500/20' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-100 dark:border-gray-700/60'" 
                 class="px-6 py-3 rounded-full font-black transition-all duration-300 whitespace-nowrap uppercase tracking-widest text-[9px] sm:text-xs">
             Diniyah & Ibadah
         </button>
         <button @click="activeSection = 'activities'" 
-                :class="activeSection === 'activities' ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/20' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-100 dark:border-gray-700/60'" 
+                :class="activeSection === 'activities' ? 'bg-sky-600 text-white shadow-lg shadow-sky-500/20' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-100 dark:border-gray-700/60'" 
                 class="px-6 py-3 rounded-full font-black transition-all duration-300 whitespace-nowrap uppercase tracking-widest text-[9px] sm:text-xs">
             Project Based Learning (PBL)
         </button>
@@ -53,7 +53,7 @@
                             <h3 class="text-base sm:text-xl font-black text-gray-955 dark:text-white uppercase tracking-wider">Grafik Perkembangan Nilai</h3>
                             <p class="text-gray-450 dark:text-gray-500 font-bold text-xs mt-1">Visualisasi kenaikan nilai rata-rata per periode akademik.</p>
                         </div>
-                        <div class="hidden sm:flex h-12 w-12 bg-purple-50 dark:bg-purple-950/40 rounded-2xl items-center justify-center text-purple-600 dark:text-purple-400 shadow-inner group-hover:scale-105 transition-transform border border-purple-250/20">
+                        <div class="hidden sm:flex h-12 w-12 bg-sky-50 dark:bg-sky-950/40 rounded-2xl items-center justify-center text-sky-600 dark:text-sky-400 shadow-inner group-hover:scale-105 transition-transform border border-sky-250/20">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                         </div>
                     </div>
@@ -64,8 +64,8 @@
 
                 <!-- Academic Summary Cards -->
                 <div class="space-y-6">
-                    <div class="bg-gradient-to-br from-purple-650 via-purple-750 to-indigo-800 p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] text-white shadow-xl shadow-purple-900/10 relative overflow-hidden group border border-white/20">
-                        <p class="text-purple-200 font-black uppercase tracking-widest text-[9px] mb-2 font-display">Pencapaian Tertinggi</p>
+                    <div class="bg-gradient-to-br from-sky-600 via-sky-700 to-sky-800 p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] text-white shadow-xl shadow-sky-900/10 relative overflow-hidden group border border-white/20">
+                        <p class="text-sky-200 font-black uppercase tracking-widest text-[9px] mb-2 font-display">Pencapaian Tertinggi</p>
                         @php
                             $maxScore = $academicTrend->max('average') ?: 0;
                             $latestScore = $academicTrend->last()['average'] ?? 0;
@@ -82,7 +82,7 @@
                             @endif
                             Naik dari periode lalu
                         </div>
-                        <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-purple-500/20 rounded-full blur-2xl group-hover:scale-110 transition-transform"></div>
+                        <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-sky-500/20 rounded-full blur-2xl group-hover:scale-110 transition-transform"></div>
                     </div>
 
                     <div class="clay-card p-6 sm:p-8 border border-white/40 dark:border-gray-800/40 shadow-xl">
@@ -96,7 +96,7 @@
                             @endphp
                             @if($bestSubject)
                                 <div class="flex items-center gap-4 p-4.5 bg-slate-100/50 dark:bg-gray-900/50 rounded-2xl border border-slate-200/20 shadow-inner group">
-                                    <div class="h-12 w-12 bg-purple-100 text-purple-650 dark:bg-purple-950/40 dark:text-purple-400 rounded-xl flex items-center justify-center font-black shadow-inner group-hover:scale-105 transition-transform border border-purple-200/10">
+                                    <div class="h-12 w-12 bg-sky-100 text-sky-600 dark:bg-sky-950/40 dark:text-sky-400 rounded-xl flex items-center justify-center font-black shadow-inner group-hover:scale-105 transition-transform border border-sky-200/10">
                                         {{ substr($bestSubject->subject->name, 0, 1) }}
                                     </div>
                                     <div>
@@ -118,7 +118,7 @@
                 <div class="clay-card p-6 sm:p-8 border border-white/40 dark:border-gray-800/40 shadow-xl overflow-hidden relative group">
                     <div class="relative z-10">
                         <div class="flex items-center gap-4 mb-8">
-                            <div class="h-12 w-12 bg-purple-50 dark:bg-purple-950/40 text-purple-650 dark:text-purple-450 rounded-xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform border border-purple-250/20">
+                            <div class="h-12 w-12 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 rounded-xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform border border-sky-250/20">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                             </div>
                             <div>
@@ -130,13 +130,13 @@
                         @if($latestDiniyah && $latestDiniyah->diniyahReports->count() > 0)
                             <div class="space-y-4">
                                 @foreach($latestDiniyah->diniyahReports as $dr)
-                                    <div class="flex items-center justify-between p-5 bg-purple-50/20 dark:bg-purple-950/20 rounded-2xl border border-purple-100/50 dark:border-purple-900/30">
+                                    <div class="flex items-center justify-between p-5 bg-sky-50/20 dark:bg-sky-950/20 rounded-2xl border border-sky-100/50 dark:border-sky-900/30">
                                         <div>
                                             <p class="text-sm sm:text-base font-black text-gray-805 dark:text-gray-200">Surat {{ \App\Helpers\ReportHelper::getSurahs()[$dr->surah_id-1]['name'] }}</p>
-                                            <p class="text-[10px] font-black text-purple-650 dark:text-purple-400 mt-0.5 uppercase">Ayat {{ $dr->start_ayah }} - {{ $dr->end_ayah }}</p>
+                                            <p class="text-[10px] font-black text-sky-600 dark:text-sky-400 mt-0.5 uppercase">Ayat {{ $dr->start_ayah }} - {{ $dr->end_ayah }}</p>
                                         </div>
                                         <div class="text-right">
-                                            <div class="text-xl sm:text-2xl font-black text-purple-605 dark:text-purple-400">{{ $dr->mutu_code }}</div>
+                                            <div class="text-xl sm:text-2xl font-black text-sky-605 dark:text-sky-400">{{ $dr->mutu_code }}</div>
                                             <div class="text-[8px] font-black uppercase text-gray-400 dark:text-gray-500 tracking-widest mt-0.5">{{ \App\Helpers\ReportHelper::getMutuDescription($dr->mutu_code) }}</div>
                                         </div>
                                     </div>
@@ -146,14 +146,14 @@
                             <p class="text-gray-400 dark:text-gray-500 font-bold text-center py-12 italic text-sm">Belum ada data hafalan terbaru.</p>
                         @endif
                     </div>
-                    <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-purple-500/5 rounded-full blur-2xl group-hover:scale-110 transition-transform"></div>
+                    <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-sky-500/5 rounded-full blur-2xl group-hover:scale-110 transition-transform"></div>
                 </div>
 
                 <!-- Latest Ibadah Summary -->
                 <div class="clay-card p-6 sm:p-8 border border-white/40 dark:border-gray-800/40 shadow-xl overflow-hidden relative group">
                     <div class="relative z-10">
                         <div class="flex items-center gap-4 mb-8">
-                            <div class="h-12 w-12 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-650 dark:text-indigo-400 rounded-xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform border border-indigo-100/10">
+                            <div class="h-12 w-12 bg-sky-50 dark:bg-sky-950/40 text-sky-650 dark:text-sky-400 rounded-xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform border border-sky-100/10">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z"></path></svg>
                             </div>
                             <div>
@@ -165,7 +165,7 @@
                         @if($latestIbadah && $latestIbadah->ibadahReport)
                             <div class="grid grid-cols-2 gap-4">
                                 @foreach(['alfatihah' => 'Al-Fatihah', 'rukuk' => 'Rukuk', 'sujud' => 'Sujud', 'tasyahud_akhir' => 'Tasyahud'] as $key => $label)
-                                    <div class="p-4 bg-purple-50/20 dark:bg-purple-950/20 rounded-2xl border border-purple-100/30 dark:border-purple-900/30 text-center">
+                                    <div class="p-4 bg-sky-50/20 dark:bg-sky-950/20 rounded-2xl border border-sky-100/30 dark:border-sky-900/30 text-center">
                                         <p class="text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1.5">{{ $label }}</p>
                                         @php
                                             $score = '-';
@@ -178,12 +178,12 @@
                                             }
                                             $score = $score ?: '-';
                                         @endphp
-                                        <div class="text-xl sm:text-2xl font-black text-purple-650 dark:text-purple-400 shadow-sm">{{ $score }}</div>
+                                        <div class="text-xl sm:text-2xl font-black text-sky-600 dark:text-sky-400 shadow-sm">{{ $score }}</div>
                                     </div>
                                 @endforeach
                             </div>
                             <div class="mt-8 text-center">
-                                <a href="{{ route('student.reports.show', $latestIbadah) }}" class="text-xs font-black text-purple-600 dark:text-purple-400 uppercase tracking-widest hover:underline flex items-center justify-center gap-1.5">
+                                <a href="{{ route('student.reports.show', $latestIbadah) }}" class="text-xs font-black text-sky-600 dark:text-sky-400 uppercase tracking-widest hover:underline flex items-center justify-center gap-1.5">
                                     Lihat Selengkapnya &rarr;
                                 </a>
                             </div>
@@ -191,7 +191,7 @@
                             <p class="text-gray-400 dark:text-gray-500 font-bold text-center py-12 italic text-sm">Belum ada data praktek ibadah terbaru.</p>
                         @endif
                     </div>
-                    <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-purple-500/5 rounded-full blur-2xl group-hover:scale-110 transition-transform"></div>
+                    <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-sky-500/5 rounded-full blur-2xl group-hover:scale-110 transition-transform"></div>
                 </div>
             </div>
         </div>
@@ -199,7 +199,7 @@
         <!-- 3. Activity Log (PBL) Section -->
         <div x-show="activeSection === 'activities'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" style="display: none;">
             <div class="clay-card border border-white/40 dark:border-gray-800/40 shadow-xl overflow-hidden">
-                <div class="p-6 sm:p-8 border-b border-purple-100/50 dark:border-purple-900/30 bg-slate-100/30 dark:bg-gray-900/20">
+                <div class="p-6 sm:p-8 border-b border-sky-100/50 dark:border-sky-900/30 bg-slate-100/30 dark:bg-gray-900/20">
                     <h3 class="text-base sm:text-xl font-black text-gray-955 dark:text-white uppercase tracking-wider">Kecerdasan & Karakter PBL</h3>
                     <p class="text-gray-400 dark:text-gray-500 font-bold text-xs mt-1">Metrik karakter tertinggi yang terakumulasi dari penilaian proyek harian kelas.</p>
                     
@@ -234,22 +234,22 @@
                             @endif
 
                             @if($topIntelligences->count() > 0)
-                            <div class="bg-white/80 dark:bg-gray-800/80 p-5 rounded-2xl border border-purple-100 dark:border-purple-900/30 shadow-inner">
-                                <h4 class="text-[9px] font-black text-purple-600 dark:text-purple-500 uppercase tracking-widest mb-3">Multiple Intelligence</h4>
+                            <div class="bg-white/80 dark:bg-gray-800/80 p-5 rounded-2xl border border-sky-100 dark:border-sky-900/30 shadow-inner">
+                                <h4 class="text-[9px] font-black text-sky-600 dark:text-sky-500 uppercase tracking-widest mb-3">Multiple Intelligence</h4>
                                 <div class="flex flex-wrap gap-1.5">
                                     @foreach($topIntelligences as $trait)
-                                        <span class="px-2.5 py-1 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-full text-[9px] font-bold">{{ $trait }}</span>
+                                        <span class="px-2.5 py-1 bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 rounded-full text-[9px] font-bold">{{ $trait }}</span>
                                     @endforeach
                                 </div>
                             </div>
                             @endif
 
                             @if($topStrengths->count() > 0)
-                            <div class="bg-white/80 dark:bg-gray-800/80 p-5 rounded-2xl border border-indigo-100 dark:border-indigo-900/30 shadow-inner">
-                                <h4 class="text-[9px] font-black text-indigo-600 dark:text-indigo-500 uppercase tracking-widest mb-3">Potential Strength</h4>
+                            <div class="bg-white/80 dark:bg-gray-800/80 p-5 rounded-2xl border border-sky-100 dark:border-sky-900/30 shadow-inner">
+                                <h4 class="text-[9px] font-black text-sky-600 dark:text-sky-500 uppercase tracking-widest mb-3">Potential Strength</h4>
                                 <div class="flex flex-wrap gap-1.5">
                                     @foreach($topStrengths as $trait)
-                                        <span class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-full text-[9px] font-bold">{{ $trait }}</span>
+                                        <span class="px-2.5 py-1 bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 rounded-full text-[9px] font-bold">{{ $trait }}</span>
                                     @endforeach
                                 </div>
                             </div>
@@ -259,18 +259,18 @@
                 </div>
 
                 <!-- Probing Timeline Feed -->
-                <div class="divide-y divide-purple-100/50 dark:divide-purple-900/40">
+                <div class="divide-y divide-sky-100/50 dark:divide-sky-900/40">
                     @forelse($probingReports as $pr)
                         @foreach($pr->probingActivities as $activity)
                             <div class="p-6 sm:p-8 hover:bg-slate-50/40 dark:hover:bg-slate-900/10 transition-all flex flex-col sm:flex-row gap-5 sm:gap-8">
-                                <div class="flex-shrink-0 text-left sm:text-center flex sm:flex-col items-center sm:items-center gap-2 sm:gap-0 bg-purple-50/30 dark:bg-purple-950/20 p-4 rounded-2xl border border-purple-100/30 shadow-inner self-start">
+                                <div class="flex-shrink-0 text-left sm:text-center flex sm:flex-col items-center sm:items-center gap-2 sm:gap-0 bg-sky-50/30 dark:bg-sky-950/20 p-4 rounded-2xl border border-sky-100/30 shadow-inner self-start">
                                     <div class="text-2xl sm:text-3xl font-black text-gray-955 dark:text-white leading-none">{{ $activity->created_at->format('d') }}</div>
-                                    <div class="text-[8px] sm:text-[10px] font-black text-purple-500 dark:text-purple-400 uppercase tracking-wider sm:mt-1.5">{{ $activity->created_at->format('M') }}</div>
+                                    <div class="text-[8px] sm:text-[10px] font-black text-sky-500 dark:text-sky-400 uppercase tracking-wider sm:mt-1.5">{{ $activity->created_at->format('M') }}</div>
                                 </div>
                                 <div class="flex-1">
                                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                                         <h4 class="text-base sm:text-lg font-black text-gray-900 dark:text-white leading-tight font-display">{{ $activity->activity_name }}</h4>
-                                        <span class="px-3 py-1 bg-purple-50 dark:bg-purple-950 text-purple-650 dark:text-purple-450 text-[8px] font-black uppercase tracking-widest rounded-full self-start border border-purple-105/10">
+                                        <span class="px-3 py-1 bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 text-[8px] font-black uppercase tracking-widest rounded-full self-start border border-sky-100/10">
                                             {{ $pr->period }}
                                         </span>
                                     </div>
@@ -287,7 +287,7 @@
                                         @endforeach
                                     </div>
                                     <div class="mt-5">
-                                        <a href="{{ route('student.reports.show', $pr) }}" class="inline-flex items-center gap-1.5 px-4.5 py-2 bg-purple-50 dark:bg-purple-950/40 text-purple-650 dark:text-purple-400 font-black text-[9px] uppercase tracking-widest rounded-xl hover:bg-purple-600 hover:text-white transition duration-200 shadow-sm">
+                                        <a href="{{ route('student.reports.show', $pr) }}" class="inline-flex items-center gap-1.5 px-4.5 py-2 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 font-black text-[9px] uppercase tracking-widest rounded-xl hover:bg-sky-600 hover:text-white transition duration-200 shadow-sm">
                                             Detail Proyek
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                         </a>
@@ -297,7 +297,7 @@
                         @endforeach
                     @empty
                         <div class="p-16 text-center text-gray-400 italic">
-                            <svg class="w-12 h-12 text-purple-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <svg class="w-12 h-12 text-sky-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <p class="text-sm font-bold text-gray-500">Belum ada catatan aktivitas pembelajaran berbasis proyek (PBL) diterbitkan.</p>
                         </div>
                     @endforelse
@@ -315,7 +315,7 @@
             <!-- Dropdown Filter Bar -->
             <div class="mb-8 flex justify-end">
                 <div class="relative w-full sm:w-64">
-                    <select x-model="selectedPeriod" class="w-full appearance-none bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700/60 text-gray-700 dark:text-gray-300 py-3 px-5 pr-10 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all font-black text-xs cursor-pointer">
+                    <select x-model="selectedPeriod" class="w-full appearance-none bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700/60 text-gray-700 dark:text-gray-300 py-3 px-5 pr-10 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all font-black text-xs cursor-pointer">
                         <option value="">Semua Periode Akademik</option>
                         @foreach($uniquePeriods as $period)
                             <option value="{{ $period }}">{{ $period }}</option>
@@ -335,7 +335,7 @@
                           x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3.5 bg-slate-50 dark:bg-gray-700 rounded-2xl text-slate-500 dark:text-slate-400 group-hover:bg-purple-650 group-hover:text-white transition-colors shadow-inner border border-slate-200/10">
+                                <div class="p-3.5 bg-slate-50 dark:bg-gray-700 rounded-2xl text-slate-500 dark:text-slate-400 group-hover:bg-sky-600 group-hover:text-white transition-colors shadow-inner border border-slate-200/10">
                                     @if($report->category->name === 'Akademik')
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                                     @elseif($report->category->name === 'Diniyah')
@@ -347,11 +347,11 @@
                                 <span class="px-3 py-1 bg-slate-50 dark:bg-gray-700 text-slate-555 dark:text-slate-400 rounded-full text-[9px] font-black uppercase tracking-widest shadow-sm">{{ $report->created_at->format('M Y') }}</span>
                             </div>
                             
-                            <h3 class="text-lg font-black text-gray-905 dark:text-white mb-1.5 line-clamp-1 group-hover:text-purple-650 transition-colors tracking-tight font-display">{{ $report->category->name }}</h3>
+                            <h3 class="text-lg font-black text-gray-905 dark:text-white mb-1.5 line-clamp-1 group-hover:text-sky-600 transition-colors tracking-tight font-display">{{ $report->category->name }}</h3>
                             <p class="text-gray-400 dark:text-gray-500 font-bold text-xs mb-6 line-clamp-1">{{ $report->period }}</p>
 
                             <div class="flex items-center gap-3 p-3.5 bg-slate-100/50 dark:bg-gray-900/50 rounded-2xl shadow-inner border border-slate-200/20">
-                                <div class="h-9 w-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-black text-xs uppercase shadow-sm">
+                                <div class="h-9 w-9 rounded-xl bg-sky-600 text-white flex items-center justify-center font-black text-xs uppercase shadow-sm">
                                     {{ substr($report->teacher->name ?? 'A', 0, 1) }}
                                 </div>
                                 <div class="min-w-0">
@@ -362,7 +362,7 @@
                         </div>
                         
                         <div class="px-6 pb-6">
-                            <a href="{{ route('student.reports.show', $report) }}" class="flex items-center justify-center w-full py-3.5 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl font-black text-xs text-center hover:bg-purple-600 hover:text-white transition duration-200 active:scale-95 shadow-lg">
+                            <a href="{{ route('student.reports.show', $report) }}" class="flex items-center justify-center w-full py-3.5 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl font-black text-xs text-center hover:bg-sky-600 hover:text-white transition duration-200 active:scale-95 shadow-lg">
                                 Detail Laporan
                             </a>
                         </div>

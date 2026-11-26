@@ -3,29 +3,29 @@
 @section('title', __('messages.assignments_exams_title'))
 
 @section('content')
-<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 min-h-screen" x-data="{ activeTab: 'assignments' }">
+<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-sky-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 min-h-screen" x-data="{ activeTab: 'assignments' }">
     <div class="max-w-7xl mx-auto space-y-8">
         
         <!-- Header banner -->
-        <div class="bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-800 rounded-[32px] p-6 sm:p-10 text-white shadow-xl shadow-purple-950/25 relative overflow-hidden group">
+        <div class="bg-gradient-to-r from-sky-700 via-sky-800 to-sky-800 rounded-[32px] p-6 sm:p-10 text-white shadow-xl shadow-sky-950/25 relative overflow-hidden group">
             <div class="relative z-10">
-                <span class="px-3.5 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest text-purple-200">
+                <span class="px-3.5 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest text-sky-200">
                     {{ __('messages.academic_activity') }}
                 </span>
                 <h1 class="text-2xl sm:text-4xl font-black mt-4 mb-2 tracking-tight">
                     {{ __('messages.assignments_exams_title') }}
                 </h1>
-                <p class="text-purple-100 text-xs sm:text-sm opacity-90 font-medium leading-relaxed">
+                <p class="text-sky-100 text-xs sm:text-sm opacity-90 font-medium leading-relaxed">
                     {{ __('messages.assignments_exams_desc') }}
                 </p>
                 <div class="mt-6 flex flex-wrap gap-2.5">
-                    <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black border border-white/10 tracking-wider uppercase text-purple-200">
+                    <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black border border-white/10 tracking-wider uppercase text-sky-200">
                         {{ $currentPeriod }}
                     </div>
                 </div>
             </div>
-            <div class="absolute -top-32 -right-32 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl group-hover:scale-110 duration-1000"></div>
-            <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-indigo-500/25 rounded-full blur-3xl group-hover:scale-110 duration-1000"></div>
+            <div class="absolute -top-32 -right-32 w-80 h-80 bg-sky-500/20 rounded-full blur-3xl group-hover:scale-110 duration-1000"></div>
+            <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-sky-500/25 rounded-full blur-3xl group-hover:scale-110 duration-1000"></div>
         </div>
 
         @if(session('success'))
@@ -42,10 +42,10 @@
 
         <!-- Tabs Navigation -->
         <div class="flex border-b border-gray-250 dark:border-gray-800">
-            <button @click="activeTab = 'assignments'" :class="activeTab === 'assignments' ? 'border-purple-600 text-purple-600 dark:border-purple-400 dark:text-purple-400 font-black' : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 font-bold'" class="py-4 px-6 border-b-2 text-sm uppercase tracking-wider transition-colors duration-200">
+            <button @click="activeTab = 'assignments'" :class="activeTab === 'assignments' ? 'border-sky-600 text-sky-600 dark:border-sky-400 dark:text-sky-400 font-black' : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 font-bold'" class="py-4 px-6 border-b-2 text-sm uppercase tracking-wider transition-colors duration-200">
                 {{ __('messages.homework_project') }}
             </button>
-            <button @click="activeTab = 'exams'" :class="activeTab === 'exams' ? 'border-indigo-650 text-indigo-650 dark:border-indigo-400 dark:text-indigo-400 font-black' : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 font-bold'" class="py-4 px-6 border-b-2 text-sm uppercase tracking-wider transition-colors duration-200">
+            <button @click="activeTab = 'exams'" :class="activeTab === 'exams' ? 'border-sky-650 text-sky-650 dark:border-sky-400 dark:text-sky-400 font-black' : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 font-bold'" class="py-4 px-6 border-b-2 text-sm uppercase tracking-wider transition-colors duration-200">
                 {{ __('messages.exams_list') }}
             </button>
         </div>
@@ -61,7 +61,7 @@
                     <div class="clay-card rounded-[32px] p-6 border border-white/40 dark:border-gray-800/40 shadow-md flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                         <div>
                             <div class="flex justify-between items-start mb-4">
-                                <span class="px-3 py-1 bg-purple-50 dark:bg-purple-950/40 text-purple-650 dark:text-purple-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-purple-100/20">
+                                <span class="px-3 py-1 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-sky-100/20">
                                     {{ $assignment->subject->name ?? __('messages.subject') }}
                                 </span>
                                 @if($sub)
@@ -85,7 +85,7 @@
                                 @endif
                             </div>
 
-                            <h3 class="text-lg font-black text-gray-900 dark:text-white tracking-tight line-clamp-1 mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            <h3 class="text-lg font-black text-gray-900 dark:text-white tracking-tight line-clamp-1 mb-3 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
                                 {{ $assignment->title }}
                             </h3>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-3 leading-relaxed mb-6 font-medium">
@@ -98,13 +98,13 @@
                                 📅 {{ __('messages.due_date_label') }}: {{ $assignment->due_date->format('d M Y H:i') }}
                             </div>
                             
-                            <a href="{{ route('student.activities.assignment.show', $assignment) }}" class="block w-full text-center py-3.5 bg-slate-900 dark:bg-slate-800 text-white hover:bg-purple-650 rounded-2xl font-black text-xs transition duration-200 active:scale-95 shadow-sm">
+                            <a href="{{ route('student.activities.assignment.show', $assignment) }}" class="block w-full text-center py-3.5 bg-slate-900 dark:bg-slate-800 text-white hover:bg-sky-600 rounded-2xl font-black text-xs transition duration-200 active:scale-95 shadow-sm">
                                 {{ $sub ? __('messages.view_detail_score') : __('messages.start_working') }}
                             </a>
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-full py-16 text-center clay-card border-2 border-dashed border-purple-200/50 dark:border-purple-800/40 text-gray-400 dark:text-gray-500 p-8 shadow-sm">
+                    <div class="col-span-full py-16 text-center clay-card border-2 border-dashed border-sky-200/50 dark:border-sky-800/40 text-gray-400 dark:text-gray-500 p-8 shadow-sm">
                         <p class="text-sm font-bold">{{ __('messages.no_active_assignments') }}</p>
                     </div>
                 @endforelse
@@ -122,7 +122,7 @@
                     <div class="clay-card rounded-[32px] p-6 border border-white/40 dark:border-gray-800/40 shadow-md flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                         <div>
                             <div class="flex justify-between items-start mb-4">
-                                <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-650 dark:text-indigo-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-indigo-100/20">
+                                <span class="px-3 py-1 bg-sky-50 dark:bg-sky-950/40 text-sky-650 dark:text-sky-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-sky-100/20">
                                     {{ $exam->subject->name ?? __('messages.subject') }}
                                 </span>
                                 @if($att)
@@ -146,11 +146,11 @@
                                 @endif
                             </div>
 
-                            <h3 class="text-lg font-black text-gray-900 dark:text-white tracking-tight line-clamp-1 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                            <h3 class="text-lg font-black text-gray-900 dark:text-white tracking-tight line-clamp-1 mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
                                 {{ $exam->title }}
                             </h3>
                             <div class="flex flex-wrap gap-1.5 mb-6">
-                                <span class="px-2 py-0.5 bg-indigo-100/50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 text-[8px] font-black uppercase tracking-widest rounded">
+                                <span class="px-2 py-0.5 bg-sky-100/50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300 text-[8px] font-black uppercase tracking-widest rounded">
                                     {{ __('messages.type_label') }}: {{ str_replace('_', ' ', $exam->type) }} {{ $exam->target_period ? "({$exam->target_period})" : "" }}
                                 </span>
                                 <span class="px-2 py-0.5 bg-slate-100/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-305 text-[8px] font-black uppercase tracking-widest rounded">
@@ -165,7 +165,7 @@
                             </div>
                             
                             @if($att && $att->completed_at)
-                                <a href="{{ route('student.activities.exam.result', $exam) }}" class="block w-full text-center py-3.5 bg-slate-900 dark:bg-slate-800 text-white hover:bg-indigo-650 rounded-2xl font-black text-xs transition duration-200 active:scale-95 shadow-sm">
+                                <a href="{{ route('student.activities.exam.result', $exam) }}" class="block w-full text-center py-3.5 bg-slate-900 dark:bg-slate-800 text-white hover:bg-sky-650 rounded-2xl font-black text-xs transition duration-200 active:scale-95 shadow-sm">
                                     {{ __('messages.view_score_result') }}
                                 </a>
                             @elseif($isExamOverdue)
@@ -173,14 +173,14 @@
                                     {{ __('messages.time_limit_expired') }}
                                 </button>
                             @else
-                                <a href="{{ route('student.activities.exam.show', $exam) }}" class="block w-full text-center py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black text-xs transition duration-200 active:scale-95 shadow-lg shadow-indigo-500/20">
+                                <a href="{{ route('student.activities.exam.show', $exam) }}" class="block w-full text-center py-3.5 bg-sky-600 hover:bg-sky-700 text-white rounded-2xl font-black text-xs transition duration-200 active:scale-95 shadow-lg shadow-sky-500/20">
                                     {{ __('messages.start_exam') }}
                                 </a>
                             @endif
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-full py-16 text-center clay-card border-2 border-dashed border-indigo-200/50 dark:border-indigo-800/40 text-gray-400 dark:text-gray-500 p-8 shadow-sm">
+                    <div class="col-span-full py-16 text-center clay-card border-2 border-dashed border-sky-200/50 dark:border-sky-800/40 text-gray-400 dark:text-gray-500 p-8 shadow-sm">
                         <p class="text-sm font-bold">{{ __('messages.no_active_exams') }}</p>
                     </div>
                 @endforelse

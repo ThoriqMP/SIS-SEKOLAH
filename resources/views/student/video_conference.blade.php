@@ -66,7 +66,7 @@
     </div>
 
     <!-- Header Section -->
-    <header class="max-w-7xl mx-auto w-full mb-6 hidden sm:flex flex-col md:flex-row justify-between items-center gap-4 glass-panel p-5 rounded-3xl border border-purple-500/20 shadow-2xl shadow-indigo-950/30">
+    <header class="max-w-7xl mx-auto w-full mb-6 hidden sm:flex flex-col md:flex-row justify-between items-center gap-4 glass-panel p-5 rounded-3xl border border-sky-500/20 shadow-2xl shadow-sky-950/30">
         <div class="flex items-center gap-4">
             {{-- Pulsing Live Badge --}}
             <div class="flex-shrink-0 bg-pink-500/10 border border-pink-500/30 px-3.5 py-1.5 rounded-2xl flex items-center gap-2">
@@ -76,12 +76,12 @@
             
             <div>
                 <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-                    <i class="fa-solid fa-graduation-cap text-purple-400"></i>
+                    <i class="fa-solid fa-graduation-cap text-sky-400"></i>
                     {{ $conference->title ?? __('messages.online_class') }}
                 </h1>
                 <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-xs text-slate-400 font-medium">
                     <span class="flex items-center gap-1.5">
-                        <i class="fa-solid fa-key text-[10px] text-purple-400"></i>
+                        <i class="fa-solid fa-key text-[10px] text-sky-400"></i>
                         {{ __('messages.room_id') }}: <span class="text-slate-200 font-bold select-all">{{ $room }}</span>
                     </span>
                     @if(isset($conference))
@@ -114,19 +114,19 @@
         <!-- Main Conference Area -->
         <main class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[10px] sm:gap-6 content-start" id="conference-container">
             <!-- Room-Centric Status Banner: Waiting for teacher -->
-            <div id="teacher-waiting-banner" class="col-span-full glass-panel px-4 py-3 rounded-2xl border border-indigo-500/30 bg-indigo-950/40 flex items-center justify-between gap-3 text-indigo-200 text-xs sm:text-sm">
+            <div id="teacher-waiting-banner" class="col-span-full glass-panel px-4 py-3 rounded-2xl border border-sky-500/30 bg-sky-950/40 flex items-center justify-between gap-3 text-sky-200 text-xs sm:text-sm">
                 <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-chalkboard-user text-indigo-400 text-base"></i>
+                    <i class="fa-solid fa-chalkboard-user text-sky-400 text-base"></i>
                     <span><strong>Ruang Kelas Siap.</strong> Menunggu Guru bergabung... Anda dapat menguji mikrofon dan kamera Anda.</span>
                 </div>
-                <span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[10px] font-bold border border-indigo-500/30 uppercase tracking-wider whitespace-nowrap">Lobby Persiapan</span>
+                <span class="px-2.5 py-1 bg-sky-500/20 text-sky-300 rounded-full text-[10px] font-bold border border-sky-500/30 uppercase tracking-wider whitespace-nowrap">Lobby Persiapan</span>
             </div>
 
             <!-- Student local video card -->
-            <div class="glass-panel rounded-3xl overflow-hidden border border-purple-500/30 relative shadow-2xl flex flex-col justify-between aspect-video group" style="order: 4;" id="localVideoContainer">
+            <div class="glass-panel rounded-3xl overflow-hidden border border-sky-500/30 relative shadow-2xl flex flex-col justify-between aspect-video group" style="order: 4;" id="localVideoContainer">
                 <video id="localVideo" class="w-full h-full object-cover rounded-3xl transform -scale-x-100 transition-transform duration-300" autoplay playsinline muted></video>
                 <div id="localVideoPlaceholder" class="absolute inset-0 bg-slate-900/90 backdrop-blur-xs flex-col items-center justify-center gap-2 z-10 transition-opacity duration-300 hidden">
-                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center text-lg font-bold text-white shadow-lg border border-white/10">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sky-600 to-sky-700 flex items-center justify-center text-lg font-bold text-white shadow-lg border border-white/10">
                         {{ strtoupper(substr($userName, 0, 2)) }}
                     </div>
                     <span class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5 bg-slate-950/60 px-2.5 py-1 rounded-full border border-slate-700/50">
@@ -134,7 +134,7 @@
                     </span>
                 </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-between p-4 pointer-events-none z-20">
-                    <span id="badge-local" class="self-start px-3 py-1 bg-purple-600 text-white text-[9px] font-black uppercase tracking-widest rounded-full shadow-md">
+                    <span id="badge-local" class="self-start px-3 py-1 bg-sky-600 text-white text-[9px] font-black uppercase tracking-widest rounded-full shadow-md">
                         {{ __('messages.student_you') }} | {{ $userClass }}
                     </span>
                     <div class="flex justify-between items-center">
@@ -160,8 +160,8 @@
             <!-- Chat Input Form -->
             <form id="chat-form" class="p-3 border-t border-slate-700/60 bg-slate-900/20 flex gap-2">
                 <input type="text" id="chat-input" placeholder="{{ __('messages.type_message') }}..." autocomplete="off" required
-                       class="flex-1 px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-purple-500">
-                <button type="submit" class="p-2.5 bg-purple-650 hover:bg-purple-700 text-white rounded-xl active:scale-95 transition-all">
+                       class="flex-1 px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                <button type="submit" class="p-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl active:scale-95 transition-all">
                     <svg class="w-3.5 h-3.5 rotate-90" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
                     </svg>
@@ -173,7 +173,7 @@
     <!-- Floating Footer Controls -->
     <footer class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-auto max-w-[95%] glass-panel border border-slate-700/60 p-2 sm:p-2.5 rounded-full shadow-2xl flex flex-nowrap justify-center items-center gap-2 sm:gap-4 transition-all duration-300">
         <!-- Mic Button -->
-        <button id="btn-mic" class="px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-purple-500/20 active:scale-95 transition-all">
+        <button id="btn-mic" class="px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-sky-500/20 active:scale-95 transition-all">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
             <span>{{ __('messages.mute') }}</span>
         </button>
@@ -272,19 +272,19 @@
 
     <!-- Modal Overlay untuk Isolasi / Deafen -->
     <div id="isolation-overlay" class="hidden fixed top-24 left-1/2 -translate-x-1/2 z-[60] flex flex-col items-center justify-center p-4 transition-opacity duration-300 w-[90%] max-w-lg pointer-events-none">
-        <div class="bg-indigo-950/90 backdrop-blur-xl border border-indigo-500/50 p-6 rounded-3xl shadow-2xl shadow-indigo-900/50 text-center relative overflow-hidden pointer-events-auto">
-            <div class="absolute inset-0 bg-gradient-to-tr from-indigo-600/10 to-transparent"></div>
-            <div class="w-16 h-16 rounded-full bg-indigo-500/20 flex items-center justify-center mx-auto mb-4 border border-indigo-500/50">
+        <div class="bg-sky-950/90 backdrop-blur-xl border border-sky-500/50 p-6 rounded-3xl shadow-2xl shadow-sky-900/50 text-center relative overflow-hidden pointer-events-auto">
+            <div class="absolute inset-0 bg-gradient-to-tr from-sky-600/10 to-transparent"></div>
+            <div class="w-16 h-16 rounded-full bg-sky-500/20 flex items-center justify-center mx-auto mb-4 border border-sky-500/50">
                 <span class="text-3xl">🤫</span>
             </div>
             <h3 class="text-lg font-extrabold text-white mb-2 relative z-10">{{ __('messages.quiet_mode_enabled') }}</h3>
-            <p class="text-sm text-indigo-200 leading-relaxed font-medium relative z-10">
+            <p class="text-sm text-sky-200 leading-relaxed font-medium relative z-10">
                 {{ __('messages.quiet_mode_desc') }}
                 <br><br>
                 <span class="text-amber-300">💡 {{ __('messages.quiet_mode_tip') }}</span>
             </p>
             <div class="mt-5 relative z-10">
-                <button onclick="document.getElementById('isolation-overlay').classList.add('hidden')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg active:scale-95 transition-all">
+                <button onclick="document.getElementById('isolation-overlay').classList.add('hidden')" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-xl shadow-lg active:scale-95 transition-all">
                     {{ __('messages.i_understand') }}
                 </button>
             </div>
@@ -722,7 +722,7 @@
                         overlay.className = "absolute inset-0 bg-slate-950/75 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-30 transition-all duration-300 pointer-events-auto";
                         overlay.innerHTML = `
                             <div class="flex flex-col items-center justify-center gap-3 text-center p-4">
-                                <div class="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                                <div class="w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
                                 <span class="text-sm font-extrabold text-slate-200 tracking-wider">{{ __('messages.reconnecting') }}</span>
                                 <span class="text-[10px] text-slate-400">{{ __('messages.connection_lost') }}</span>
                             </div>
@@ -953,7 +953,7 @@
             
             const initials = (pName || 'U').split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('').toUpperCase();
             placeholder.innerHTML = `
-                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center text-lg font-bold text-white shadow-lg border border-white/10">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sky-600 to-sky-700 flex items-center justify-center text-lg font-bold text-white shadow-lg border border-white/10">
                     ${initials}
                 </div>
                 <span class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5 bg-slate-950/60 px-2.5 py-1 rounded-full border border-slate-700/50">
@@ -988,10 +988,10 @@
                 badgeClass = "self-start px-3 py-1 bg-amber-500/20 text-amber-300 text-[9px] font-black uppercase tracking-widest rounded-full border border-amber-500/40 shadow-sm shadow-amber-500/20";
                 badgeText = "👑 Pimpinan Sekolah";
             } else if (pRole === 'teacher') {
-                badgeClass = "self-start px-3 py-1 bg-indigo-500/20 text-indigo-300 text-[9px] font-black uppercase tracking-widest rounded-full border border-indigo-500/30";
+                badgeClass = "self-start px-3 py-1 bg-sky-500/20 text-sky-300 text-[9px] font-black uppercase tracking-widest rounded-full border border-sky-500/30";
                 badgeText = "{{ __('messages.teacher') }}";
             } else if (pRole === 'teacher_screen') {
-                badgeClass = "self-start px-3 py-1 bg-indigo-500/20 text-indigo-300 text-[9px] font-black uppercase tracking-widest rounded-full border border-indigo-500/30";
+                badgeClass = "self-start px-3 py-1 bg-sky-500/20 text-sky-300 text-[9px] font-black uppercase tracking-widest rounded-full border border-sky-500/30";
                 badgeText = "{{ __('messages.teacher_presentation') }}";
             } else if (pRole === 'student_screen') {
                 badgeText = "{{ __('messages.student_presentation') }} (" + pClass + ")";
@@ -1535,7 +1535,7 @@
                 ? '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg><span>Mute</span>'
                 : '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2"></path><path d="M5 10v2a7 7 0 0 0 12 5"></path><path d="M15 9.34V5a3 3 0 0 0-5.68-1.33"></path><path d="M9 9v3a3 3 0 0 0 5.12 2.12"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg><span>Unmute</span>';
             btnMic.className = localMicEnabled 
-                ? "px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-purple-500/20 active:scale-95 transition-all"
+                ? "px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-sky-500/20 active:scale-95 transition-all"
                 : "px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-rose-500/20 active:scale-95 transition-all";
 
             if (overlay) overlay.classList.add('hidden');
@@ -1554,7 +1554,7 @@
                 ? '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg><span>Mute</span>'
                 : '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2"></path><path d="M5 10v2a7 7 0 0 0 12 5"></path><path d="M15 9.34V5a3 3 0 0 0-5.68-1.33"></path><path d="M9 9v3a3 3 0 0 0 5.12 2.12"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg><span>Unmute</span>';
             document.getElementById('btn-mic').className = localMicEnabled 
-                ? "px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-purple-500/20 active:scale-95 transition-all"
+                ? "px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-sky-500/20 active:scale-95 transition-all"
                 : "px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-2xl font-medium text-xs flex items-center gap-2 shadow-lg shadow-rose-500/20 active:scale-95 transition-all";
             
             socket.emit('toggle-media-state', { roomId, isVideoOff: !localVideoEnabled, isAudioMuted: !localMicEnabled });
@@ -1760,15 +1760,15 @@
             const chatBtn = document.getElementById('btn-chat');
             if (chatSidebar.classList.contains('hidden')) {
                 chatSidebar.classList.remove('hidden');
-                chatBtn.classList.replace('bg-slate-800', 'bg-purple-650');
+                chatBtn.classList.replace('bg-slate-800', 'bg-sky-600');
                 chatBtn.classList.replace('text-slate-200', 'text-white');
-                chatBtn.classList.remove('border-indigo-500', 'animate-pulse'); // remove unread highlights
+                chatBtn.classList.remove('border-sky-500', 'animate-pulse'); // remove unread highlights
                 
                 const chatMsgs = document.getElementById('chat-messages');
                 chatMsgs.scrollTop = chatMsgs.scrollHeight;
             } else {
                 chatSidebar.classList.add('hidden');
-                chatBtn.classList.replace('bg-purple-650', 'bg-slate-800');
+                chatBtn.classList.replace('bg-sky-600', 'bg-slate-800');
                 chatBtn.classList.replace('text-white', 'text-slate-200');
             }
         }
@@ -1791,7 +1791,7 @@
             const bubble = document.createElement('div');
             bubble.className = `flex flex-col max-w-[85%] rounded-2xl p-3 text-xs ${
                 isMe 
-                    ? 'bg-purple-600 text-white self-end ml-auto rounded-tr-none' 
+                    ? 'bg-sky-600 text-white self-end ml-auto rounded-tr-none' 
                     : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
             }`;
             
@@ -1883,7 +1883,7 @@
             const chatSidebar = document.getElementById('chat-sidebar');
             if (chatSidebar.classList.contains('hidden')) {
                 const chatBtn = document.getElementById('btn-chat');
-                chatBtn.classList.add('border-indigo-500', 'animate-pulse');
+                chatBtn.classList.add('border-sky-500', 'animate-pulse');
             }
         });
 

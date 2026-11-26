@@ -3,7 +3,7 @@
 @section('title', __('messages.online_class_list'))
 
 @section('content')
-<div class="py-6 sm:py-12 bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 min-h-screen">
+<div class="py-6 sm:py-12 bg-gradient-to-br from-slate-50 via-slate-50 to-sky-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <!-- Header -->
@@ -28,7 +28,7 @@
                     <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-3xl p-6 border border-gray-150/40 dark:border-gray-800/40 shadow-md flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                         <div>
                              <div class="flex justify-between items-start mb-4">
-                                <span class="px-3 py-1 bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-purple-150/20 max-w-[200px] truncate">
+                                <span class="px-3 py-1 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-sky-150/20 max-w-[200px] truncate">
                                     Siswa: {{ is_array($conf->class) ? (empty($conf->target_students) ? implode(', ', $conf->class) : implode(', ', $conf->target_students)) : $conf->class }}
                                 </span>
                                 @if($isLive)
@@ -42,7 +42,7 @@
                                 @endif
                             </div>
 
-                            <h3 class="text-lg font-black text-gray-900 dark:text-white tracking-tight line-clamp-1 mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            <h3 class="text-lg font-black text-gray-900 dark:text-white tracking-tight line-clamp-1 mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
                                 {{ $conf->title }}
                             </h3>
                             
@@ -61,14 +61,14 @@
                                     {{ __('messages.join_class_live') }}
                                 </a>
                             @else
-                                <a href="{{ route('student.video-conference.join', $conf->room_name) }}" class="block text-center py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-extrabold text-xs shadow-md transition duration-200">
+                                <a href="{{ route('student.video-conference.join', $conf->room_name) }}" class="block text-center py-3 bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-extrabold text-xs shadow-md transition duration-200">
                                     {{ __('messages.join_class') }}
                                 </a>
                             @endif
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-full py-20 text-center bg-white/40 dark:bg-gray-900/40 rounded-3xl border-2 border-dashed border-purple-200/50 dark:border-purple-800/40 text-gray-400 dark:text-gray-500 p-8 shadow-sm">
+                    <div class="col-span-full py-20 text-center bg-white/40 dark:bg-gray-900/40 rounded-3xl border-2 border-dashed border-sky-200/50 dark:border-sky-800/40 text-gray-400 dark:text-gray-500 p-8 shadow-sm">
                         <p class="text-sm font-bold">{{ __('messages.no_online_class_scheduled') }}</p>
                     </div>
                 @endforelse

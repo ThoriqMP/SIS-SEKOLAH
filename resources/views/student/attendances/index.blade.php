@@ -7,7 +7,7 @@
     <div class="max-w-4xl mx-auto space-y-6">
         <div class="flex items-center justify-between">
             <div>
-                <a href="{{ route('student.dashboard') }}" class="text-xs font-bold text-purple-600 hover:underline">
+                <a href="{{ route('student.dashboard') }}" class="text-xs font-bold text-sky-600 hover:underline">
                     <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Dashboard
                 </a>
                 <h1 class="text-2xl font-extrabold text-slate-900 mt-1">Riwayat Kehadiran</h1>

@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="pt-2.5 sm:pt-6 pb-28 sm:pb-12 px-3 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 min-h-screen">
+<div class="pt-2.5 sm:pt-6 pb-28 sm:pb-12 px-3 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-sky-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 min-h-screen">
     <!-- Welcome Header -->
     <div class="mb-3 sm:mb-8" id="tour-welcome">
         <!-- Mobile Compact Hero Card (Above-The-Fold / Zero Scroll) -->
-        <div class="sm:hidden bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-800 rounded-2xl p-3.5 text-white shadow-lg shadow-purple-950/20 relative overflow-hidden">
+        <div class="sm:hidden bg-gradient-to-r from-sky-700 via-sky-800 to-sky-800 rounded-2xl p-3.5 text-white shadow-lg shadow-sky-950/20 relative overflow-hidden">
             <div class="relative z-10 flex items-center justify-between gap-2 mb-2">
-                <span class="px-2.5 py-0.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-[9px] font-black uppercase tracking-wider text-purple-200">
-                    Sayyidah School Portal
+                <span class="px-2.5 py-0.5 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-[9px] font-black uppercase tracking-wider text-sky-200">
+                    SIS SEKOLAH Portal
                 </span>
                 <div class="flex items-center gap-1.5">
-                    <span class="bg-white/10 px-2 py-0.5 rounded-md text-[9px] font-black uppercase text-purple-200 border border-white/10">
+                    <span class="bg-white/10 px-2 py-0.5 rounded-md text-[9px] font-black uppercase text-sky-200 border border-white/10">
                         {{ __('messages.semester_even') }}
                     </span>
-                    <span class="bg-purple-500/25 px-2 py-0.5 rounded-md text-[9px] font-black uppercase text-purple-200 border border-purple-400/25 flex items-center gap-1">
+                    <span class="bg-sky-500/25 px-2 py-0.5 rounded-md text-[9px] font-black uppercase text-sky-200 border border-sky-400/25 flex items-center gap-1">
                         <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
                         {{ __('messages.active') }}
                     </span>
@@ -25,53 +25,53 @@
                     <h1 class="text-base font-black text-white tracking-tight truncate leading-tight">
                         {{ __('messages.welcome') }}, {{ $student->nama_siswa }}! 👋
                     </h1>
-                    <p class="text-[11px] text-purple-100 font-semibold opacity-90 truncate mt-0.5">
+                    <p class="text-[11px] text-sky-100 font-semibold opacity-90 truncate mt-0.5">
                         NIS: {{ $student->nis ?: '-' }} &bull; {{ __('messages.class') }}: {{ $student->class }}
                     </p>
                 </div>
-                <button onclick="window.startDashboardTour()" class="bg-white/95 text-purple-950 hover:bg-white font-extrabold px-2.5 py-1.5 rounded-xl text-[10px] transition-all shadow-xs active:scale-95 flex items-center gap-1 shrink-0 border border-white/20">
-                    <svg class="w-3.5 h-3.5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <button onclick="window.startDashboardTour()" class="bg-white/95 text-sky-950 hover:bg-white font-extrabold px-2.5 py-1.5 rounded-xl text-[10px] transition-all shadow-xs active:scale-95 flex items-center gap-1 shrink-0 border border-white/20">
+                    <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <span>Tour</span>
                 </button>
             </div>
             <!-- Decorative accents -->
-            <div class="absolute -top-16 -right-16 w-36 h-36 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-indigo-500/25 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -top-16 -right-16 w-36 h-36 bg-sky-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-sky-500/25 rounded-full blur-2xl pointer-events-none"></div>
         </div>
 
         <!-- Desktop Spacious Hero Card -->
-        <div class="hidden sm:block bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-800 rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 text-white shadow-xl shadow-purple-950/25 relative overflow-hidden group">
+        <div class="hidden sm:block bg-gradient-to-r from-sky-700 via-sky-800 to-sky-800 rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 text-white shadow-xl shadow-sky-950/25 relative overflow-hidden group">
             <div class="relative z-10">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <span class="px-3.5 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest text-purple-200">
-                            Sayyidah School Portal
+                        <span class="px-3.5 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest text-sky-200">
+                            SIS SEKOLAH Portal
                         </span>
                         <h1 class="text-2xl sm:text-5xl font-black mt-4 mb-2 tracking-tight leading-tight">
                             {{ __('messages.welcome') }}, {{ $student->nama_siswa }}! 👋
                         </h1>
-                        <p class="text-purple-100 text-sm sm:text-lg opacity-90 font-medium font-display">
+                        <p class="text-sky-100 text-sm sm:text-lg opacity-90 font-medium font-display">
                             NIS: {{ $student->nis }} &bull; {{ __('messages.class') }}: {{ $student->class }}
                         </p>
                     </div>
-                    <button onclick="window.startDashboardTour()" class="bg-white text-purple-955 hover:bg-purple-50 font-extrabold px-5 py-3 rounded-2xl text-xs sm:text-sm transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 border border-white/10 shrink-0 self-start md:self-center">
-                        <svg class="w-4 h-4 text-purple-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <button onclick="window.startDashboardTour()" class="bg-white text-sky-900 hover:bg-sky-50 font-extrabold px-5 py-3 rounded-2xl text-xs sm:text-sm transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 border border-white/10 shrink-0 self-start md:self-center">
+                        <svg class="w-4 h-4 text-sky-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         {{ __('messages.dashboard_tour') }}
                     </button>
                 </div>
                 <div class="mt-6 flex flex-wrap gap-2.5">
-                    <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black border border-white/10 tracking-wider uppercase text-purple-200">
+                    <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black border border-white/10 tracking-wider uppercase text-sky-200">
                         {{ __('messages.semester_even') }}
                     </div>
-                    <div class="bg-purple-500/20 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black border border-purple-400/20 tracking-wider uppercase text-purple-300 flex items-center gap-1.5">
-                        <span class="h-2 w-2 rounded-full bg-purple-400 animate-ping"></span>
+                    <div class="bg-sky-500/20 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black border border-sky-400/20 tracking-wider uppercase text-sky-300 flex items-center gap-1.5">
+                        <span class="h-2 w-2 rounded-full bg-sky-400 animate-ping"></span>
                         {{ __('messages.status') }}: {{ __('messages.active') }}
                     </div>
                 </div>
             </div>
             <!-- Decorative flowing background bubbles -->
-            <div class="absolute -top-32 -right-32 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-1000"></div>
-            <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-indigo-500/25 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-1000"></div>
+            <div class="absolute -top-32 -right-32 w-80 h-80 bg-sky-500/20 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-1000"></div>
+            <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-sky-500/25 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-1000"></div>
         </div>
     </div>
 
@@ -109,17 +109,17 @@
     <div class="mb-3 sm:mb-10" id="tour-potensi">
         <div class="flex items-center justify-between gap-2 mb-2 sm:mb-6">
             <div class="flex items-center gap-2 sm:gap-3.5">
-                <div class="h-7 w-7 sm:h-12 sm:w-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-md shadow-purple-500/20 shrink-0">
+                <div class="h-7 w-7 sm:h-12 sm:w-12 bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-md shadow-sky-500/20 shrink-0">
                     <svg class="w-3.5 h-3.5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                 </div>
                 <div>
                     <h3 class="text-xs sm:text-3xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">{{ __('messages.potential_character_map') }}</h3>
-                    <p class="text-[9px] sm:text-xs font-black text-purple-650 dark:text-purple-400 uppercase tracking-widest mt-0.5">{{ __('messages.pbl_analysis_desc') }}</p>
+                    <p class="text-[9px] sm:text-xs font-black text-sky-600 dark:text-sky-400 uppercase tracking-widest mt-0.5">{{ __('messages.pbl_analysis_desc') }}</p>
                 </div>
             </div>
             <!-- Mobile swipe hint -->
             @if($topPersonalities->count() > 0 || $topIntelligences->count() > 0 || $topStrengths->count() > 0)
-                <span class="sm:hidden text-[9px] font-extrabold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/50 px-2 py-0.5 rounded-full border border-purple-200/50 flex items-center gap-1">
+                <span class="sm:hidden text-[9px] font-extrabold text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/50 px-2 py-0.5 rounded-full border border-sky-200/50 flex items-center gap-1">
                     <span>Geser</span>
                     <i class="fa-solid fa-arrow-right text-[8px]"></i>
                 </span>
@@ -147,15 +147,15 @@
             @endif
 
             @if($topIntelligences->count() > 0)
-            <div class="w-[78vw] max-w-[280px] shrink-0 snap-center bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-3 text-white shadow-md shadow-purple-500/20 relative overflow-hidden flex flex-col justify-between border border-white/20">
+            <div class="w-[78vw] max-w-[280px] shrink-0 snap-center bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl p-3 text-white shadow-md shadow-sky-500/20 relative overflow-hidden flex flex-col justify-between border border-white/20">
                 <div class="relative z-10">
-                    <h4 class="text-[10px] font-black uppercase tracking-wider mb-2 text-purple-100 flex items-center gap-1.5">
-                        <span class="h-1.5 w-1.5 bg-purple-200 rounded-full animate-ping"></span>
+                    <h4 class="text-[10px] font-black uppercase tracking-wider mb-2 text-sky-100 flex items-center gap-1.5">
+                        <span class="h-1.5 w-1.5 bg-sky-200 rounded-full animate-ping"></span>
                         {{ __('messages.multiple_intelligence') }}
                     </h4>
                     <div class="flex flex-wrap gap-1.5">
                         @foreach($topIntelligences as $trait)
-                            <span class="px-2.5 py-1 bg-white/95 text-purple-950 rounded-xl text-[10px] font-black shadow-xs tracking-wide border border-white/40">{{ $trait }}</span>
+                            <span class="px-2.5 py-1 bg-white/95 text-sky-950 rounded-xl text-[10px] font-black shadow-xs tracking-wide border border-white/40">{{ $trait }}</span>
                         @endforeach
                     </div>
                 </div>
@@ -164,10 +164,10 @@
             @endif
 
             @if($topStrengths->count() > 0)
-            <div class="w-[78vw] max-w-[280px] shrink-0 snap-center bg-gradient-to-br from-violet-500 to-fuchsia-600 rounded-2xl p-3 text-white shadow-md shadow-violet-500/20 relative overflow-hidden flex flex-col justify-between border border-white/20">
+            <div class="w-[78vw] max-w-[280px] shrink-0 snap-center bg-gradient-to-br from-sky-500 to-fuchsia-600 rounded-2xl p-3 text-white shadow-md shadow-sky-500/20 relative overflow-hidden flex flex-col justify-between border border-white/20">
                 <div class="relative z-10">
-                    <h4 class="text-[10px] font-black uppercase tracking-wider mb-2 text-violet-100 flex items-center gap-1.5">
-                        <span class="h-1.5 w-1.5 bg-violet-200 rounded-full animate-ping"></span>
+                    <h4 class="text-[10px] font-black uppercase tracking-wider mb-2 text-sky-100 flex items-center gap-1.5">
+                        <span class="h-1.5 w-1.5 bg-sky-200 rounded-full animate-ping"></span>
                         {{ __('messages.potential_strength') }}
                     </h4>
                     <div class="flex flex-wrap gap-1.5">
@@ -205,16 +205,16 @@
             @endif
 
             @if($topIntelligences->count() > 0)
-            <div class="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-[32px] p-6 sm:p-8 text-white shadow-xl shadow-purple-500/25 relative overflow-hidden group hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 border border-white/20">
+            <div class="bg-gradient-to-br from-sky-500 to-sky-600 rounded-[32px] p-6 sm:p-8 text-white shadow-xl shadow-sky-500/25 relative overflow-hidden group hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 border border-white/20">
                 <div class="relative z-10 flex flex-col h-full justify-between">
                     <div>
-                        <h4 class="text-[11px] font-black uppercase tracking-widest mb-6 text-purple-100 flex items-center gap-1.5">
-                            <span class="h-1.5 w-1.5 bg-purple-200 rounded-full animate-ping"></span>
+                        <h4 class="text-[11px] font-black uppercase tracking-widest mb-6 text-sky-100 flex items-center gap-1.5">
+                            <span class="h-1.5 w-1.5 bg-sky-200 rounded-full animate-ping"></span>
                             {{ __('messages.multiple_intelligence') }}
                         </h4>
                         <div class="flex flex-wrap gap-2">
                             @foreach($topIntelligences as $trait)
-                                <span class="px-3 py-2 bg-white/95 text-purple-950 rounded-2xl text-[11px] font-black shadow-sm tracking-wide border border-white/40">{{ $trait }}</span>
+                                <span class="px-3 py-2 bg-white/95 text-sky-950 rounded-2xl text-[11px] font-black shadow-sm tracking-wide border border-white/40">{{ $trait }}</span>
                             @endforeach
                         </div>
                     </div>
@@ -226,11 +226,11 @@
             @endif
 
             @if($topStrengths->count() > 0)
-            <div class="bg-gradient-to-br from-violet-500 to-fuchsia-600 rounded-[32px] p-6 sm:p-8 text-white shadow-xl shadow-violet-500/25 relative overflow-hidden group hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 border border-white/20">
+            <div class="bg-gradient-to-br from-sky-500 to-fuchsia-600 rounded-[32px] p-6 sm:p-8 text-white shadow-xl shadow-sky-500/25 relative overflow-hidden group hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 border border-white/20">
                 <div class="relative z-10 flex flex-col h-full justify-between">
                     <div>
-                        <h4 class="text-[11px] font-black uppercase tracking-widest mb-6 text-violet-100 flex items-center gap-1.5">
-                            <span class="h-1.5 w-1.5 bg-violet-200 rounded-full animate-ping"></span>
+                        <h4 class="text-[11px] font-black uppercase tracking-widest mb-6 text-sky-100 flex items-center gap-1.5">
+                            <span class="h-1.5 w-1.5 bg-sky-200 rounded-full animate-ping"></span>
                             {{ __('messages.potential_strength') }}
                         </h4>
                         <div class="flex flex-wrap gap-2">
@@ -249,7 +249,7 @@
         @else
         <!-- Beautiful Premium Empty State for Potentials -->
         <div class="clay-card rounded-2xl sm:rounded-[32px] p-4 sm:p-10 border border-white/40 dark:border-gray-800/40 shadow-md sm:shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center gap-4 sm:gap-8 group">
-            <div class="h-10 w-10 sm:h-20 sm:w-20 bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30 rounded-xl sm:rounded-[24px] flex items-center justify-center text-purple-650 dark:text-purple-400 shadow-inner shrink-0 relative group-hover:scale-105 transition-transform duration-500">
+            <div class="h-10 w-10 sm:h-20 sm:w-20 bg-gradient-to-br from-sky-100 to-sky-100 dark:from-sky-900/30 dark:to-sky-900/30 rounded-xl sm:rounded-[24px] flex items-center justify-center text-sky-600 dark:text-sky-400 shadow-inner shrink-0 relative group-hover:scale-105 transition-transform duration-500">
                 <svg class="w-5 h-5 sm:w-10 sm:h-10 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                 </svg>
@@ -273,7 +273,7 @@
                 <span class="text-[8px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-tight truncate max-w-full leading-none mb-1">
                     {{ __('messages.average_score') }}
                 </span>
-                <p class="text-sm font-black text-purple-700 dark:text-purple-300 tracking-tight leading-none">
+                <p class="text-sm font-black text-sky-700 dark:text-sky-300 tracking-tight leading-none">
                     {{ $averageScore !== null ? round($averageScore) : '-' }}
                 </p>
             </div>
@@ -307,7 +307,7 @@
                 <span class="text-[8px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-tight truncate max-w-full leading-none mb-1">
                     Tahfidz
                 </span>
-                <p class="text-sm font-black text-indigo-700 dark:text-indigo-300 tracking-tight leading-none">
+                <p class="text-sm font-black text-sky-700 dark:text-sky-300 tracking-tight leading-none">
                     {{ $totalSurahs }} <span class="text-[8px] font-semibold text-gray-400">Surah</span>
                 </p>
             </div>
@@ -315,8 +315,8 @@
 
         <!-- Desktop Spacious 4-Card Grid -->
         <div class="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-purple-500/30 transition-all duration-300 group flex items-center gap-4">
-                <div class="h-12 w-12 bg-purple-50 dark:bg-purple-950/40 rounded-2xl flex items-center justify-center text-purple-650 dark:text-purple-400 flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform">
+            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-sky-500/30 transition-all duration-300 group flex items-center gap-4">
+                <div class="h-12 w-12 bg-sky-50 dark:bg-sky-950/40 rounded-2xl flex items-center justify-center text-sky-600 dark:text-sky-400 flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                 </div>
                 <div class="min-w-0">
@@ -324,8 +324,8 @@
                     <p class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">{{ $averageScore !== null ? round($averageScore) : '-' }}</p>
                 </div>
             </div>
-            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-indigo-500/30 transition-all duration-300 group flex items-center gap-4">
-                <div class="h-12 w-12 bg-indigo-50 dark:bg-indigo-950/40 rounded-2xl flex items-center justify-center text-indigo-650 dark:text-indigo-400 flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform">
+            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-sky-500/30 transition-all duration-300 group flex items-center gap-4">
+                <div class="h-12 w-12 bg-sky-50 dark:bg-sky-950/40 rounded-2xl flex items-center justify-center text-sky-650 dark:text-sky-400 flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 </div>
                 <div class="min-w-0">
@@ -333,8 +333,8 @@
                     <p class="text-lg sm:text-xl font-black text-gray-900 dark:text-white tracking-tight truncate">Rp {{ number_format($latestInvoice->grand_total ?? 0, 0, ',', '.') }}</p>
                 </div>
             </div>
-            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-violet-500/30 transition-all duration-300 group flex items-center gap-4">
-                <div class="h-12 w-12 bg-violet-50 dark:bg-violet-950/40 rounded-2xl flex items-center justify-center text-violet-600 dark:text-violet-400 flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform">
+            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-sky-500/30 transition-all duration-300 group flex items-center gap-4">
+                <div class="h-12 w-12 bg-sky-50 dark:bg-sky-950/40 rounded-2xl flex items-center justify-center text-sky-600 dark:text-sky-400 flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                 </div>
                 <div class="min-w-0">
@@ -342,8 +342,8 @@
                     <p class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">{{ $totalSurahs }} {{ __('messages.surah') }}</p>
                 </div>
             </div>
-            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-purple-500/30 transition-all duration-300 group flex items-center gap-4">
-                <div class="h-12 w-12 bg-purple-55 text-purple-650 dark:bg-purple-950/40 dark:text-purple-400 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform text-lg font-black">
+            <div class="clay-card p-5 sm:p-6 hover:shadow-2xl hover:scale-[1.02] hover:border-sky-500/30 transition-all duration-300 group flex items-center gap-4">
+                <div class="h-12 w-12 bg-sky-55 text-sky-600 dark:bg-sky-950/40 dark:text-sky-400 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-110 transition-transform text-lg font-black">
                     🌟
                 </div>
                 <div class="min-w-0">
@@ -360,7 +360,7 @@
         <div class="p-3 bg-white dark:bg-gray-800 rounded-2xl border border-slate-200/70 dark:border-gray-700/70 shadow-2xs flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-purple-650 dark:text-purple-400 flex items-center gap-1">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-sky-600 dark:text-sky-400 flex items-center gap-1">
                         <i class="fa-solid fa-graduation-cap text-[8px]"></i>
                         {{ __('messages.academic_progress') }}
                     </span>
@@ -371,10 +371,10 @@
             </div>
             <div class="mt-2.5 flex items-center gap-1.5">
                 @if($latestReports->first())
-                    <a href="{{ route('student.reports.show', $latestReports->first()) }}" class="flex-1 py-1.5 text-center bg-slate-900 dark:bg-slate-700 text-white rounded-xl text-[10px] font-extrabold hover:bg-purple-950 transition active:scale-95 shadow-2xs">
+                    <a href="{{ route('student.reports.show', $latestReports->first()) }}" class="flex-1 py-1.5 text-center bg-slate-900 dark:bg-slate-700 text-white rounded-xl text-[10px] font-extrabold hover:bg-sky-950 transition active:scale-95 shadow-2xs">
                         Lihat Raport
                     </a>
-                    <a href="{{ route('student.reports.pdf', $latestReports->first()) }}" class="p-1.5 bg-purple-50 dark:bg-purple-950/40 text-purple-600 rounded-xl text-[10px] font-bold hover:bg-purple-100 transition active:scale-95" title="PDF">
+                    <a href="{{ route('student.reports.pdf', $latestReports->first()) }}" class="p-1.5 bg-sky-50 dark:bg-sky-950/40 text-sky-600 rounded-xl text-[10px] font-bold hover:bg-sky-100 transition active:scale-95" title="PDF">
                         <i class="fa-solid fa-file-pdf"></i>
                     </a>
                 @else
@@ -387,7 +387,7 @@
         <div class="p-3 bg-white dark:bg-gray-800 rounded-2xl border border-slate-200/70 dark:border-gray-700/70 shadow-2xs flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-sky-600 dark:text-sky-400 flex items-center gap-1">
                         <i class="fa-solid fa-receipt text-[8px]"></i>
                         {{ __('messages.spp_fees') }}
                     </span>
@@ -407,7 +407,7 @@
             </div>
             <div class="mt-2.5">
                 @if($latestInvoice)
-                    <a href="{{ route('student.invoices.show', $latestInvoice) }}" class="block w-full py-1.5 text-center {{ $latestInvoice->status === 'paid' ? 'bg-slate-900 dark:bg-slate-700' : 'bg-purple-950 dark:bg-purple-800' }} text-white rounded-xl text-[10px] font-extrabold hover:opacity-90 transition active:scale-95 shadow-2xs">
+                    <a href="{{ route('student.invoices.show', $latestInvoice) }}" class="block w-full py-1.5 text-center {{ $latestInvoice->status === 'paid' ? 'bg-slate-900 dark:bg-slate-700' : 'bg-sky-950 dark:bg-sky-800' }} text-white rounded-xl text-[10px] font-extrabold hover:opacity-90 transition active:scale-95 shadow-2xs">
                         {{ $latestInvoice->status === 'paid' ? __('messages.view_details') : 'Bayar Sekarang' }}
                     </a>
                 @else
@@ -428,16 +428,16 @@
                         <h3 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">{{ __('messages.academic_progress') }}</h3>
                         <p class="text-xs font-semibold text-gray-400 mt-0.5">{{ __('messages.unread_academic_report') }}</p>
                     </div>
-                    <a href="{{ route('student.reports') }}" class="text-sm font-black text-purple-650 hover:text-purple-700 flex items-center gap-1 hover:underline">
+                    <a href="{{ route('student.reports') }}" class="text-sm font-black text-sky-600 hover:text-sky-700 flex items-center gap-1 hover:underline">
                         {{ __('messages.all_reports') }} &rarr;
                     </a>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     @forelse($latestReports as $report)
-                        <div class="clay-card p-6 shadow-md hover:shadow-xl hover:border-purple-500/20 hover:-translate-y-1 duration-300 group flex flex-col justify-between">
+                        <div class="clay-card p-6 shadow-md hover:shadow-xl hover:border-sky-500/20 hover:-translate-y-1 duration-300 group flex flex-col justify-between">
                             <div>
                                 <div class="flex justify-between items-start mb-4">
-                                    <div class="p-3 bg-purple-50 dark:bg-purple-950/40 rounded-2xl text-purple-600 dark:text-purple-400 group-hover:bg-purple-650 group-hover:text-white transition-colors duration-300">
+                                    <div class="p-3 bg-sky-50 dark:bg-sky-950/40 rounded-2xl text-sky-600 dark:text-sky-400 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
                                         @if($report->category->name === 'Akademik')
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                                         @elseif($report->category->name === 'Diniyah')
@@ -452,7 +452,7 @@
                                     <h4 class="text-lg font-black text-gray-900 dark:text-white line-clamp-1 tracking-tight">{{ $report->category->name }}</h4>
                                     <p class="text-xs text-gray-400 font-bold mb-3">{{ $report->period }}</p>
                                     <div class="inline-flex items-center gap-2 p-2 bg-slate-100/50 dark:bg-slate-900/50 rounded-xl border border-slate-200/20">
-                                        <div class="h-6 w-6 rounded-lg bg-purple-600 text-white flex items-center justify-center font-black text-[9px] uppercase shadow-sm">
+                                        <div class="h-6 w-6 rounded-lg bg-sky-600 text-white flex items-center justify-center font-black text-[9px] uppercase shadow-sm">
                                             {{ substr($report->teacher->name ?? 'A', 0, 1) }}
                                         </div>
                                         <p class="text-[9px] font-black text-gray-500 dark:text-gray-400 tracking-wider truncate max-w-[120px]">{{ $report->teacher->name ?? __('messages.homeroom_teacher') }}</p>
@@ -460,15 +460,15 @@
                                 </div>
                             </div>
                             <div class="flex gap-2 mt-auto">
-                                <a href="{{ route('student.reports.show', $report) }}" class="flex-1 text-center py-3 bg-slate-900 dark:bg-slate-800 text-white rounded-xl font-black text-xs hover:bg-purple-650 hover:text-white transition duration-200">{{ __('messages.action_detail') }}</a>
-                                <a href="{{ route('student.reports.pdf', $report) }}" class="p-3 bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 rounded-xl hover:bg-purple-650 hover:text-white transition duration-200 flex items-center justify-center shadow-inner" title="Download PDF">
+                                <a href="{{ route('student.reports.show', $report) }}" class="flex-1 text-center py-3 bg-slate-900 dark:bg-slate-800 text-white rounded-xl font-black text-xs hover:bg-sky-600 hover:text-white transition duration-200">{{ __('messages.action_detail') }}</a>
+                                <a href="{{ route('student.reports.pdf', $report) }}" class="p-3 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 rounded-xl hover:bg-sky-600 hover:text-white transition duration-200 flex items-center justify-center shadow-inner" title="Download PDF">
                                     <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </a>
                             </div>
                         </div>
                     @empty
-                        <div class="col-span-full py-16 text-center clay-card border-2 border-dashed border-purple-200/50 dark:border-purple-800/40 text-gray-400 p-8 shadow-sm">
-                            <svg class="w-12 h-12 text-purple-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <div class="col-span-full py-16 text-center clay-card border-2 border-dashed border-sky-200/50 dark:border-sky-800/40 text-gray-400 p-8 shadow-sm">
+                            <svg class="w-12 h-12 text-sky-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             <p class="text-sm font-bold text-gray-500">{{ __('messages.unread_academic_report_empty') }}</p>
                         </div>
                     @endforelse
@@ -487,14 +487,14 @@
                             <p class="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">{{ __('messages.invoice_amount') }}</p>
                             <p class="text-3xl font-black text-gray-950 dark:text-white tracking-tighter">Rp {{ number_format($latestInvoice->grand_total, 0, ',', '.') }}</p>
                             <div class="mt-4 flex flex-wrap items-center gap-2">
-                                <span class="px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest {{ $latestInvoice->status === 'paid' ? 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-400' : 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400' }}">
+                                <span class="px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest {{ $latestInvoice->status === 'paid' ? 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400' : 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400' }}">
                                     {{ $latestInvoice->status === 'paid' ? __('messages.paid') : __('messages.unpaid') }}
                                 </span>
                                 <span class="text-[10px] text-gray-400 dark:text-gray-500 font-bold">{{ __('messages.due_date') }}: {{ $latestInvoice->jatuh_tempo ? $latestInvoice->jatuh_tempo->format('d M Y') : '-' }}</span>
                             </div>
                         </div>
                         <div class="flex gap-3">
-                            <a href="{{ route('student.invoices.show', $latestInvoice) }}" class="flex-1 py-3.5 bg-purple-650 text-white rounded-2xl font-black text-xs sm:text-sm text-center shadow-lg shadow-purple-600/20 hover:bg-purple-700 transition duration-200 active:scale-95">
+                            <a href="{{ route('student.invoices.show', $latestInvoice) }}" class="flex-1 py-3.5 bg-sky-600 text-white rounded-2xl font-black text-xs sm:text-sm text-center shadow-lg shadow-sky-600/20 hover:bg-sky-700 transition duration-200 active:scale-95">
                                 {{ __('messages.view_details') }}
                             </a>
                             <a href="{{ route('student.invoices.pdf', $latestInvoice) }}" class="px-5 py-3.5 bg-slate-150 dark:bg-gray-700 text-gray-900 dark:text-white rounded-2xl font-black text-center hover:bg-slate-200 dark:hover:bg-gray-650 transition duration-200 active:scale-95 flex items-center justify-center shadow-inner" title="Download PDF">
@@ -504,10 +504,10 @@
                     </div>
                 @else
                     <div class="py-10 text-center">
-                        <div class="h-16 w-16 bg-purple-50 dark:bg-purple-950/40 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
-                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="h-16 w-16 bg-sky-50 dark:bg-sky-950/40 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+                            <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
-                        <p class="text-sm font-black text-purple-600 dark:text-purple-400">{{ __('messages.awesome_payment') }}</p>
+                        <p class="text-sm font-black text-sky-600 dark:text-sky-400">{{ __('messages.awesome_payment') }}</p>
                         <p class="text-xs font-bold text-gray-400 dark:text-gray-500 mt-1">{{ __('messages.spp_fees_all_paid') }}</p>
                     </div>
                 @endif
@@ -522,15 +522,15 @@
                             @php
                                 $isStudent = $comment->user->role === 'student';
                                 $initials = strtoupper(substr($comment->user->name, 0, 2));
-                                $avatarGrad = $isStudent ? 'from-amber-400 to-orange-500' : 'from-indigo-500 to-purple-650';
+                                $avatarGrad = $isStudent ? 'from-amber-400 to-orange-500' : 'from-sky-500 to-sky-600';
                                 
                                 $badgeClass = 'bg-slate-100 text-slate-700';
                                 if ($comment->user->role === 'guru') {
-                                    $badgeClass = 'bg-indigo-100 text-indigo-800 border border-indigo-200/50';
+                                    $badgeClass = 'bg-sky-100 text-sky-800 border border-sky-200/50';
                                 } elseif ($comment->user->role === 'admin') {
                                     $badgeClass = 'bg-rose-100 text-rose-800 border border-rose-200/50';
                                 } elseif ($comment->user->role === 'pimpinan') {
-                                    $badgeClass = 'bg-purple-100 text-purple-800 border border-purple-200/50';
+                                    $badgeClass = 'bg-sky-100 text-sky-800 border border-sky-200/50';
                                 }
                             @endphp
                             <a href="{{ route('student.lessons.show', $comment->lesson_id) }}?tab=diskusi" class="block p-3.5 bg-slate-50/70 hover:bg-slate-100/70 dark:bg-slate-900/40 dark:hover:bg-slate-800/50 rounded-2xl border border-slate-150/50 dark:border-slate-800/60 transition group/item">
@@ -547,7 +547,7 @@
                                             {{ $comment->content }}
                                         </p>
                                         <div class="flex items-center justify-between gap-2 mt-2 pt-1.5 border-t border-slate-150/40 dark:border-slate-850/40">
-                                            <span class="text-[9px] font-bold text-purple-650 dark:text-purple-400 truncate max-w-[120px] group-hover/item:underline">📚 {{ $comment->lesson->title }}</span>
+                                            <span class="text-[9px] font-bold text-sky-600 dark:text-sky-400 truncate max-w-[120px] group-hover/item:underline">📚 {{ $comment->lesson->title }}</span>
                                             <span class="text-[9px] text-gray-400 dark:text-gray-500 font-semibold shrink-0">{{ $comment->created_at->diffForHumans() }}</span>
                                         </div>
                                     </div>
@@ -564,17 +564,17 @@
             </div>
 
             <!-- Quick Links / Help -->
-            <div class="bg-gradient-to-br from-purple-800 via-purple-900 to-indigo-950 rounded-[32px] p-6 sm:p-8 text-white shadow-xl relative overflow-hidden group" id="tour-contact">
+            <div class="bg-gradient-to-br from-sky-800 via-sky-900 to-sky-950 rounded-[32px] p-6 sm:p-8 text-white shadow-xl relative overflow-hidden group" id="tour-contact">
                 <div class="relative z-10">
                     <h3 class="text-lg sm:text-xl font-black mb-2 text-white">{{ __('messages.contact_homeroom_teacher') }}</h3>
-                    <p class="text-purple-200 text-xs leading-relaxed mb-6 font-semibold">{{ __('messages.contact_homeroom_desc') }}</p>
-                    <button @click="$dispatch('toggle-admin-chat')" class="w-full py-4 bg-white text-purple-950 rounded-2xl font-black text-xs sm:text-sm hover:bg-purple-50 transition duration-200 active:scale-95 shadow-lg">
+                    <p class="text-sky-200 text-xs leading-relaxed mb-6 font-semibold">{{ __('messages.contact_homeroom_desc') }}</p>
+                    <button @click="$dispatch('toggle-admin-chat')" class="w-full py-4 bg-white text-sky-950 rounded-2xl font-black text-xs sm:text-sm hover:bg-sky-50 transition duration-200 active:scale-95 shadow-lg">
                         {{ __('messages.contact_admin') }}
                     </button>
                 </div>
                 <!-- Neon accents background -->
-                <div class="absolute -top-12 -right-12 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
-                <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
+                <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
             </div></div>
         </div>
     </div>
@@ -713,15 +713,6 @@
                 }
             ]
         });
-
-        const isTourCompleted = localStorage.getItem('says_dashboard_tour_completed');
-        
-        if (!isTourCompleted) {
-            setTimeout(() => {
-                tourDriver.drive();
-                localStorage.setItem('says_dashboard_tour_completed', 'true');
-            }, 800);
-        }
 
         window.startDashboardTour = function() {
             tourDriver.drive();

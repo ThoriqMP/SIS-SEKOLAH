@@ -3,7 +3,7 @@
 @section('title', __('messages.exam_score_result'))
 
 @section('content')
-<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 min-h-screen">
+<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-sky-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 min-h-screen">
     <div class="max-w-4xl mx-auto space-y-6">
         
         <div class="flex items-center gap-4">
@@ -12,14 +12,14 @@
             </a>
             <div>
                 <h1 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">{{ __('messages.exam_score_result') }}</h1>
-                <p class="text-[10px] sm:text-xs font-black text-purple-650 dark:text-purple-400 uppercase tracking-widest mt-0.5 font-display">{{ __('messages.test_evaluation') }}</p>
+                <p class="text-[10px] sm:text-xs font-black text-sky-600 dark:text-sky-400 uppercase tracking-widest mt-0.5 font-display">{{ __('messages.test_evaluation') }}</p>
             </div>
         </div>
 
         <!-- Score counter banner -->
         <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-[32px] p-8 border border-gray-150/40 dark:border-gray-800/40 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
             <div class="space-y-2">
-                <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-650 dark:text-indigo-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-indigo-100/20">
+                <span class="px-3 py-1 bg-sky-50 dark:bg-sky-950/40 text-sky-650 dark:text-sky-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-sky-100/20">
                     {{ $exam->subject->name ?? __('messages.subject') }}
                 </span>
                 <h2 class="text-xl sm:text-2xl font-black text-gray-950 dark:text-white tracking-tight">{{ $exam->title }}</h2>
@@ -29,8 +29,8 @@
                 </div>
             </div>
 
-            <div class="text-center bg-indigo-600 text-white px-8 py-5 rounded-[24px] shadow-lg shadow-indigo-500/20 flex flex-col justify-center items-center shrink-0">
-                <div class="text-[10px] font-black uppercase tracking-widest text-indigo-200">{{ __('messages.exam_score') }}</div>
+            <div class="text-center bg-sky-600 text-white px-8 py-5 rounded-[24px] shadow-lg shadow-sky-500/20 flex flex-col justify-center items-center shrink-0">
+                <div class="text-[10px] font-black uppercase tracking-widest text-sky-200">{{ __('messages.exam_score') }}</div>
                 <div class="text-4xl sm:text-5xl font-black mt-1">{{ number_format($attempt->score, 1) }}</div>
             </div>
         </div>

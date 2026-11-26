@@ -3,24 +3,24 @@
 @section('title', __('messages.complete_personal_data'))
 
 @section('content')
-<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-tr from-slate-50 via-slate-50 to-purple-100/30 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 flex items-center justify-center relative overflow-hidden">
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-tr from-slate-50 via-slate-50 to-sky-100/30 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 flex items-center justify-center relative overflow-hidden">
     <!-- Decorative ambient glows -->
-    <div class="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl"></div>
 
     <div class="max-w-2xl w-full space-y-8 clay-card p-6 sm:p-10 border border-white/40 dark:border-gray-800/40 relative z-10">
         
         <!-- Language Switcher Widget -->
         <div class="flex justify-end">
             <div class="flex items-center gap-1 bg-gray-100/80 dark:bg-gray-900/85 p-0.5 rounded-lg text-xs font-bold border border-gray-200 dark:border-gray-800/50 shadow-inner">
-                <a href="/lang/id" class="lang-switch-btn px-2.5 py-1 rounded-md transition-all {{ app()->getLocale() === 'id' ? 'bg-purple-650 text-white shadow-sm font-black' : 'text-gray-500 hover:text-gray-800 dark:hover:text-white' }}">ID</a>
-                <a href="/lang/en" class="lang-switch-btn px-2.5 py-1 rounded-md transition-all {{ app()->getLocale() === 'en' ? 'bg-purple-650 text-white shadow-sm font-black' : 'text-gray-500 hover:text-gray-800 dark:hover:text-white' }}">EN</a>
+                <a href="/lang/id" class="lang-switch-btn px-2.5 py-1 rounded-md transition-all {{ app()->getLocale() === 'id' ? 'bg-sky-600 text-white shadow-sm font-black' : 'text-gray-500 hover:text-gray-800 dark:hover:text-white' }}">ID</a>
+                <a href="/lang/en" class="lang-switch-btn px-2.5 py-1 rounded-md transition-all {{ app()->getLocale() === 'en' ? 'bg-sky-600 text-white shadow-sm font-black' : 'text-gray-500 hover:text-gray-800 dark:hover:text-white' }}">EN</a>
             </div>
         </div>
 
         <!-- Header -->
         <div class="text-center">
-            <div class="mx-auto h-16 w-16 bg-gradient-to-br from-purple-500 via-purple-600 to-indigo-700 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-purple-500/20 mb-6">
+            <div class="mx-auto h-16 w-16 bg-gradient-to-br from-sky-500 via-sky-600 to-sky-700 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-sky-500/20 mb-6">
                 <svg class="w-8 h-8 animate-pulse text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
@@ -58,8 +58,8 @@
 
             <!-- Section 2: Data Pribadi Siswa -->
             <div class="space-y-5">
-                <h3 class="text-[10px] sm:text-xs font-black text-purple-650 dark:text-purple-400 uppercase tracking-[0.2em] border-b border-purple-100 dark:border-purple-900/40 pb-3 flex items-center gap-2">
-                    <span class="h-2 w-2 rounded-full bg-purple-500"></span>
+                <h3 class="text-[10px] sm:text-xs font-black text-sky-600 dark:text-sky-400 uppercase tracking-[0.2em] border-b border-sky-100 dark:border-sky-900/40 pb-3 flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-sky-500"></span>
                     {{ __('messages.student_personal_data') }}
                 </h3>
                 
@@ -67,19 +67,19 @@
                     <div class="col-span-full">
                         <label for="nama_siswa" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.student_full_name') }}</label>
                         <input type="text" name="nama_siswa" id="nama_siswa" value="{{ old('nama_siswa', $student->nama_siswa) }}" required
-                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
+                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
                     </div>
 
                     <div>
                         <label for="tanggal_lahir" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.date_of_birth') }}</label>
                         <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ old('tanggal_lahir', $student->tanggal_lahir ? $student->tanggal_lahir->format('Y-m-d') : '') }}" required
-                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
+                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
                     </div>
 
                     <div>
                         <label for="jenis_kelamin" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.gender') }}</label>
                         <select name="jenis_kelamin" id="jenis_kelamin" required
-                                class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm cursor-pointer">
+                                class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm cursor-pointer">
                             <option value="">{{ __('messages.select_gender') }}</option>
                             <option value="Laki-laki" {{ old('jenis_kelamin', $student->jenis_kelamin) === 'Laki-laki' ? 'selected' : '' }}>{{ __('messages.male') }}</option>
                             <option value="Perempuan" {{ old('jenis_kelamin', $student->jenis_kelamin) === 'Perempuan' ? 'selected' : '' }}>{{ __('messages.female') }}</option>
@@ -89,15 +89,15 @@
                     <div class="col-span-full">
                         <label for="email" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.email_parent_student') }}</label>
                         <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required
-                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
+                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
                     </div>
                 </div>
             </div>
 
             <!-- Section 3: Data Orang Tua -->
             <div class="space-y-5">
-                <h3 class="text-[10px] sm:text-xs font-black text-purple-650 dark:text-purple-400 uppercase tracking-[0.2em] border-b border-purple-100 dark:border-purple-900/40 pb-3 flex items-center gap-2">
-                    <span class="h-2 w-2 rounded-full bg-purple-500"></span>
+                <h3 class="text-[10px] sm:text-xs font-black text-sky-600 dark:text-sky-400 uppercase tracking-[0.2em] border-b border-sky-100 dark:border-sky-900/40 pb-3 flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-sky-500"></span>
                     {{ __('messages.parent_guardian_data') }}
                 </h3>
                 
@@ -105,19 +105,19 @@
                     <div>
                         <label for="nama_orang_tua" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.parent_guardian_name') }}</label>
                         <input type="text" name="nama_orang_tua" id="nama_orang_tua" value="{{ old('nama_orang_tua', $student->nama_orang_tua === '-' ? '' : $student->nama_orang_tua) }}" required
-                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
+                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
                     </div>
 
                     <div>
                         <label for="telepon_orang_tua" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.whatsapp_phone_number') }}</label>
                         <input type="tel" name="telepon_orang_tua" id="telepon_orang_tua" value="{{ old('telepon_orang_tua', $student->telepon_orang_tua) }}" required placeholder="{{ __('messages.phone_placeholder') }}"
-                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
+                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
                     </div>
 
                     <div>
                         <label for="jenis_kelamin_orang_tua" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.parent_gender') }}</label>
                         <select name="jenis_kelamin_orang_tua" id="jenis_kelamin_orang_tua" required
-                                class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm cursor-pointer">
+                                class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm cursor-pointer">
                             <option value="">{{ __('messages.select_gender') }}</option>
                             <option value="Laki-laki" {{ old('jenis_kelamin_orang_tua', $student->jenis_kelamin_orang_tua) === 'Laki-laki' ? 'selected' : '' }}>{{ __('messages.male') }}</option>
                             <option value="Perempuan" {{ old('jenis_kelamin_orang_tua', $student->jenis_kelamin_orang_tua) === 'Perempuan' ? 'selected' : '' }}>{{ __('messages.female') }}</option>
@@ -127,13 +127,13 @@
                     <div>
                         <label for="tanggal_lahir_orang_tua" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.parent_dob') }}</label>
                         <input type="date" name="tanggal_lahir_orang_tua" id="tanggal_lahir_orang_tua" value="{{ old('tanggal_lahir_orang_tua', $student->tanggal_lahir_orang_tua ? $student->tanggal_lahir_orang_tua->format('Y-m-d') : '') }}" required
-                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
+                               class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm">
                     </div>
 
                     <div class="col-span-full">
                         <label for="alamat_orang_tua" class="block text-[10px] sm:text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">{{ __('messages.domicile_address') }}</label>
                         <textarea name="alamat_orang_tua" id="alamat_orang_tua" rows="3" required placeholder="{{ __('messages.address_placeholder') }}"
-                                  class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm leading-relaxed">{{ old('alamat_orang_tua', $student->alamat_orang_tua === 'Bogor' || $student->alamat_orang_tua === '-' || empty($student->alamat_orang_tua) ? ($student->alamat_tagihan === 'Bogor' || $student->alamat_tagihan === '-' ? '' : $student->alamat_tagihan) : $student->alamat_orang_tua) }}</textarea>
+                                  class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-xs sm:text-sm font-semibold p-3.5 transition-all shadow-sm leading-relaxed">{{ old('alamat_orang_tua', $student->alamat_orang_tua === 'Bogor' || $student->alamat_orang_tua === '-' || empty($student->alamat_orang_tua) ? ($student->alamat_tagihan === 'Bogor' || $student->alamat_tagihan === '-' ? '' : $student->alamat_tagihan) : $student->alamat_orang_tua) }}</textarea>
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
             <!-- Submit Button -->
             <div class="pt-4">
                 <button type="submit" :disabled="loading" 
-                        class="w-full flex justify-center py-4 px-6 rounded-2xl shadow-xl text-xs sm:text-sm font-black uppercase tracking-widest text-white bg-purple-650 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 active:scale-95 disabled:opacity-50 shadow-purple-500/20">
+                        class="w-full flex justify-center py-4 px-6 rounded-2xl shadow-xl text-xs sm:text-sm font-black uppercase tracking-widest text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-all duration-300 active:scale-95 disabled:opacity-50 shadow-sky-500/20">
                     <span x-show="!loading">{{ __('messages.save_and_enter_dashboard') }}</span>
                     <span x-show="loading" style="display: none;" class="flex items-center gap-2">
                         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">

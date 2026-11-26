@@ -28,12 +28,12 @@
                 <!-- Left: Back Navigation, Avatar, Student Name, Badges & Meta -->
                 <div class="flex items-center gap-3 min-w-0">
                     <a href="{{ auth()->user()->role === 'student' ? route('student.reports') : route('admin.reports.student-list', [$report->siswa_id, 'tahun_ajaran' => request('tahun_ajaran')]) }}" 
-                       class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-gray-750 dark:hover:bg-gray-700 text-slate-500 hover:text-purple-600 transition flex items-center justify-center shrink-0" 
+                       class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-gray-750 dark:hover:bg-gray-700 text-slate-500 hover:text-sky-600 transition flex items-center justify-center shrink-0" 
                        title="Kembali ke Daftar Raport">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                     </a>
 
-                    <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 flex items-center justify-center font-black text-base shrink-0 border border-purple-200/70 dark:border-purple-800/60">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 flex items-center justify-center font-black text-base shrink-0 border border-sky-200/70 dark:border-sky-800/60">
                         {{ strtoupper(substr($report->student->nama_siswa ?? 'S', 0, 1)) }}
                     </div>
 
@@ -43,7 +43,7 @@
                                 {{ $report->student->nama_siswa }}
                             </h1>
 
-                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-purple-50 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 rounded-md">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-sky-50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800 rounded-md">
                                 {{ $report->category->name }}
                             </span>
 
@@ -69,14 +69,14 @@
                 <!-- Right: Action Buttons -->
                 <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
                     <button @click="showGuideline = true" 
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 hover:bg-purple-100 dark:bg-purple-950/40 dark:hover:bg-purple-900/60 text-purple-700 dark:text-purple-300 rounded-xl font-bold transition text-xs border border-purple-200/60 dark:border-purple-800/60 min-h-[36px]">
-                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 hover:bg-sky-100 dark:bg-sky-950/40 dark:hover:bg-sky-900/60 text-sky-700 dark:text-sky-300 rounded-xl font-bold transition text-xs border border-sky-200/60 dark:border-sky-800/60 min-h-[36px]">
+                        <svg class="w-4 h-4 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span>{{ __('messages.how_to_read') }}</span>
                     </button>
 
                     <a href="{{ route('student.reports.pdf', $report) }}" 
                        target="_blank"
-                       class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-900 hover:bg-purple-700 text-white rounded-xl text-xs font-bold transition shadow-xs min-h-[36px]">
+                       class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-900 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition shadow-xs min-h-[36px]">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         <span>{{ __('messages.save_pdf') }}</span>
                     </a>
@@ -92,7 +92,7 @@
                     <div class="bg-white dark:bg-gray-800 rounded-2xl border border-slate-200/80 dark:border-gray-700 p-5 shadow-sm overflow-hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                             <div class="lg:col-span-7 space-y-3">
-                                <span class="px-3 py-1 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full text-[10px] font-bold uppercase tracking-wider border border-purple-200">
+                                <span class="px-3 py-1 bg-sky-50 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 rounded-full text-[10px] font-bold uppercase tracking-wider border border-sky-200">
                                     Project Based Learning
                                 </span>
                                 <h4 class="text-xl font-black text-slate-900 dark:text-white leading-tight">
@@ -126,10 +126,10 @@
                     <div class="bg-white dark:bg-gray-800 rounded-2xl border border-slate-200/80 dark:border-gray-700 p-4 shadow-sm flex items-center justify-between">
                         <div>
                             <h5 class="text-base font-black text-slate-900 dark:text-white">{{ $surah['name'] ?? 'Surat' }}</h5>
-                            <span class="text-xs text-purple-600 font-bold">Ayat {{ $diniyah->start_ayah }} - {{ $diniyah->end_ayah }}</span>
+                            <span class="text-xs text-sky-600 font-bold">Ayat {{ $diniyah->start_ayah }} - {{ $diniyah->end_ayah }}</span>
                             <p class="text-xs text-slate-500 italic mt-1">"{{ $diniyah->description }}"</p>
                         </div>
-                        <div class="w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center font-black text-lg shrink-0">
+                        <div class="w-12 h-12 bg-sky-600 text-white rounded-xl flex items-center justify-center font-black text-lg shrink-0">
                             {{ $diniyah->mutu_code }}
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                         $score = $score ?: '-';
                     @endphp
                     <div class="bg-white dark:bg-gray-800 p-3.5 rounded-xl border border-slate-200/80 dark:border-gray-700 flex items-center gap-3 shadow-sm">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center font-black text-sm {{ $score === 'A' ? 'bg-purple-600 text-white' : ($score === 'B' ? 'bg-purple-100 text-purple-700' : 'bg-slate-100 text-slate-400') }}">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center font-black text-sm {{ $score === 'A' ? 'bg-sky-600 text-white' : ($score === 'B' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-400') }}">
                             {{ $score }}
                         </div>
                         <div>
@@ -179,7 +179,7 @@
                         <!-- Header Tabel -->
                         <div class="flex items-center justify-between pb-2 mb-2.5 border-b border-slate-100 dark:border-gray-700">
                             <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+                                <span class="w-2 h-2 rounded-full bg-sky-600"></span>
                                 <h3 class="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">
                                     Rincian Nilai Mata Pelajaran
                                 </h3>
@@ -205,17 +205,17 @@
                                         <th class="py-2.5 px-2 text-center">PTS</th>
                                         <th class="py-2.5 px-2 text-center">PAS</th>
                                         <th class="py-2.5 px-2 text-center">Remedial</th>
-                                        <th class="py-2.5 px-3 text-center bg-purple-50/50 dark:bg-purple-950/20">Nilai Akhir</th>
+                                        <th class="py-2.5 px-3 text-center bg-sky-50/50 dark:bg-sky-950/20">Nilai Akhir</th>
                                         <th class="py-2.5 px-3 text-center">Predikat</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 dark:divide-gray-700/60 font-medium">
                                     @foreach($report->grades as $grade)
-                                        <tr class="hover:bg-purple-50/30 dark:hover:bg-gray-750/40 transition">
+                                        <tr class="hover:bg-sky-50/30 dark:hover:bg-gray-750/40 transition">
                                             <!-- Nama Mapel + Keterangan Guru jika ada -->
                                             <td class="py-2 px-3">
                                                 <div class="flex items-center gap-2">
-                                                    <div class="w-6 h-6 rounded-lg bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 font-black text-[11px] flex items-center justify-center shrink-0">
+                                                    <div class="w-6 h-6 rounded-lg bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 font-black text-[11px] flex items-center justify-center shrink-0">
                                                         {{ strtoupper(substr($grade->subject->name, 0, 1)) }}
                                                     </div>
                                                     <div class="min-w-0">
@@ -255,7 +255,7 @@
                                             </td>
 
                                             <!-- Nilai Akhir (Highlight) -->
-                                            <td class="py-2 px-3 text-center bg-purple-50/50 dark:bg-purple-950/20">
+                                            <td class="py-2 px-3 text-center bg-sky-50/50 dark:bg-sky-950/20">
                                                 <span class="font-mono font-black text-sm text-slate-900 dark:text-white">
                                                     {{ is_numeric($grade->score) ? round($grade->score) : '-' }}
                                                 </span>
@@ -263,7 +263,7 @@
 
                                             <!-- Predikat -->
                                             <td class="py-2 px-3 text-center">
-                                                <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider {{ ($grade->predicate === 'A' || $grade->score >= 85) ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300' : 'bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300' }}">
+                                                <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider {{ ($grade->predicate === 'A' || $grade->score >= 85) ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300' : 'bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-300' }}">
                                                     Predikat {{ $grade->predicate ?? '-' }}
                                                 </span>
                                             </td>
@@ -289,23 +289,23 @@
                 <div class="lg:col-span-4 flex flex-col justify-between gap-3">
                     
                     <!-- Card 1: Rerata Nilai Akademik (Gradient Hero Card Ringkas) -->
-                    <div class="bg-gradient-to-br from-purple-800 via-purple-900 to-indigo-950 rounded-2xl p-4 text-white shadow-sm border border-purple-700/50 relative overflow-hidden shrink-0">
+                    <div class="bg-gradient-to-br from-sky-800 via-sky-900 to-sky-950 rounded-2xl p-4 text-white shadow-sm border border-sky-700/50 relative overflow-hidden shrink-0">
                         <div class="relative z-10 flex items-center justify-between">
                             <div>
-                                <span class="text-purple-300 text-[10px] font-black uppercase tracking-wider block">Rerata Akademik</span>
+                                <span class="text-sky-300 text-[10px] font-black uppercase tracking-wider block">Rerata Akademik</span>
                                 <div class="text-4xl font-black text-white font-mono tracking-tight mt-0.5">
                                     {{ round($report->grades->avg('score'), 1) }}
                                 </div>
-                                <span class="text-[10px] text-purple-300 block mt-0.5">
+                                <span class="text-[10px] text-sky-300 block mt-0.5">
                                     {{ $report->grades->count() }} Mata Pelajaran Terverifikasi KKM
                                 </span>
                             </div>
 
                             <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center border border-white/20 shadow-xs shrink-0">
-                                <span class="text-2xl font-black text-purple-100 leading-none">
+                                <span class="text-2xl font-black text-sky-100 leading-none">
                                     {{ $report->grades->avg('score') >= 90 ? 'A' : ($report->grades->avg('score') >= 80 ? 'B' : 'C') }}
                                 </span>
-                                <span class="text-[8.5px] uppercase font-bold text-purple-300 tracking-wider">Predikat</span>
+                                <span class="text-[8.5px] uppercase font-bold text-sky-300 tracking-wider">Predikat</span>
                             </div>
                         </div>
                     </div>
@@ -319,13 +319,13 @@
                                 <div class="flex p-0.5 bg-slate-100 dark:bg-gray-750 rounded-xl text-[10.5px] font-bold">
                                     <button type="button" 
                                             @click="rightTab = 'notes'" 
-                                            :class="rightTab === 'notes' ? 'bg-white dark:bg-gray-700 text-purple-700 dark:text-purple-300 shadow-xs' : 'text-slate-500 hover:text-slate-800'"
+                                            :class="rightTab === 'notes' ? 'bg-white dark:bg-gray-700 text-sky-700 dark:text-sky-300 shadow-xs' : 'text-slate-500 hover:text-slate-800'"
                                             class="px-2.5 py-1 rounded-lg transition min-h-[26px]">
                                         Catatan Evaluasi
                                     </button>
                                     <button type="button" 
                                             @click="rightTab = 'radar'; $nextTick(() => { window.reportRadarChart && window.reportRadarChart.resize(); })" 
-                                            :class="rightTab === 'radar' ? 'bg-white dark:bg-gray-700 text-purple-700 dark:text-purple-300 shadow-xs' : 'text-slate-500 hover:text-slate-800'"
+                                            :class="rightTab === 'radar' ? 'bg-white dark:bg-gray-700 text-sky-700 dark:text-sky-300 shadow-xs' : 'text-slate-500 hover:text-slate-800'"
                                             class="px-2.5 py-1 rounded-lg transition min-h-[26px]">
                                         Radar Kekuatan
                                     </button>
@@ -338,8 +338,8 @@
                             <div x-show="rightTab === 'notes'" class="space-y-2 text-xs">
                                 <!-- Penilaian PTS / PAS -->
                                 @if($report->pts_pas_summary)
-                                    <div class="p-2.5 bg-purple-50/60 dark:bg-purple-950/30 rounded-xl border border-purple-100 dark:border-purple-800/40">
-                                        <span class="text-[9.5px] font-bold text-purple-900 dark:text-purple-300 uppercase tracking-wider block mb-0.5">
+                                    <div class="p-2.5 bg-sky-50/60 dark:bg-sky-950/30 rounded-xl border border-sky-100 dark:border-sky-800/40">
+                                        <span class="text-[9.5px] font-bold text-sky-900 dark:text-sky-300 uppercase tracking-wider block mb-0.5">
                                             Penilaian {{ $report->academic_type === 'PAS' ? 'Akhir' : 'Tengah' }} Semester
                                         </span>
                                         <p class="text-[11px] text-slate-700 dark:text-slate-300 italic leading-snug line-clamp-3">
@@ -416,15 +416,15 @@
              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
              x-transition:leave-end="opacity-0 scale-95 translate-y-4">
             
-            <div class="p-6 flex-shrink-0 border-b border-purple-100 dark:border-purple-900/40">
+            <div class="p-6 flex-shrink-0 border-b border-sky-100 dark:border-sky-900/40">
                 <div class="flex justify-between items-start">
                     <div class="flex items-center gap-3">
-                        <div class="h-10 w-10 bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center shrink-0 border border-purple-100/20">
+                        <div class="h-10 w-10 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 rounded-xl flex items-center justify-center shrink-0 border border-sky-100/20">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         </div>
                         <div>
                             <h3 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Panduan Membaca Raport</h3>
-                            <p class="text-[9px] font-black text-purple-600 uppercase tracking-widest mt-0.5">Kategori: {{ $report->category->name }}</p>
+                            <p class="text-[9px] font-black text-sky-600 uppercase tracking-widest mt-0.5">Kategori: {{ $report->category->name }}</p>
                         </div>
                     </div>
                     <button @click="showGuideline = false" class="text-slate-400 hover:text-rose-500 transition-colors bg-slate-100 dark:bg-gray-700/60 p-1.5 rounded-full shrink-0">
@@ -442,7 +442,7 @@
                 </ul>
 
                 <div class="mt-6 pt-4 border-t border-slate-100 dark:border-gray-700 flex justify-end">
-                    <button @click="showGuideline = false" class="px-6 py-2.5 bg-purple-600 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-purple-700 transition">
+                    <button @click="showGuideline = false" class="px-6 py-2.5 bg-sky-600 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-sky-700 transition">
                         Saya Mengerti
                     </button>
                 </div>

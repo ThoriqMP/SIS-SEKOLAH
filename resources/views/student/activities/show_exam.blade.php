@@ -3,7 +3,7 @@
 @section('title', __('messages.exam_instructions'))
 
 @section('content')
-<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 min-h-screen">
+<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-sky-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 min-h-screen">
     <div class="max-w-xl mx-auto space-y-6">
         
         <div class="flex items-center gap-4">
@@ -12,13 +12,13 @@
             </a>
             <div>
                 <h1 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">{{ __('messages.exam_instructions') }}</h1>
-                <p class="text-[10px] sm:text-xs font-black text-purple-650 dark:text-purple-400 uppercase tracking-widest mt-0.5 font-display">{{ __('messages.exam_evaluation') }}</p>
+                <p class="text-[10px] sm:text-xs font-black text-sky-600 dark:text-sky-400 uppercase tracking-widest mt-0.5 font-display">{{ __('messages.exam_evaluation') }}</p>
             </div>
         </div>
 
         <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-gray-150/40 dark:border-gray-800/40 shadow-xl space-y-6">
             <div class="text-center space-y-3">
-                <span class="px-3.5 py-1 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 text-[10px] font-black uppercase tracking-widest rounded-full border border-indigo-150/20">
+                <span class="px-3.5 py-1 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 text-[10px] font-black uppercase tracking-widest rounded-full border border-sky-150/20">
                     {{ $exam->subject->name ?? __('messages.subject') }}
                 </span>
                 <h2 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">{{ $exam->title }}</h2>
@@ -62,7 +62,7 @@
                         {{ __('messages.exam_ended') }}
                     </button>
                 @else
-                    <a href="{{ route('student.activities.exam.take', $exam) }}" class="block w-full text-center py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-2xl text-xs sm:text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+                    <a href="{{ route('student.activities.exam.take', $exam) }}" class="block w-full text-center py-4 bg-sky-600 hover:bg-sky-700 text-white font-extrabold rounded-2xl text-xs sm:text-sm shadow-lg shadow-sky-500/20 active:scale-95 transition-all">
                         {{ __('messages.start_exam_now') }}
                     </a>
                 @endif

@@ -4,22 +4,22 @@
 @php
     $activeSchool = $invoice->profilSekolah ?? $schoolProfile;
 @endphp
-<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-purple-950/20 min-h-screen" x-data="{ showUploadModal: false, step: 1, preview: null, checkedItems: [@foreach($invoice->invoiceDetails as $item) '{{ $item->id }}', @endforeach], selectAll: true }">
+<div class="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-slate-50 to-sky-50/20 dark:from-gray-950 dark:via-gray-950 dark:to-sky-950/20 min-h-screen" x-data="{ showUploadModal: false, step: 1, preview: null, checkedItems: [@foreach($invoice->invoiceDetails as $item) '{{ $item->id }}', @endforeach], selectAll: true }">
     <!-- Header Section -->
     <div class="mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
         <div>
             <div class="flex items-center gap-3.5 mb-4">
-                <a href="{{ auth()->user()->role === 'student' ? route('student.invoices') : route('invoices.index') }}" class="h-10 w-10 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center text-gray-500 shadow-md border border-gray-100 dark:border-gray-700/80 hover:bg-purple-600 hover:text-white transition-all active:scale-95 group">
+                <a href="{{ auth()->user()->role === 'student' ? route('student.invoices') : route('invoices.index') }}" class="h-10 w-10 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center text-gray-500 shadow-md border border-gray-100 dark:border-gray-700/80 hover:bg-sky-600 hover:text-white transition-all active:scale-95 group">
                     <svg class="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                 </a>
-                <span class="px-3.5 py-1.5 bg-purple-100 text-purple-750 dark:bg-purple-950/40 dark:text-purple-450 rounded-full text-[9px] font-black uppercase tracking-widest border border-purple-200/20 shadow-sm">{{ __('messages.invoice_details') }}</span>
+                <span class="px-3.5 py-1.5 bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400 rounded-full text-[9px] font-black uppercase tracking-widest border border-sky-200/20 shadow-sm">{{ __('messages.invoice_details') }}</span>
             </div>
             <h2 class="text-2xl sm:text-4xl font-black text-gray-955 dark:text-white tracking-tight mb-2 font-display">Invoice #{{ $invoice->no_invoice }}</h2>
             <p class="text-gray-400 dark:text-gray-500 text-xs sm:text-sm font-bold">{{ __('messages.invoice_published_on') }} {{ $invoice->tanggal_invoice ? $invoice->tanggal_invoice->format('d M Y') : '-' }}</p>
         </div>
         
         <div class="flex flex-wrap items-center gap-3">
-            <a href="{{ route('student.invoices.pdf', $invoice) }}" class="flex items-center justify-center flex-1 md:flex-none gap-2 px-6 py-3.5 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl text-xs sm:text-sm font-black shadow-lg hover:bg-purple-650 transition-all active:scale-95">
+            <a href="{{ route('student.invoices.pdf', $invoice) }}" class="flex items-center justify-center flex-1 md:flex-none gap-2 px-6 py-3.5 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl text-xs sm:text-sm font-black shadow-lg hover:bg-sky-600 transition-all active:scale-95">
                 <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 {{ __('messages.download_invoice') }}
             </a>
@@ -28,7 +28,7 @@
                 Download Kwitansi
             </a>
             @if($invoice->status !== 'paid')
-                <button @click="showUploadModal = true" class="flex items-center justify-center flex-1 md:flex-none gap-2 px-6 py-3.5 bg-purple-650 text-white rounded-2xl text-xs sm:text-sm font-black shadow-lg shadow-purple-600/20 hover:bg-purple-700 transition-all active:scale-95">
+                <button @click="showUploadModal = true" class="flex items-center justify-center flex-1 md:flex-none gap-2 px-6 py-3.5 bg-sky-600 text-white rounded-2xl text-xs sm:text-sm font-black shadow-lg shadow-sky-600/20 hover:bg-sky-700 transition-all active:scale-95">
                     {{ __('messages.pay_now') }}
                 </button>
             @endif
@@ -36,8 +36,8 @@
     </div>
 
     @if(session('success'))
-        <div class="mb-8 p-5 bg-purple-50 dark:bg-purple-950/30 border-l-4 border-purple-500 rounded-2xl text-purple-800 dark:text-purple-300 font-bold flex items-center gap-3 shadow-sm border border-purple-200/20">
-            <svg class="w-5 h-5 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="mb-8 p-5 bg-sky-50 dark:bg-sky-950/30 border-l-4 border-sky-500 rounded-2xl text-sky-800 dark:text-sky-300 font-bold flex items-center gap-3 shadow-sm border border-sky-200/20">
+            <svg class="w-5 h-5 text-sky-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <p class="text-xs sm:text-sm">{{ session('success') }}</p>
         </div>
     @endif
@@ -66,9 +66,9 @@
                         </thead>
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-800/50">
                             @foreach($invoice->invoiceDetails as $item)
-                                <tr class="hover:bg-purple-50/20 dark:hover:bg-purple-900/10 transition-colors">
+                                <tr class="hover:bg-sky-50/20 dark:hover:bg-sky-900/10 transition-colors">
                                     <td class="px-6 py-5 sm:py-6 flex items-center gap-3">
-                                        <div class="h-10 w-10 bg-purple-50 dark:bg-purple-950/40 text-purple-650 dark:text-purple-400 rounded-xl flex items-center justify-center font-black text-sm shrink-0 shadow-inner border border-purple-100/10">
+                                        <div class="h-10 w-10 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 rounded-xl flex items-center justify-center font-black text-sm shrink-0 shadow-inner border border-sky-100/10">
                                             {{ substr($item->layanan->nama_layanan ?? 'L', 0, 1) }}
                                         </div>
                                         <div class="min-w-0">
@@ -91,9 +91,9 @@
                             @endforeach
                         </tbody>
                         <tfoot>
-                            <tr class="bg-slate-900 dark:bg-slate-900/80 text-white border-t border-purple-900/20">
+                            <tr class="bg-slate-900 dark:bg-slate-900/80 text-white border-t border-sky-900/20">
                                 <td colspan="3" class="px-6 py-5 text-right font-black uppercase tracking-widest text-gray-400 dark:text-gray-300 text-[10px] sm:text-xs">{{ __('messages.table_total_payment') }}</td>
-                                <td class="px-6 py-5 text-right font-black text-sm sm:text-xl text-purple-300">Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</td>
+                                <td class="px-6 py-5 text-right font-black text-sm sm:text-xl text-sky-300">Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -109,13 +109,13 @@
                             <img src="{{ asset('storage/' . $invoice->payment_proof) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bukti Transfer">
                         </div>
                         <div class="space-y-4">
-                            <div class="p-5 bg-purple-50/50 dark:bg-purple-950/20 rounded-2xl border border-purple-100/50 dark:border-purple-900/30">
-                                <p class="text-[9px] font-black text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-1">{{ __('messages.upload_date') }}</p>
+                            <div class="p-5 bg-sky-50/50 dark:bg-sky-950/20 rounded-2xl border border-sky-100/50 dark:border-sky-900/30">
+                                <p class="text-[9px] font-black text-sky-600 dark:text-sky-400 uppercase tracking-widest mb-1">{{ __('messages.upload_date') }}</p>
                                 <p class="text-sm sm:text-base font-black text-gray-955 dark:text-white">{{ $invoice->payment_date->format('d M Y H:i') }} WIB</p>
                             </div>
                             @if($invoice->payment_notes)
-                                <div class="p-5 bg-purple-50/50 dark:bg-purple-950/20 rounded-2xl border border-purple-100/50 dark:border-purple-900/30">
-                                    <p class="text-[9px] font-black text-purple-750 dark:text-purple-450 uppercase tracking-widest mb-1">{{ __('messages.marked_for_service') }}</p>
+                                <div class="p-5 bg-sky-50/50 dark:bg-sky-950/20 rounded-2xl border border-sky-100/50 dark:border-sky-900/30">
+                                    <p class="text-[9px] font-black text-sky-700 dark:text-sky-400 uppercase tracking-widest mb-1">{{ __('messages.marked_for_service') }}</p>
                                     <p class="text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 leading-relaxed">{{ $invoice->payment_notes }}</p>
                                 </div>
                             @endif
@@ -150,7 +150,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                                 @foreach($paidInvoices as $paidInvoice)
-                                    <tr class="hover:bg-purple-50/20 dark:hover:bg-purple-900/10 transition-all">
+                                    <tr class="hover:bg-sky-50/20 dark:hover:bg-sky-900/10 transition-all">
                                         <td class="px-4 py-4 font-black text-gray-900 dark:text-white text-xs sm:text-sm">
                                             #{{ $paidInvoice->no_invoice }}
                                         </td>
@@ -161,7 +161,7 @@
                                             Rp {{ number_format($paidInvoice->grand_total, 0, ',', '.') }}
                                         </td>
                                         <td class="px-4 py-4 text-center">
-                                            <a href="{{ route('student.invoices.show', $paidInvoice) }}" class="px-3.5 py-1.5 bg-slate-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg font-black text-[10px] hover:bg-purple-650 hover:text-white transition active:scale-95">
+                                            <a href="{{ route('student.invoices.show', $paidInvoice) }}" class="px-3.5 py-1.5 bg-slate-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg font-black text-[10px] hover:bg-sky-600 hover:text-white transition active:scale-95">
                                                 {{ __('messages.action_detail') }}
                                             </a>
                                         </td>
@@ -177,7 +177,7 @@
         <!-- Sidebar Content (Right Side - Status & Bank VA Card) -->
         <div class="space-y-8">
             <!-- Payment Status Card -->
-            <div class="{{ $invoice->status === 'paid' ? 'bg-gradient-to-br from-purple-600 to-indigo-700 shadow-xl shadow-purple-900/20' : ($invoice->payment_proof ? 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-xl shadow-orange-950/20' : 'bg-gradient-to-br from-rose-600 to-red-700 shadow-xl shadow-rose-900/20') }} rounded-[28px] p-6 sm:p-8 text-white relative overflow-hidden group">
+            <div class="{{ $invoice->status === 'paid' ? 'bg-gradient-to-br from-sky-600 to-sky-700 shadow-xl shadow-sky-900/20' : ($invoice->payment_proof ? 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-xl shadow-orange-950/20' : 'bg-gradient-to-br from-rose-600 to-red-700 shadow-xl shadow-rose-900/20') }} rounded-[28px] p-6 sm:p-8 text-white relative overflow-hidden group">
                 <div class="relative z-10">
                     <div class="flex items-center gap-3.5 mb-6">
                         <div class="h-10 w-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center">
@@ -205,21 +205,21 @@
             <div class="clay-card p-6 sm:p-8 shadow-md">
                 <h4 class="text-sm sm:text-base font-black text-gray-900 dark:text-white mb-5">{{ __('messages.payment_method') }}</h4>
                 @if($activeSchool && $activeSchool->no_rekening)
-                    <div class="p-5 bg-gradient-to-br from-slate-900 to-purple-955 text-white rounded-2xl border border-slate-950 flex flex-col gap-4 shadow-lg group relative overflow-hidden">
+                    <div class="p-5 bg-gradient-to-br from-slate-900 to-sky-900 text-white rounded-2xl border border-slate-950 flex flex-col gap-4 shadow-lg group relative overflow-hidden">
                         <div class="flex items-center justify-between z-10">
-                            <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg text-[10px] font-black uppercase tracking-wider text-purple-200">{{ $activeSchool->bank_nama ?? 'REKENING' }}</span>
-                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                            <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg text-[10px] font-black uppercase tracking-wider text-sky-200">{{ $activeSchool->bank_nama ?? 'REKENING' }}</span>
+                            <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                         </div>
                         <div class="z-10 mt-1">
-                            <p class="text-[8px] font-black text-purple-300 uppercase tracking-widest">{{ __('messages.target_account_number') }}</p>
-                            <p class="text-xl sm:text-2xl font-black tracking-wider mt-1 text-purple-50">{{ $activeSchool->no_rekening }}</p>
+                            <p class="text-[8px] font-black text-sky-300 uppercase tracking-widest">{{ __('messages.target_account_number') }}</p>
+                            <p class="text-xl sm:text-2xl font-black tracking-wider mt-1 text-sky-50">{{ $activeSchool->no_rekening }}</p>
                         </div>
                         <div class="pt-3 border-t border-white/10 flex justify-between items-center text-xs z-10 mt-2">
-                            <span class="font-bold text-purple-300 text-[10px] uppercase">{{ __('messages.account_name') }}</span>
-                            <span class="font-black text-purple-50 uppercase tracking-wide truncate max-w-[120px]">{{ $activeSchool->atas_nama }}</span>
+                            <span class="font-bold text-sky-300 text-[10px] uppercase">{{ __('messages.account_name') }}</span>
+                            <span class="font-black text-sky-50 uppercase tracking-wide truncate max-w-[120px]">{{ $activeSchool->atas_nama }}</span>
                         </div>
                         <!-- Ambient backdrop graphic -->
-                        <div class="absolute -bottom-16 -right-16 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl group-hover:scale-115 transition-transform duration-700"></div>
+                        <div class="absolute -bottom-16 -right-16 w-32 h-32 bg-sky-500/20 rounded-full blur-2xl group-hover:scale-115 transition-transform duration-700"></div>
                     </div>
                 @else
                     <p class="text-xs text-gray-400 italic">{{ __('messages.va_info_unavailable') }}</p>
@@ -255,19 +255,19 @@
 
                 <!-- VA Account Copier in Modal -->
                 @if($activeSchool && $activeSchool->no_rekening)
-                    <div class="mb-6 p-4 bg-purple-50/60 dark:bg-purple-950/20 rounded-2xl border border-purple-150 dark:border-purple-900/30 flex flex-col gap-2.5">
+                    <div class="mb-6 p-4 bg-sky-50/60 dark:bg-sky-950/20 rounded-2xl border border-sky-150 dark:border-sky-900/30 flex flex-col gap-2.5">
                         <div class="flex justify-between items-center">
-                            <span class="px-2.5 py-0.5 bg-purple-600 text-white rounded-md text-[8px] font-black uppercase tracking-wider">{{ $activeSchool->bank_nama ?? 'TRANSFER' }}</span>
+                            <span class="px-2.5 py-0.5 bg-sky-600 text-white rounded-md text-[8px] font-black uppercase tracking-wider">{{ $activeSchool->bank_nama ?? 'TRANSFER' }}</span>
                             <span class="text-[10px] font-bold text-gray-400 dark:text-gray-500">{{ __('messages.target_account_number') }}</span>
                         </div>
                         <div class="flex justify-between items-center gap-3">
-                            <p class="text-lg font-black text-purple-600 dark:text-purple-400 tracking-wider truncate" id="modal-bank-acc">{{ $activeSchool->no_rekening }}</p>
-                            <button type="button" @click="navigator.clipboard.writeText('{{ $activeSchool->no_rekening }}'); alert('{{ __('messages.copied_rekening') }}')" class="h-8 px-3.5 bg-white dark:bg-gray-800 text-[10px] font-black text-gray-700 dark:text-gray-300 rounded-lg border border-slate-200 dark:border-gray-750 hover:bg-purple-600 hover:text-white transition active:scale-95 flex items-center justify-center gap-1 shrink-0 shadow-sm">
+                            <p class="text-lg font-black text-sky-600 dark:text-sky-400 tracking-wider truncate" id="modal-bank-acc">{{ $activeSchool->no_rekening }}</p>
+                            <button type="button" @click="navigator.clipboard.writeText('{{ $activeSchool->no_rekening }}'); alert('{{ __('messages.copied_rekening') }}')" class="h-8 px-3.5 bg-white dark:bg-gray-800 text-[10px] font-black text-gray-700 dark:text-gray-300 rounded-lg border border-slate-200 dark:border-gray-750 hover:bg-sky-600 hover:text-white transition active:scale-95 flex items-center justify-center gap-1 shrink-0 shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                 {{ __('messages.copy') }}
                             </button>
                         </div>
-                        <div class="pt-2 border-t border-purple-100/50 dark:border-purple-900/10 flex justify-between items-center text-[10px] font-bold text-gray-500 dark:text-purple-300 uppercase">
+                        <div class="pt-2 border-t border-sky-100/50 dark:border-sky-900/10 flex justify-between items-center text-[10px] font-bold text-gray-500 dark:text-sky-300 uppercase">
                             <span>{{ __('messages.account_name') }}</span>
                             <span class="font-black text-gray-900 dark:text-white">{{ $activeSchool->atas_nama }}</span>
                         </div>
@@ -281,13 +281,13 @@
                     <div x-show="step === 1" class="space-y-6" x-transition>
                         <div>
                             <label class="block text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2 ml-1">{{ __('messages.select_transfer_proof') }}</label>
-                            <div class="relative group aspect-[4/3] rounded-3xl overflow-hidden bg-slate-50 dark:bg-gray-900 border-2 border-dashed border-slate-200 dark:border-gray-700 flex flex-col items-center justify-center transition-all hover:border-purple-500 hover:bg-purple-50/20 shadow-inner">
+                            <div class="relative group aspect-[4/3] rounded-3xl overflow-hidden bg-slate-50 dark:bg-gray-900 border-2 border-dashed border-slate-200 dark:border-gray-700 flex flex-col items-center justify-center transition-all hover:border-sky-500 hover:bg-sky-50/20 shadow-inner">
                                 <template x-if="!preview">
                                     <div class="text-center p-6">
-                                        <div class="h-16 w-16 bg-purple-100/60 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center text-purple-650 dark:text-purple-400 mx-auto mb-4 group-hover:scale-105 transition-all border border-purple-200/10">
+                                        <div class="h-16 w-16 bg-sky-100/60 dark:bg-sky-900/30 rounded-2xl flex items-center justify-center text-sky-600 dark:text-sky-400 mx-auto mb-4 group-hover:scale-105 transition-all border border-sky-200/10">
                                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                         </div>
-                                        <p class="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest group-hover:text-purple-600 transition-colors">{{ __('messages.choose_file_drag') }}</p>
+                                        <p class="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest group-hover:text-sky-600 transition-colors">{{ __('messages.choose_file_drag') }}</p>
                                     </div>
                                 </template>
                                 <template x-if="preview">
@@ -304,7 +304,7 @@
                             </button>
                             <button type="button" 
                                     @click="if (preview) { step = 2 } else { alert('{{ __('messages.select_file_warning') }}') }" 
-                                     class="flex-1 px-5 py-3.5 bg-purple-650 text-white rounded-2xl font-black uppercase text-xs tracking-wider shadow-lg shadow-purple-600/20 hover:bg-purple-700 transition active:scale-95">
+                                     class="flex-1 px-5 py-3.5 bg-sky-600 text-white rounded-2xl font-black uppercase text-xs tracking-wider shadow-lg shadow-sky-600/20 hover:bg-sky-700 transition active:scale-95">
                                 {{ __('messages.next') }}
                             </button>
                         </div>
@@ -321,16 +321,16 @@
                             <span class="text-[9px] font-black uppercase tracking-wider text-gray-400 dark:text-gray-500">{{ __('messages.service_invoice_list') }}</span>
                             <button type="button" 
                                     @click="selectAll = !selectAll; checkedItems = selectAll ? [@foreach($invoice->invoiceDetails as $item) '{{ $item->id }}', @endforeach] : []" 
-                                    class="text-[9px] font-black text-purple-650 dark:text-purple-400 uppercase tracking-widest hover:underline">
+                                    class="text-[9px] font-black text-sky-600 dark:text-sky-400 uppercase tracking-widest hover:underline">
                                 <span x-text="selectAll ? '{{ __('messages.clear_all_checks') }}' : '{{ __('messages.check_all_items') }}'"></span>
                             </button>
                         </div>
 
                         <div class="max-h-56 overflow-y-auto space-y-2.5 pr-1.5 scrollbar-hide">
                             @foreach($invoice->invoiceDetails as $item)
-                                <label class="flex items-start gap-3.5 p-4 bg-slate-50 dark:bg-gray-900/50 rounded-2xl border border-slate-100 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-500 cursor-pointer transition-all">
+                                <label class="flex items-start gap-3.5 p-4 bg-slate-50 dark:bg-gray-900/50 rounded-2xl border border-slate-100 dark:border-gray-800 hover:border-sky-500 dark:hover:border-sky-500 cursor-pointer transition-all">
                                     <input type="checkbox" name="checked_items[]" value="{{ $item->id }}" x-model="checkedItems"
-                                           class="mt-1.5 h-4.5 w-4.5 rounded-md border-gray-300 dark:border-gray-750 text-purple-650 focus:ring-purple-500 dark:focus:ring-purple-650 cursor-pointer">
+                                           class="mt-1.5 h-4.5 w-4.5 rounded-md border-gray-300 dark:border-gray-750 text-sky-600 focus:ring-sky-500 dark:focus:ring-sky-600 cursor-pointer">
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs sm:text-sm font-black text-gray-900 dark:text-white truncate">
                                             {{ $item->layanan->nama_layanan ?? 'Layanan' }}
@@ -338,7 +338,7 @@
                                         @if($item->deskripsi_tambahan)
                                             <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5 truncate">{{ $item->deskripsi_tambahan }}</p>
                                         @endif
-                                        <p class="text-xs font-black text-purple-650 dark:text-purple-400 mt-1">Rp {{ number_format($item->total_biaya, 0, ',', '.') }}</p>
+                                        <p class="text-xs font-black text-sky-600 dark:text-sky-400 mt-1">Rp {{ number_format($item->total_biaya, 0, ',', '.') }}</p>
                                     </div>
                                 </label>
                             @endforeach
@@ -350,7 +350,7 @@
                             </button>
                             <button type="submit" 
                                     :disabled="checkedItems.length === 0"
-                                    class="flex-1 px-5 py-3.5 bg-purple-650 text-white rounded-2xl font-black uppercase text-xs tracking-wider shadow-lg shadow-purple-600/20 hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition active:scale-95">
+                                    class="flex-1 px-5 py-3.5 bg-sky-600 text-white rounded-2xl font-black uppercase text-xs tracking-wider shadow-lg shadow-sky-600/20 hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed transition active:scale-95">
                                 {{ __('messages.send_proof') }}
                             </button>
                         </div>

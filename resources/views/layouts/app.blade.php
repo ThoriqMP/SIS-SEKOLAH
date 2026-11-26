@@ -23,25 +23,31 @@
 </head>
 <body class="bg-[#fafafc] text-slate-900 antialiased">
 
-@if (auth()->check() && !auth()->user()->isStudent() && !request()->is('login', 'teacher/login', 'pendaftaran*'))
+@if (auth()->check() && !request()->is('login', 'teacher/login', 'student/login', 'student/activate*', 'student/complete-profile*', 'pendaftaran*'))
     <div x-data="{ sidebarOpen: false }" class="min-h-screen flex bg-[#fafafc]">
 
         {{-- Mobile Sidebar Overlay --}}
         <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false"
             class="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs lg:hidden"></div>
 
-        {{-- Persistent Left Sidebar (Teacher & Admin Portal) --}}
+        {{-- Persistent Left Sidebar (Admin / Guru / Student Portal) --}}
         <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
             class="fixed lg:sticky top-0 left-0 z-50 w-64 h-screen bg-white border-r border-slate-200/80 flex flex-col transition-transform duration-200 ease-in-out shrink-0">
 
             {{-- Brand --}}
             <div class="h-16 px-5 border-b border-slate-100 flex items-center justify-between shrink-0">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5">
+                <a href="{{ auth()->user()->isStudent() ? route('student.dashboard') : route('dashboard') }}" class="flex items-center gap-2.5">
                     <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="w-9 h-9 rounded-xl object-contain bg-sky-50 p-1">
                     <div>
                         <span class="block text-sm font-extrabold text-slate-900 leading-none">SIS SEKOLAH</span>
                         <span class="block text-[9px] font-bold uppercase tracking-wider text-sky-600 mt-0.5">
-                            {{ auth()->user()->isSuperadmin() ? 'Superadmin' : 'Portal Guru' }}
+                            @if (auth()->user()->isStudent())
+                                Portal Siswa
+                            @elseif (auth()->user()->isSuperadmin())
+                                Superadmin
+                            @else
+                                Portal Guru
+                            @endif
                         </span>
                     </div>
                 </a>
@@ -51,6 +57,62 @@
             </div>
 
             {{-- Navigation Links --}}
+            @if (auth()->user()->isStudent())
+                <nav id="tour-desktop-nav" class="flex-1 overflow-y-auto px-3 py-4 space-y-5 text-xs font-semibold">
+                    <div>
+                        <a href="{{ route('student.dashboard') }}"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {{ request()->routeIs('student.dashboard') ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-600 hover:bg-sky-50 hover:text-sky-700' }}">
+                            <i class="fa-solid fa-house w-4 text-center"></i> Dashboard
+                        </a>
+                    </div>
+
+                    <div>
+                        <p class="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">Pembelajaran</p>
+                        <div class="space-y-1">
+                            <a href="{{ route('student.activities.index') }}"
+                                class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('student.activities.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                                <i class="fa-solid fa-pen-to-square w-4 text-center"></i> Tugas &amp; Ujian
+                            </a>
+                            <a href="{{ route('student.lessons.index') }}"
+                                class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('student.lessons.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                                <i class="fa-solid fa-book-open w-4 text-center"></i> Ruang Belajar
+                            </a>
+                            <a href="{{ route('student.video-conferences.index') }}"
+                                class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('student.video-conference*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                                <i class="fa-solid fa-video w-4 text-center"></i> Kelas Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">Akademik &amp; Keuangan</p>
+                        <div class="space-y-1">
+                            <a href="{{ route('student.reports') }}"
+                                class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('student.reports*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                                <i class="fa-solid fa-award w-4 text-center"></i> Rapor &amp; Nilai
+                            </a>
+                            <a href="{{ route('student.attendances.index') }}"
+                                class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('student.attendances.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                                <i class="fa-solid fa-clipboard-check w-4 text-center"></i> Absensi
+                            </a>
+                            <a href="{{ route('student.invoices') }}"
+                                class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('student.invoices*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                                <i class="fa-solid fa-file-invoice-dollar w-4 text-center"></i> Tagihan SPP
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">Akun</p>
+                        <div class="space-y-1">
+                            <a href="{{ route('student.profile.edit') }}"
+                                class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('student.profile.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                                <i class="fa-solid fa-user-gear w-4 text-center"></i> Profil Saya
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            @else
             <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-5 text-xs font-semibold">
                 <div>
                     <a href="{{ route('dashboard') }}"
@@ -171,10 +233,11 @@
                     </div>
                 </div>
             </nav>
+            @endif
 
             {{-- Sidebar Footer --}}
             <div class="p-3 border-t border-slate-100 shrink-0">
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ auth()->user()->isStudent() ? route('student.logout') : route('logout') }}">
                     @csrf
                     <button type="submit" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition">
                         <i class="fa-solid fa-right-from-bracket"></i> Keluar

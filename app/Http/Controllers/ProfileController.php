@@ -17,7 +17,25 @@ class ProfileController extends Controller
             return redirect()->back()->with('info', 'Halaman profil belum tersedia.');
         }
 
-        return view($view, compact('user'));
+        $student = $user->siswa ?? new \App\Models\Siswa([
+            'nama_siswa' => $user->name,
+            'nis' => '-',
+            'class' => 'Umum',
+        ]);
+
+        $sessions = collect();
+        try {
+            if (config('session.driver') === 'database') {
+                $sessions = \Illuminate\Support\Facades\DB::table('sessions')
+                    ->where('user_id', $user->id)
+                    ->orderByDesc('last_activity')
+                    ->get();
+            }
+        } catch (\Throwable $e) {
+            $sessions = collect();
+        }
+
+        return view($view, compact('user', 'student', 'sessions'));
     }
 
     public function update(Request $request)
