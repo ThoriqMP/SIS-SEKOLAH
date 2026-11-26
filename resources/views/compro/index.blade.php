@@ -39,7 +39,7 @@
         /* Realistic iPhone 15/16 Pro Titanium Frame */
         .iphone-frame {
             background: linear-gradient(145deg, #0b0d12 0%, #020305 100%);
-            border-radius: 46px;
+            border-radius: 54px;
             padding: 9px;
             border: 2.5px solid #475569;
             box-shadow:
@@ -75,7 +75,7 @@
         }
         .iphone-screen {
             background: #f8fafc;
-            border-radius: 36px;
+            border-radius: 44px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -323,7 +323,7 @@
                             </div>
 
                             {{-- Authentic Mobile Hero Card from student/dashboard.blade.php --}}
-                            <div class="bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-800 rounded-2xl p-3.5 text-white shadow-lg shadow-purple-950/20 relative overflow-hidden text-left">
+                            <div class="bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-800 rounded-3xl p-3.5 text-white shadow-lg shadow-purple-950/20 relative overflow-hidden text-left">
                                 <div class="flex items-center justify-between gap-1 mb-2">
                                     <span class="px-2 py-0.5 bg-white/15 border border-white/20 rounded-full text-[8px] font-extrabold uppercase tracking-wider text-purple-100">
                                         SIS SEKOLAH Portal
