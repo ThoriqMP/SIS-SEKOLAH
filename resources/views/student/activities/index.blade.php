@@ -95,7 +95,7 @@
 
                         <div class="space-y-4">
                             <div class="flex items-center gap-2 text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-                                📅 {{ __('messages.due_date_label') }}: {{ $assignment->due_date->format('d M Y H:i') }}
+                                <i class="fa-regular fa-calendar"></i> {{ __('messages.due_date_label') }}: {{ $assignment->due_date?->format('d M Y H:i') ?? '-' }}
                             </div>
                             
                             <a href="{{ route('student.activities.assignment.show', $assignment) }}" class="block w-full text-center py-3.5 bg-slate-900 dark:bg-slate-800 text-white hover:bg-sky-600 rounded-2xl font-black text-xs transition duration-200 active:scale-95 shadow-sm">
@@ -154,14 +154,14 @@
                                     {{ __('messages.type_label') }}: {{ str_replace('_', ' ', $exam->type) }} {{ $exam->target_period ? "({$exam->target_period})" : "" }}
                                 </span>
                                 <span class="px-2 py-0.5 bg-slate-100/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-305 text-[8px] font-black uppercase tracking-widest rounded">
-                                    ⏱ {{ $exam->duration }} {{ __('messages.minutes') }}
+                                    <i class="fa-regular fa-clock mr-1"></i> {{ $exam->duration }} {{ __('messages.minutes') }}
                                 </span>
                             </div>
                         </div>
 
                         <div class="space-y-4">
                             <div class="flex items-center gap-2 text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-                                📅 {{ __('messages.due_date_label') }}: {{ $exam->due_date->format('d M Y H:i') }}
+                                <i class="fa-regular fa-calendar"></i> {{ __('messages.due_date_label') }}: {{ $exam->due_date?->format('d M Y H:i') ?? '-' }}
                             </div>
                             
                             @if($att && $att->completed_at)

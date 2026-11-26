@@ -18,36 +18,56 @@ class PortalActivityController extends Controller
 {
     public function index()
     {
-        $siswa = Auth::user()->siswa;
-        if (!$siswa) {
-            abort(403, 'Siswa profile not found.');
-        }
-
+        $user = Auth::user();
+        $siswa = $user->siswa;
         $currentPeriod = ReportHelper::getCurrentPeriod();
 
-        // Get assignments and exams assigned to student's class and period
-        $assignments = Assignment::with(['subject'])
-            ->where('class', $siswa->class)
-            ->where('period', $currentPeriod)
-            ->orderBy('due_date', 'asc')
-            ->get();
+        $assignments = collect();
+        $exams = collect();
+        $submissions = collect();
+        $attempts = collect();
 
-        $exams = Exam::with(['subject'])
-            ->where('class', $siswa->class)
-            ->where('period', $currentPeriod)
-            ->orderBy('due_date', 'asc')
-            ->get();
+        if ($siswa) {
+            try {
+                $assignments = Assignment::with(['subject'])
+                    ->where('class', $siswa->class)
+                    ->where('period', $currentPeriod)
+                    ->orderBy('due_date', 'asc')
+                    ->get();
+            } catch (\Throwable $e) {
+                $assignments = collect();
+            }
 
-        // Load submission statuses
-        $submissions = AssignmentSubmission::where('siswa_id', $siswa->id)
-            ->whereIn('assignment_id', $assignments->pluck('id'))
-            ->get()
-            ->keyBy('assignment_id');
+            try {
+                $exams = Exam::with(['subject'])
+                    ->where('class', $siswa->class)
+                    ->where('period', $currentPeriod)
+                    ->orderBy('due_date', 'asc')
+                    ->get();
+            } catch (\Throwable $e) {
+                $exams = collect();
+            }
 
-        $attempts = ExamAttempt::where('siswa_id', $siswa->id)
-            ->whereIn('exam_id', $exams->pluck('id'))
-            ->get()
-            ->keyBy('exam_id');
+            try {
+                $subCol = \Illuminate\Support\Facades\Schema::hasColumn('assignment_submissions', 'siswa_id') ? 'siswa_id' : 'student_id';
+                $submissions = AssignmentSubmission::where($subCol, $siswa->id)
+                    ->whereIn('assignment_id', $assignments->pluck('id'))
+                    ->get()
+                    ->keyBy('assignment_id');
+            } catch (\Throwable $e) {
+                $submissions = collect();
+            }
+
+            try {
+                $attCol = \Illuminate\Support\Facades\Schema::hasColumn('exam_attempts', 'siswa_id') ? 'siswa_id' : 'student_id';
+                $attempts = ExamAttempt::where($attCol, $siswa->id)
+                    ->whereIn('exam_id', $exams->pluck('id'))
+                    ->get()
+                    ->keyBy('exam_id');
+            } catch (\Throwable $e) {
+                $attempts = collect();
+            }
+        }
 
         return view('student.activities.index', compact('assignments', 'exams', 'submissions', 'attempts', 'currentPeriod'));
     }
