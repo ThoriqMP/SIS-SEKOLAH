@@ -22,6 +22,18 @@ class ExamAttempt extends Model
         'answers' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function (ExamAttempt $attempt) {
+            if (empty($attempt->student_id) && !empty($attempt->siswa_id)) {
+                $attempt->student_id = $attempt->siswa_id;
+            }
+            if (empty($attempt->siswa_id) && !empty($attempt->student_id)) {
+                $attempt->siswa_id = $attempt->student_id;
+            }
+        });
+    }
+
     public function exam()
     {
         return $this->belongsTo(Exam::class);

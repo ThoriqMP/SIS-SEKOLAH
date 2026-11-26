@@ -302,10 +302,10 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::post('/absensi', [\App\Http\Controllers\AttendanceController::class, 'store'])->name('attendances.store');
 
     // Master Mata Pelajaran (Subjects)
-    Route::resource('subjects', SubjectController::class);
+    Route::resource('subjects', SubjectController::class)->except(['show']);
 
     // Master Layanan Sekolah (Services)
-    Route::resource('services', ServiceController::class);
+    Route::resource('services', ServiceController::class)->except(['show']);
 
     // Profil Sekolah (School Profile)
     Route::get('/school-profile', [SchoolProfileController::class, 'edit'])->name('school-profile.edit');
@@ -319,7 +319,7 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::delete('expense-categories/{expense_category}/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expense-categories.expenses.destroy');
 
     // Master Template Proyek Bulanan
-    Route::resource('project-templates', \App\Http\Controllers\Admin\ProjectTemplateController::class);
+    Route::resource('project-templates', \App\Http\Controllers\Admin\ProjectTemplateController::class)->except(['show']);
 
     // Surat Keterangan (SK CIBI & SK ABK)
     Route::prefix('surat-keterangan')->name('surat-keterangan.')->group(function () {

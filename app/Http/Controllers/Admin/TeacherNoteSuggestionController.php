@@ -10,8 +10,7 @@ class TeacherNoteSuggestionController extends Controller
 {
     public function index()
     {
-        $suggestions = TeacherNoteSuggestion::latest()->paginate(10);
-        return view('admin.suggestions.index', compact('suggestions'));
+        return redirect()->route('admin.academic-settings.index');
     }
 
     public function store(Request $request)

@@ -57,7 +57,12 @@ class Invoice extends Model
      */
     public function profilSekolah()
     {
-        return $this->belongsTo(ProfilSekolah::class, 'id_sekolah');
+        return $this->belongsTo(ProfilSekolah::class, 'id_sekolah')->withDefault(function () {
+            return ProfilSekolah::first() ?? new ProfilSekolah([
+                'nama_sekolah' => 'SIS SEKOLAH',
+                'alamat' => 'Jl. Pendidikan Modern No. 1, Jakarta',
+            ]);
+        });
     }
 
     /**
