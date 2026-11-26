@@ -3,36 +3,7 @@
 @section('title', 'Dashboard - SIS SEKOLAH')
 
 @section('content')
-<div class="min-h-screen bg-[#fafafc]">
-    {{-- Top Navbar --}}
-    <header class="bg-white border-b border-slate-200/80 sticky top-0 z-30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="w-9 h-9 rounded-xl object-contain bg-purple-50 p-1">
-                <div>
-                    <span class="block text-sm font-extrabold text-slate-900 leading-none">SIS SEKOLAH</span>
-                    <span class="block text-[10px] font-bold uppercase tracking-wider text-purple-600 mt-0.5">
-                        {{ auth()->user()->isSuperadmin() ? 'Superadmin Workspace' : 'Portal Guru & Staf' }}
-                    </span>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <div class="hidden sm:block text-right">
-                    <p class="text-xs font-extrabold text-slate-900">{{ auth()->user()->name }}</p>
-                    <p class="text-[11px] font-semibold text-purple-600 uppercase">{{ auth()->user()->role }}</p>
-                </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition">
-                        <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar
-                    </button>
-                </form>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+<div class="p-4 sm:p-6 lg:p-8 space-y-8">
         {{-- Greeting Banner --}}
         <div class="bg-gradient-to-r from-[#6d28d9] via-[#5b21b6] to-[#4f46e5] rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-purple-600/20">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-[10px] font-extrabold uppercase tracking-widest">
@@ -132,6 +103,5 @@
                 </a>
             </div>
         </div>
-    </main>
-</div>
+    </div>
 @endsection

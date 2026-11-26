@@ -59,6 +59,7 @@
                             </div>
                         </div>
                     </div>
+                @endif
                 <!-- Status Storage & Tanda Tangan -->
                 <div class="mb-6 p-4 rounded-xl border {{ ($symlinkValid ?? true) && ($signatureExists ?? false) ? 'bg-slate-50 border-slate-200 dark:bg-slate-800/40 dark:border-slate-700' : 'bg-amber-50 border-amber-200 dark:bg-amber-950/30 dark:border-amber-800' }}">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

@@ -31,12 +31,11 @@ class ReportManagementController extends Controller
         if (!$period) {
             // Folder List View
             // Get unique periods from StudentReport
-            $dbPeriods = StudentReport::select('period')
+            $dbPeriods = StudentReport::whereNotNull('period')
                 ->distinct()
-                ->orderByRaw("SUBSTRING_INDEX(period, ' ', -1) DESC") // Sort by year desc
-                ->orderByRaw("FIELD(SUBSTRING_INDEX(period, ' ', 2), 'Semester Genap', 'Semester Ganjil') DESC") // Sort by semester desc
-                ->get()
-                ->pluck('period');
+                ->pluck('period')
+                ->sortDesc()
+                ->values();
 
             $currentPeriod = ReportHelper::getCurrentPeriod();
             if ($dbPeriods->isEmpty()) {
