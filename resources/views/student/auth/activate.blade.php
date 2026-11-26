@@ -7,26 +7,26 @@
     $portalLabel = 'Portal Siswa & Wali';
     $portalTitle = 'Aktivasi Akun Belajar';
     $portalSubtitle = 'Silakan tentukan kata sandi baru untuk akun portal belajar Anda.';
-    $gradientFrom = 'from-violet-600';
-    $gradientTo = 'to-indigo-600';
-    $accentText = 'text-indigo-600 dark:text-indigo-400 hover:text-indigo-500';
-    $focusRing = 'focus:ring-indigo-500 focus:border-indigo-500';
-    $accentColorHex = '#4f46e5';
-    $bgGradient = 'from-violet-50/50 via-slate-50 to-indigo-50/50 dark:from-violet-950/20 dark:via-gray-950 dark:to-indigo-950/20';
-    $buttonClass = 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 focus:ring-indigo-500 shadow-indigo-500/20';
-    $badgeClass = 'bg-violet-100 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 border border-violet-200/50 dark:border-violet-800/30';
-    $iconClass = 'text-violet-600 dark:text-violet-400';
+    $gradientFrom = 'from-sky-600';
+    $gradientTo = 'to-sky-600';
+    $accentText = 'text-sky-600 dark:text-sky-400 hover:text-sky-500';
+    $focusRing = 'focus:ring-sky-500 focus:border-sky-500';
+    $accentColorHex = '#0369a1';
+    $bgGradient = 'from-sky-50/50 via-slate-50 to-sky-50/50 dark:from-sky-950/20 dark:via-gray-950 dark:to-sky-950/20';
+    $buttonClass = 'bg-gradient-to-r from-sky-600 to-sky-600 hover:from-sky-700 hover:to-sky-700 focus:ring-sky-500 shadow-sky-500/20';
+    $badgeClass = 'bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200/50 dark:border-sky-800/30';
+    $iconClass = 'text-sky-600 dark:text-sky-400';
     
     // Illustration representing activation / secure keys
     $illustration = '
     <div class="relative w-20 h-20 sm:w-28 sm:h-28 mx-auto flex items-center justify-center">
         <!-- Animated rings -->
-        <div class="absolute inset-0 rounded-full bg-violet-500/10 dark:bg-violet-500/5 animate-ping duration-1000"></div>
-        <div class="absolute inset-2 rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 animate-pulse"></div>
+        <div class="absolute inset-0 rounded-full bg-sky-500/10 dark:bg-sky-500/5 animate-ping duration-1000"></div>
+        <div class="absolute inset-2 rounded-full bg-sky-500/10 dark:bg-sky-500/5 animate-pulse"></div>
         
         <!-- Key Icon Container -->
-        <div class="relative w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-tr from-violet-500/10 to-indigo-500/10 border border-indigo-200/30 dark:border-indigo-800/30 rounded-2xl flex items-center justify-center shadow-lg backdrop-blur-md">
-            <i class="fa-solid fa-key text-2xl sm:text-4xl text-indigo-600 dark:text-indigo-400"></i>
+        <div class="relative w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-tr from-sky-500/10 to-sky-500/10 border border-sky-200/30 dark:border-sky-800/30 rounded-2xl flex items-center justify-center shadow-lg backdrop-blur-md">
+            <i class="fa-solid fa-key text-2xl sm:text-4xl text-sky-600 dark:text-sky-400"></i>
         </div>
     </div>';
 @endphp
@@ -118,7 +118,7 @@
                             Password Baru
                         </label>
                         <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-indigo-500 transition-colors">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-sky-500 transition-colors">
                                 <i class="fa-solid fa-lock text-sm"></i>
                             </div>
                             <input id="password" name="password" type="password" required 
@@ -133,7 +133,7 @@
                             Konfirmasi Password Baru
                         </label>
                         <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-indigo-500 transition-colors">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-sky-500 transition-colors">
                                 <i class="fa-solid fa-shield-halved text-sm"></i>
                             </div>
                             <input id="password_confirmation" name="password_confirmation" type="password" required 
