@@ -909,6 +909,14 @@
                     <p class="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
                         Sistem Informasi Sekolah &amp; Learning Management System modern untuk mendukung pembelajaran digital, manajemen akademik, dan keuangan sekolah.
                     </p>
+                    <div class="pt-1">
+                        <a href="https://wa.me/6285155238654?text=Halo%2C%20saya%20ingin%20konsultasi%20mengenai%20sistem%20SIS%20SEKOLAH."
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-bold transition">
+                            <i class="fa-brands fa-whatsapp text-base text-emerald-400"></i>
+                            <span>Konsultasi Sistem: 0851-5523-8654</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="md:col-span-3 space-y-2.5 text-xs">
@@ -941,6 +949,15 @@
             </div>
         </div>
     </footer>
+
+    {{-- Floating WhatsApp Consultation Button --}}
+    <a href="https://wa.me/6285155238654?text=Halo%2C%20saya%20ingin%20konsultasi%20mengenai%20sistem%20SIS%20SEKOLAH."
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Konsultasi Sistem via WhatsApp"
+       class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs sm:text-sm font-extrabold shadow-xl shadow-emerald-600/30 transition-all hover:scale-105">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span class="hidden sm:inline">Konsultasi Sistem</span>
+    </a>
 
 </body>
 </html>
