@@ -280,9 +280,13 @@ class RegistrationController extends Controller
         $nomor = $request->query('nomor');
         $email = $request->query('email');
 
-        $registration = StudentRegistration::where('nomor_pendaftaran', $nomor)
-            ->where('email', $email)
-            ->first();
+        try {
+            $registration = StudentRegistration::where('nomor_pendaftaran', $nomor)
+                ->where('email', $email)
+                ->first();
+        } catch (\Throwable $e) {
+            $registration = null;
+        }
 
         if (!$registration || $registration->status !== 'approved') {
             return redirect()->route('student.index')->with('error', 'Tautan aktivasi tidak valid atau pendaftaran belum disetujui.');

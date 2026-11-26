@@ -7,14 +7,18 @@
     <meta name="google-adsense-account" content="ca-pub-1189692810742391">
     
     @php
-        $globalSchoolProfile = \App\Models\ProfilSekolah::first();
+        try {
+            $globalSchoolProfile = \App\Models\ProfilSekolah::first();
+        } catch (\Throwable $e) {
+            $globalSchoolProfile = null;
+        }
         $faviconUrl = ($globalSchoolProfile && $globalSchoolProfile->logo_path) 
             ? Storage::url($globalSchoolProfile->logo_path) 
-            : asset('storage/logos/sayyidah-school-logo.png');
+            : asset('logos/sis-sekolah-logo.png');
     @endphp
     <link rel="icon" href="{{ $faviconUrl }}">
 
-    <title>Pendaftaran Siswa Baru - Says Homeschooling</title>
+    <title>Pendaftaran Siswa Baru - SIS SEKOLAH</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
