@@ -116,38 +116,38 @@
     {{-- ===================================================================== --}}
     {{-- NAVBAR                                                                --}}
     {{-- ===================================================================== --}}
-    <header class="sticky top-0 z-50 w-full px-4 sm:px-6 pt-3 pb-2 bg-gradient-to-b from-[#f3efff]/90 to-transparent backdrop-blur-md">
-        <nav class="max-w-7xl mx-auto flex items-center justify-between gap-4 bg-white/85 backdrop-blur-xl border border-purple-100/80 rounded-full px-4 sm:px-6 py-2.5 shadow-[0_8px_30px_rgb(109,40,217,0.07)]">
+    <header class="sticky top-0 z-50 w-full px-4 sm:px-6 py-3.5 bg-[#f3efff]/85 backdrop-blur-md">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between gap-4">
             {{-- Brand --}}
             <a href="#" class="flex items-center gap-2.5 shrink-0 group">
-                <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="h-9 w-9 object-contain rounded-xl shadow-xs group-hover:scale-105 transition-transform">
+                <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="h-9 w-9 object-contain rounded-xl shadow-xs group-hover:scale-105 transition-transform bg-white p-0.5">
                 <div class="leading-none">
                     <span class="block text-sm sm:text-base font-extrabold tracking-tight text-slate-900">SIS SEKOLAH</span>
                     <span class="block text-[9px] font-bold uppercase tracking-widest text-purple-600 mt-0.5">Smart School</span>
                 </div>
             </a>
 
-            {{-- Desktop Menu --}}
-            <div class="hidden md:flex items-center gap-7 text-xs font-bold text-slate-600">
-                <a href="#fitur" class="hover:text-purple-700 transition">{{ __('messages.programs') }}</a>
-                <a href="#hasil-belajar" class="hover:text-purple-700 transition">Rapor & Nilai</a>
-                <a href="#dashboard-macbook" class="hover:text-purple-700 transition">Admin & Guru</a>
+            {{-- Desktop Centered Pill Menu --}}
+            <div class="hidden md:flex items-center gap-6 bg-white/90 border border-purple-100/90 rounded-full px-6 py-2.5 shadow-[0_6px_24px_rgb(109,40,217,0.06)] text-xs font-bold text-slate-600">
+                <a href="#fitur" class="hover:text-purple-700 transition">Fitur</a>
+                <a href="#hasil-belajar" class="hover:text-purple-700 transition">Rapor &amp; Nilai</a>
+                <a href="#dashboard-macbook" class="hover:text-purple-700 transition">Admin &amp; Guru</a>
                 <a href="#testimoni" class="hover:text-purple-700 transition">Testimoni</a>
-                <a href="{{ route('registration.create') }}" class="hover:text-purple-700 transition">{{ __('messages.registration') }}</a>
+                <a href="{{ route('registration.create') }}" class="hover:text-purple-700 transition">PPDB</a>
             </div>
 
             {{-- Right Actions --}}
             <div class="hidden md:flex items-center gap-2 shrink-0">
-                <a href="{{ route('student.login') }}" class="px-4 py-2 rounded-full text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200/70 transition">
-                    <i class="fa-solid fa-graduation-cap mr-1"></i> {{ __('messages.student_portal') }}
+                <a href="{{ route('student.login') }}" class="px-4 py-2.5 rounded-full text-xs font-bold text-purple-700 bg-white/90 hover:bg-white border border-purple-200/80 shadow-xs transition">
+                    <i class="fa-solid fa-graduation-cap mr-1"></i> Portal Siswa
                 </a>
-                <a href="{{ route('login') }}" class="px-4 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-[#7c3aed] to-[#4f46e5] hover:opacity-95 shadow-md shadow-purple-600/20 transition">
-                    <i class="fa-solid fa-chalkboard-user mr-1"></i> {{ __('messages.teacher_portal') }}
+                <a href="{{ route('login') }}" class="px-4 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-[#7c3aed] to-[#4f46e5] hover:opacity-95 shadow-md shadow-purple-600/20 transition">
+                    <i class="fa-solid fa-chalkboard-user mr-1"></i> Portal Guru
                 </a>
             </div>
 
             {{-- Mobile Hamburger --}}
-            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 rounded-xl text-slate-700 hover:bg-purple-50" aria-label="Menu">
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2.5 rounded-xl bg-white/80 border border-purple-100 text-slate-700 hover:bg-white" aria-label="Menu">
                 <i class="fa-solid" :class="mobileMenu ? 'fa-xmark' : 'fa-bars'"></i>
             </button>
         </nav>
@@ -155,13 +155,14 @@
         {{-- Mobile Dropdown --}}
         <div x-show="mobileMenu" x-cloak @click.away="mobileMenu = false"
             class="md:hidden mt-2 max-w-7xl mx-auto bg-white rounded-3xl border border-purple-100 shadow-xl p-5 space-y-3">
-            <a href="#fitur" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">{{ __('messages.programs') }}</a>
-            <a href="#hasil-belajar" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Rapor & Nilai</a>
-            <a href="#dashboard-macbook" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Admin & Guru</a>
+            <a href="#fitur" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Fitur</a>
+            <a href="#hasil-belajar" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Rapor &amp; Nilai</a>
+            <a href="#dashboard-macbook" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Admin &amp; Guru</a>
             <a href="#testimoni" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Testimoni</a>
+            <a href="{{ route('registration.create') }}" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">PPDB</a>
             <div class="pt-3 border-t border-slate-100 grid grid-cols-2 gap-2">
-                <a href="{{ route('student.login') }}" class="text-center py-2.5 rounded-xl text-xs font-bold text-purple-700 bg-purple-50 border border-purple-200">{{ __('messages.student_portal') }}</a>
-                <a href="{{ route('login') }}" class="text-center py-2.5 rounded-xl text-xs font-bold text-white bg-purple-700">{{ __('messages.teacher_portal') }}</a>
+                <a href="{{ route('student.login') }}" class="text-center py-2.5 rounded-xl text-xs font-bold text-purple-700 bg-purple-50 border border-purple-200">Portal Siswa</a>
+                <a href="{{ route('login') }}" class="text-center py-2.5 rounded-xl text-xs font-bold text-white bg-purple-700">Portal Guru</a>
             </div>
         </div>
     </header>
