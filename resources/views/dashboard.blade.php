@@ -32,37 +32,37 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
         {{-- Welcome Banner (spans 2 cols) --}}
-        <div class="lg:col-span-2 relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 p-6 sm:p-7 text-white shadow-lg">
+        <div class="lg:col-span-2 relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-700 via-sky-600 to-cyan-700 p-6 sm:p-7 text-white shadow-lg shadow-sky-600/20">
             {{-- Decorative circles --}}
-            <div class="absolute -top-10 -right-10 w-52 h-52 bg-teal-500/10 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-16 right-24 w-64 h-64 bg-purple-600/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -top-10 -right-10 w-52 h-52 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 right-24 w-64 h-64 bg-sky-300/15 rounded-full blur-2xl pointer-events-none"></div>
 
-            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] font-extrabold uppercase tracking-widest text-teal-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-[10px] font-extrabold uppercase tracking-widest text-sky-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-sky-200 animate-pulse"></span>
                 {{ $roleLabel }}
             </span>
 
             <h1 class="mt-3 text-2xl sm:text-3xl font-black tracking-tight">
                 {{ $greeting }}, {{ $user?->name }}!
             </h1>
-            <p class="mt-1 text-sm text-slate-300 max-w-md">
+            <p class="mt-1 text-sm text-sky-100 max-w-md">
                 Kelola aktivitas akademik, rapor siswa, tagihan SPP, dan ruang belajar dari satu dashboard terpadu.
             </p>
 
             {{-- Quick nav pills --}}
             <div class="mt-5 flex flex-wrap gap-2">
-                <a href="{{ route('teacher.activities.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    <i class="fa-solid fa-pen-to-square text-teal-300"></i> Tugas & Ujian
+                <a href="{{ route('teacher.activities.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-sky-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-pen-to-square text-sky-300"></i> Tugas & Ujian
                 </a>
-                <a href="{{ route('teacher.lessons.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    <i class="fa-solid fa-book-open text-teal-300"></i> Ruang Belajar
+                <a href="{{ route('teacher.lessons.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-sky-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-book-open text-sky-300"></i> Ruang Belajar
                 </a>
-                <a href="{{ route('attendances.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    <i class="fa-solid fa-clipboard-check text-teal-300"></i> Absensi
+                <a href="{{ route('attendances.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-sky-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-clipboard-check text-sky-300"></i> Absensi
                 </a>
                 @if ($canViewFinance ?? false)
-                <a href="{{ route('invoices.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
-                    <i class="fa-solid fa-file-invoice-dollar text-teal-300"></i> Tagihan SPP
+                <a href="{{ route('invoices.index') }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-sky-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                    <i class="fa-solid fa-file-invoice-dollar text-sky-300"></i> Tagihan SPP
                 </a>
                 @endif
             </div>
@@ -88,7 +88,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
 
         {{-- Siswa Aktif --}}
-        <div class="sm:col-span-1 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl p-4 text-white shadow-md shadow-teal-500/20">
+        <div class="sm:col-span-1 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl p-4 text-white shadow-md shadow-sky-500/20">
             <div class="flex items-start justify-between">
                 <span class="text-[10px] font-bold uppercase tracking-widest opacity-80">Siswa Aktif</span>
                 <i class="fa-solid fa-user-graduate text-base opacity-85"></i>
@@ -176,13 +176,13 @@
 
                 {{-- Ruang Belajar --}}
                 <a href="{{ route('teacher.lessons.index') }}"
-                   class="group relative overflow-hidden bg-white hover:bg-teal-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-teal-500/25 hover:shadow-lg hover:border-transparent">
-                    <div class="w-10 h-10 rounded-xl bg-teal-100 group-hover:bg-white/20 text-teal-600 group-hover:text-white flex items-center justify-center transition text-base">
+                   class="group relative overflow-hidden bg-white hover:bg-sky-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-sky-500/25 hover:shadow-lg hover:border-transparent">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 group-hover:bg-white/20 text-sky-600 group-hover:text-white flex items-center justify-center transition text-base">
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <div>
                         <p class="text-sm font-extrabold text-slate-900 group-hover:text-white">Ruang Belajar</p>
-                        <p class="text-[11px] text-slate-400 group-hover:text-teal-200 leading-tight mt-0.5">Kursus & materi interaktif</p>
+                        <p class="text-[11px] text-slate-400 group-hover:text-sky-200 leading-tight mt-0.5">Kursus & materi interaktif</p>
                     </div>
                 </a>
 
@@ -290,7 +290,7 @@
             <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-xs font-extrabold text-slate-500 uppercase tracking-widest">Absensi Hari Ini</h3>
-                    <a href="{{ route('attendances.index') }}" class="text-[11px] text-teal-600 font-semibold hover:underline">Lihat semua →</a>
+                    <a href="{{ route('attendances.index') }}" class="text-[11px] text-sky-600 font-semibold hover:underline">Lihat semua →</a>
                 </div>
 
                 @if(($recentAttendances ?? collect())->isEmpty())
@@ -357,7 +357,7 @@
                     </div>
                     <div class="pt-2 border-t border-slate-100 flex justify-between items-center">
                         <span class="text-xs font-bold text-slate-700">Net Cashflow</span>
-                        <span class="text-xs font-black {{ ($netCashflow ?? 0) >= 0 ? 'text-teal-600' : 'text-rose-600' }}">
+                        <span class="text-xs font-black {{ ($netCashflow ?? 0) >= 0 ? 'text-sky-600' : 'text-rose-600' }}">
                             Rp {{ number_format($netCashflow ?? 0, 0, ',', '.') }}
                         </span>
                     </div>
@@ -366,13 +366,13 @@
             @endif
 
             {{-- System Info Card --}}
-            <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-5 text-white shadow-md">
-                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Sistem</p>
+            <div class="bg-gradient-to-br from-sky-700 to-sky-800 rounded-2xl p-5 text-white shadow-md shadow-sky-700/20">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-sky-200">Sistem</p>
                 <p class="mt-2 text-sm font-black">SIS SEKOLAH v2.0</p>
-                <p class="text-[11px] text-slate-400 mt-1">Ruang Belajar · Rapor Digital · WebRTC</p>
+                <p class="text-[11px] text-sky-100 mt-1">Ruang Belajar · Rapor Digital · WebRTC</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                    <span class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></span>
-                    <span class="text-[11px] text-teal-400 font-semibold">Sistem Berjalan Normal</span>
+                    <span class="w-2 h-2 bg-emerald-300 rounded-full animate-pulse"></span>
+                    <span class="text-[11px] text-sky-100 font-semibold">Sistem Berjalan Normal</span>
                 </div>
             </div>
         </div>

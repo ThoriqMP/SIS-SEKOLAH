@@ -37,10 +37,10 @@
             {{-- Brand --}}
             <div class="h-16 px-5 border-b border-slate-100 flex items-center justify-between shrink-0">
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5">
-                    <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="w-9 h-9 rounded-xl object-contain bg-teal-50 p-1">
+                    <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="w-9 h-9 rounded-xl object-contain bg-sky-50 p-1">
                     <div>
                         <span class="block text-sm font-extrabold text-slate-900 leading-none">SIS SEKOLAH</span>
-                        <span class="block text-[9px] font-bold uppercase tracking-wider text-teal-600 mt-0.5">
+                        <span class="block text-[9px] font-bold uppercase tracking-wider text-sky-600 mt-0.5">
                             {{ auth()->user()->isSuperadmin() ? 'Superadmin' : 'Portal Guru' }}
                         </span>
                     </div>
@@ -54,7 +54,7 @@
             <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-5 text-xs font-semibold">
                 <div>
                     <a href="{{ route('dashboard') }}"
-                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {{ request()->routeIs('dashboard') ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20' : 'text-slate-600 hover:bg-teal-50 hover:text-teal-700' }}">
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {{ request()->routeIs('dashboard') ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-600 hover:bg-sky-50 hover:text-sky-700' }}">
                         <i class="fa-solid fa-chart-pie w-4 text-center"></i> Dashboard
                     </a>
                 </div>
@@ -63,15 +63,15 @@
                     <p class="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">Pengajaran (Guru)</p>
                     <div class="space-y-1">
                         <a href="{{ route('teacher.activities.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('teacher.activities.*', 'teacher.assignments.*', 'teacher.exams.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('teacher.activities.*', 'teacher.assignments.*', 'teacher.exams.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-pen-to-square w-4 text-center"></i> Tugas &amp; Ujian
                         </a>
                         <a href="{{ route('teacher.lessons.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('teacher.lessons.*', 'teacher.courses.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('teacher.lessons.*', 'teacher.courses.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-book-open w-4 text-center"></i> Ruang Belajar
                         </a>
                         <a href="{{ route('teacher.video-conferences.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('teacher.video-conference*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('teacher.video-conference*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-video w-4 text-center"></i> Kelas Video WebRTC
                         </a>
                     </div>
@@ -81,35 +81,35 @@
                     <p class="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">Akademik &amp; Rapor</p>
                     <div class="space-y-1">
                         <a href="{{ route('admin.reports.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.reports.index', 'admin.reports.create', 'admin.reports.show', 'admin.reports.edit') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.reports.index', 'admin.reports.create', 'admin.reports.show', 'admin.reports.edit') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-award w-4 text-center"></i> Manajemen Rapor
                         </a>
                         <a href="{{ route('admin.reports.bulk-pbl.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.reports.bulk-pbl.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.reports.bulk-pbl.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-layer-group w-4 text-center"></i> Bulk PBL
                         </a>
                         <a href="{{ route('admin.reports.settings.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.reports.settings.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.reports.settings.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-sliders w-4 text-center"></i> Setting Rapor
                         </a>
                         <a href="{{ route('admin.semester-projects.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.semester-projects.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.semester-projects.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-diagram-project w-4 text-center"></i> Proyek Semester
                         </a>
                         <a href="{{ route('project-templates.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('project-templates.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('project-templates.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-copy w-4 text-center"></i> Template Proyek
                         </a>
                         <a href="{{ route('admin.academic-settings.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.academic-settings.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.academic-settings.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-graduation-cap w-4 text-center"></i> KKM &amp; Mutu
                         </a>
                         <a href="{{ route('admin.report-categories.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.report-categories.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.report-categories.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-tags w-4 text-center"></i> Kategori Rapor
                         </a>
                         <a href="{{ route('subjects.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('subjects.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('subjects.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-book w-4 text-center"></i> Mata Pelajaran
                         </a>
                     </div>
@@ -119,19 +119,19 @@
                     <p class="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">Kesiswaan &amp; Surat</p>
                     <div class="space-y-1">
                         <a href="{{ route('students.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('students.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('students.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-users w-4 text-center"></i> Data Siswa
                         </a>
                         <a href="{{ route('attendances.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('attendances.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('attendances.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-clipboard-user w-4 text-center"></i> Absensi Kehadiran
                         </a>
                         <a href="{{ route('admin.registrations.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.registrations.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.registrations.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-user-plus w-4 text-center"></i> Pendaftaran PPDB
                         </a>
                         <a href="{{ route('surat-keterangan.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('surat-keterangan.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('surat-keterangan.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-envelope-open-text w-4 text-center"></i> Surat Keterangan
                         </a>
                     </div>
@@ -141,31 +141,31 @@
                     <p class="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">Keuangan &amp; Sekolah</p>
                     <div class="space-y-1">
                         <a href="{{ route('invoices.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('invoices.index', 'invoices.create', 'invoices.show', 'invoices.edit') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('invoices.index', 'invoices.create', 'invoices.show', 'invoices.edit') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-file-invoice-dollar w-4 text-center"></i> Tagihan SPP
                         </a>
                         <a href="{{ route('invoices.automation') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('invoices.automation*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('invoices.automation*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-robot w-4 text-center"></i> Otomatisasi SPP
                         </a>
                         <a href="{{ route('invoices.kwitansi-index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('invoices.kwitansi*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('invoices.kwitansi*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-receipt w-4 text-center"></i> Kwitansi
                         </a>
                         <a href="{{ route('services.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('services.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('services.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-cubes w-4 text-center"></i> Layanan Sekolah
                         </a>
                         <a href="{{ route('expense-categories.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('expense-categories.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('expense-categories.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-wallet w-4 text-center"></i> Pengeluaran
                         </a>
                         <a href="{{ route('school-profile.edit') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('school-profile.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('school-profile.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-school w-4 text-center"></i> Profil Sekolah
                         </a>
                         <a href="{{ route('admin.compro-cms.index') }}"
-                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.compro-cms.*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.compro-cms.*') ? 'bg-sky-50 text-sky-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-globe w-4 text-center"></i> CMS Compro
                         </a>
                     </div>
@@ -187,17 +187,17 @@
         <div class="flex-1 min-w-0 flex flex-col">
             <header class="h-16 bg-white/85 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30">
                 <div class="flex items-center gap-3">
-                    <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-teal-50">
+                    <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-sky-50">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <a href="{{ route('compro.index') }}" class="text-xs font-bold text-slate-500 hover:text-teal-700 transition">
+                    <a href="{{ route('compro.index') }}" class="text-xs font-bold text-slate-500 hover:text-sky-700 transition">
                         <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Lihat Landing Page
                     </a>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="text-right">
                         <p class="text-xs font-extrabold text-slate-900 leading-none">{{ auth()->user()->name }}</p>
-                        <p class="text-[10px] font-bold uppercase text-teal-600 mt-0.5">{{ auth()->user()->role }}</p>
+                        <p class="text-[10px] font-bold uppercase text-sky-600 mt-0.5">{{ auth()->user()->role }}</p>
                     </div>
                 </div>
             </header>
