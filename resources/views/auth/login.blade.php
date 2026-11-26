@@ -4,7 +4,7 @@
     $isStudentPortal = request()->is('student*');
 @endphp
 
-@section('title', ($isStudentPortal ? 'Portal Siswa' : 'Portal Guru & Admin') . ' - Sayyidah School')
+@section('title', ($isStudentPortal ? 'Portal Siswa' : 'Portal Guru & Admin') . ' - SIS SEKOLAH')
 
 @section('content')
 <div class="relative min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 overflow-hidden bg-[#fafafc]">
@@ -23,11 +23,11 @@
             <div class="relative z-10">
                 <a href="{{ route('compro.index') }}" class="inline-flex items-center gap-3 group">
                     <div class="w-12 h-12 rounded-2xl bg-white p-1.5 shadow-lg shadow-black/15 flex items-center justify-center transition-transform group-hover:scale-105">
-                        <img src="{{ asset('logos/sayyidah-school-logo.png') }}" alt="Sayyidah School" class="w-full h-full object-contain rounded-xl">
+                        <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="w-full h-full object-contain rounded-xl">
                     </div>
                     <div>
-                        <span class="block font-extrabold text-lg tracking-tight leading-none">Sayyidah School</span>
-                        <span class="block text-[11px] font-semibold tracking-widest uppercase text-purple-200 mt-1">Homeschooling & LMS</span>
+                        <span class="block font-extrabold text-lg tracking-tight leading-none">SIS SEKOLAH</span>
+                        <span class="block text-[11px] font-semibold tracking-widest uppercase text-purple-200 mt-1">Digital Academy & LMS</span>
                     </div>
                 </a>
 
@@ -68,11 +68,11 @@
             <div class="flex lg:hidden items-center justify-between mb-6">
                 <a href="{{ route('compro.index') }}" class="inline-flex items-center gap-2.5">
                     <div class="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100 p-1 flex items-center justify-center">
-                        <img src="{{ asset('logos/sayyidah-school-logo.png') }}" alt="Sayyidah School" class="w-full h-full object-contain rounded-lg">
+                        <img src="{{ asset('logos/sis-sekolah-logo.png') }}" alt="SIS SEKOLAH" class="w-full h-full object-contain rounded-lg">
                     </div>
                     <div>
-                        <span class="block font-extrabold text-sm text-slate-900 leading-none">Sayyidah School</span>
-                        <span class="block text-[10px] font-bold uppercase tracking-wider text-purple-600 mt-0.5">Homeschooling</span>
+                        <span class="block font-extrabold text-sm text-slate-900 leading-none">SIS SEKOLAH</span>
+                        <span class="block text-[10px] font-bold uppercase tracking-wider text-purple-600 mt-0.5">Digital Academy</span>
                     </div>
                 </a>
                 <a href="{{ route('compro.index') }}" class="text-xs font-semibold text-slate-500 hover:text-purple-700">

@@ -14,23 +14,23 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link class="brand-logo-fav" rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     
-    <title>Says Homeschooling - Mandiri, Kreatif, & Berkarakter Berbasis Pemetaan Potensi & Fitrah</title>
-    <meta name="description" content="Says Homeschooling - Institusi pendidikan fleksibel berbasis karakter, kurikulum personal, dan pemetaan potensi & fitrah anak dengan dukungan LMS & kelas online interaktif.">
+    <title>SIS SEKOLAH - Sistem Informasi Sekolah & Pembelajaran Digital</title>
+    <meta name="description" content="SIS SEKOLAH - Institusi pendidikan fleksibel berbasis karakter, kurikulum personal, dan pemetaan potensi anak dengan dukungan LMS & kelas online interaktif.">
 
     <!-- Open Graph / Google Search Rich Metadata -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Says Homeschooling - Sayyidah School">
-    <meta property="og:title" content="Says Homeschooling - Mandiri, Kreatif, & Berkarakter Berbasis Pemetaan Potensi & Fitrah">
-    <meta property="og:description" content="Says Homeschooling - Institusi pendidikan fleksibel berbasis karakter, kurikulum personal, dan pemetaan potensi & fitrah anak dengan dukungan LMS & kelas online interaktif.">
-    <meta property="og:image" content="{{ asset('logos/sayyidah-school-logo.png') }}">
-    <meta property="og:image:secure_url" content="{{ asset('logos/sayyidah-school-logo.png') }}">
+    <meta property="og:site_name" content="SIS SEKOLAH">
+    <meta property="og:title" content="SIS SEKOLAH - Sistem Informasi Sekolah & Pembelajaran Digital">
+    <meta property="og:description" content="SIS SEKOLAH - Institusi pendidikan fleksibel berbasis karakter, kurikulum personal, dan pemetaan potensi anak dengan dukungan LMS & kelas online interaktif.">
+    <meta property="og:image" content="{{ asset('logos/sis-sekolah-logo.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('logos/sis-sekolah-logo.png') }}">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="640">
     <meta property="og:image:height" content="640">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Says Homeschooling - Mandiri, Kreatif, & Berkarakter">
-    <meta name="twitter:description" content="Institusi pendidikan fleksibel berbasis karakter, kurikulum personal, dan pemetaan potensi & fitrah anak.">
-    <meta name="twitter:image" content="{{ asset('logos/sayyidah-school-logo.png') }}">
+    <meta name="twitter:title" content="SIS SEKOLAH - Sistem Informasi Sekolah">
+    <meta name="twitter:description" content="Institusi pendidikan fleksibel berbasis karakter, kurikulum personal, dan pemetaan potensi anak.">
+    <meta name="twitter:image" content="{{ asset('logos/sis-sekolah-logo.png') }}">
 
     <!-- Official Google Fonts CDN & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -237,15 +237,15 @@
             
             <!-- Logo Brand -->
             <a href="#" class="flex items-center gap-2 sm:gap-3 group shrink-0">
-                <img src="{{ ($schoolProfile && $schoolProfile->logo_path) ? Storage::url($schoolProfile->logo_path) : asset('storage/logos/sayyidah-school-logo.png') }}" 
-                     alt="Sayyidah School" 
-                     class="h-8 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                <img src="{{ ($schoolProfile && $schoolProfile->logo_path) ? Storage::url($schoolProfile->logo_path) : asset('logos/sis-sekolah-logo.png') }}" 
+                     alt="SIS SEKOLAH" 
+                     class="h-8 sm:h-11 md:h-12 w-auto object-contain rounded-xl transition-transform duration-300 group-hover:scale-105">
                 <div class="flex flex-col leading-none">
                     <span class="text-xs sm:text-base md:text-lg font-heading font-black tracking-tight text-slate-900 group-hover:text-purple-700 transition-colors">
-                        Sayyidah School
+                        SIS SEKOLAH
                     </span>
                     <span class="text-[8px] sm:text-[10px] md:text-[11px] font-extrabold text-purple-600 uppercase tracking-widest mt-0.5 sm:mt-1">
-                        Homeschooling
+                        Digital Academy
                     </span>
                 </div>
             </a>
@@ -750,7 +750,7 @@
                                             <div class="relative z-10 flex items-center justify-between gap-1.5 sm:gap-2">
                                                 <div>
                                                     <span class="px-1.5 sm:px-2 py-0.5 bg-white/15 border border-white/25 rounded-full text-[6.5px] sm:text-[7px] font-black uppercase tracking-widest text-purple-200">
-                                                        Sayyidah School Portal
+                                                        SIS SEKOLAH Portal
                                                     </span>
                                                     <h3 class="text-[10.5px] sm:text-sm font-black mt-0.5 tracking-tight text-white leading-tight">
                                                         Selamat Datang, Sayyidah Athazya! 👋
@@ -2258,11 +2258,11 @@
                 <!-- Brand Info -->
                 <div class="md:col-span-5 space-y-5">
                     <div class="flex items-center gap-3.5">
-                        <img src="{{ ($schoolProfile && $schoolProfile->logo_path) ? Storage::url($schoolProfile->logo_path) : asset('storage/logos/sayyidah-school-logo.png') }}" 
-                             alt="Sayyidah School" 
+                        <img src="{{ ($schoolProfile && $schoolProfile->logo_path) ? Storage::url($schoolProfile->logo_path) : asset('logos/sis-sekolah-logo.png') }}" 
+                             alt="SIS SEKOLAH" 
                              class="h-12 sm:h-14 w-auto object-contain bg-white rounded-2xl p-1.5 shadow-md">
                         <div class="flex flex-col leading-none">
-                            <span class="text-xl sm:text-2xl font-heading font-black text-white tracking-tight">{{ $settings['footer_title'] ?? 'SAYYIDAH SCHOOL' }}</span>
+                            <span class="text-xl sm:text-2xl font-heading font-black text-white tracking-tight">{{ $settings['footer_title'] ?? 'SIS SEKOLAH' }}</span>
                             <span class="text-[10px] sm:text-xs font-bold text-purple-400 uppercase tracking-widest mt-1">Homeschooling</span>
                         </div>
                     </div>
