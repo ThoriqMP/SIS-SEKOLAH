@@ -10,6 +10,8 @@ use App\Models\Assignment;
 use App\Models\AssignmentSubmission;
 use App\Models\Lesson;
 use App\Models\LessonComment;
+use App\Models\Attendance;
+use App\Models\StudentReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +32,41 @@ class DashboardController extends Controller
         } catch (\Throwable $e) {
             $totalStudents = 0;
             $totalServices = 0;
+        }
+
+        // ── New School KPIs ──────────────────────────────────────────
+        $studentsWithHighScore = 0;
+        $hadirToday = 0;
+        $totalExpectedToday = $totalStudents;
+        $recentAttendances = collect();
+        $activeSemester = 'Ganjil 2026/2027';
+
+        try {
+            // Siswa berprestasi: laporan dengan rata-rata nilai >= 90
+            $studentsWithHighScore = Cache::remember('dashboard_high_score', 120, function () {
+                return StudentReport::with('grades')
+                    ->where('is_draft', false)
+                    ->get()
+                    ->filter(fn($r) => $r->grades->avg('score') >= 90)
+                    ->unique('siswa_id')
+                    ->count();
+            });
+        } catch (\Throwable $e) {
+            $studentsWithHighScore = 0;
+        }
+
+        try {
+            $attendanceToday = Attendance::whereDate('date', today())->get();
+            $hadirToday = $attendanceToday->where('status', 'hadir')->count();
+
+            $recentAttendances = Attendance::with('siswa')
+                ->whereDate('date', today())
+                ->latest()
+                ->take(5)
+                ->get();
+        } catch (\Throwable $e) {
+            $hadirToday = 0;
+            $recentAttendances = collect();
         }
 
         // Data for Teacher Academic Dashboard
@@ -194,7 +231,8 @@ class DashboardController extends Controller
             'revenue', 'potentialRevenue', 'totalExpenses', 'netCashflow',
             'revenueChart', 'expenseChart', 'statusChart', 'expensesByCategory',
             'year', 'month', 'canViewFinance', 'isGuru',
-            'todayConferences', 'myAssignments', 'pendingGradingCount', 'totalLessons', 'recentComments'
+            'todayConferences', 'myAssignments', 'pendingGradingCount', 'totalLessons', 'recentComments',
+            'studentsWithHighScore', 'hadirToday', 'totalExpectedToday', 'recentAttendances', 'activeSemester'
         ));
     }
 
