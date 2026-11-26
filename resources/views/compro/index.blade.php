@@ -81,21 +81,25 @@
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
         }
         .iphone-statusbar {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 16px 6px;
+            padding: 9px 16px 7px;
             font-size: 9.5px;
             font-weight: 700;
             color: #0f172a;
             letter-spacing: -0.02em;
         }
         .iphone-island {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             width: 72px;
             height: 19px;
             background: #040507;
             border-radius: 9999px;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: flex-end;
