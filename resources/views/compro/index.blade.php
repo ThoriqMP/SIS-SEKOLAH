@@ -938,7 +938,13 @@
 
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
                 <p>&copy; {{ date('Y') }} SIS SEKOLAH. All rights reserved.</p>
-                <p>Powered by Laravel &amp; Vercel</p>
+                <p class="flex items-center gap-1.5 flex-wrap justify-center">
+                    <span>Created by <span class="text-slate-300 font-semibold">Thoriq Muhammad Pasya</span></span>
+                    <span>&middot;</span>
+                    <a href="https://instagram.com/riqstr_" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-pink-400 hover:text-pink-300 font-semibold transition">
+                        <i class="fa-brands fa-instagram"></i> @riqstr_
+                    </a>
+                </p>
             </div>
 
             {{-- Giant Brand Display Typography --}}
