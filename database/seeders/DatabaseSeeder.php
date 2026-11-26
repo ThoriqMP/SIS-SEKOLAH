@@ -17,6 +17,7 @@ use App\Models\StudentReport;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -67,7 +68,7 @@ class DatabaseSeeder extends Seeder
         // 3. Tahun Ajaran & Kategori Rapor
         $academicYear = AcademicYear::firstOrCreate(
             ['name' => '2025/2026'],
-            ['is_active' => true]
+            ['is_active' => DB::raw('true')]
         );
 
         $akademikCat = ReportCategory::firstOrCreate(['name' => 'Akademik']);
@@ -176,7 +177,7 @@ class DatabaseSeeder extends Seeder
                     'teacher_id' => $teacher->id,
                     'academic_year_id' => $academicYear->id,
                     'summary_notes' => 'Menunjukkan perkembangan belajar yang sangat baik dan aktif dalam proyek kelas.',
-                    'is_draft' => false,
+                    'is_draft' => DB::raw('false'),
                 ]
             );
 
@@ -208,7 +209,7 @@ class DatabaseSeeder extends Seeder
                     'jatuh_tempo' => now()->startOfMonth()->addDays(9)->toDateString(),
                     'id_siswa' => $s->id,
                     'status' => $status,
-                    'is_auto_generated' => true,
+                    'is_auto_generated' => DB::raw('true'),
                     'grand_total' => $idx === 0 ? 1750000 : 1250000,
                     'potongan' => 0,
                     'payment_date' => $status === 'paid' ? now()->subDays(2) : null,
