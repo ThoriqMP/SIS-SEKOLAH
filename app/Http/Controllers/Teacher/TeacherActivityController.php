@@ -34,23 +34,27 @@ class TeacherActivityController extends Controller
 
         $selectedClass = $request->query('class');
 
-        // Load assignments with owner or collaborator check
+        // Load assignments with owner or collaborator check (admin/superadmin sees all)
         $assignmentsQuery = Assignment::with(['subject', 'teacher', 'collaborators'])
-            ->where(function ($query) {
-                $query->where('teacher_id', Auth::id())
-                      ->orWhereHas('collaborators', function ($q) {
-                          $q->where('users.id', Auth::id());
-                      });
+            ->when(!Auth::user()->isAdmin(), function ($q) {
+                $q->where(function ($query) {
+                    $query->where('teacher_id', Auth::id())
+                          ->orWhereHas('collaborators', function ($cq) {
+                              $cq->where('users.id', Auth::id());
+                          });
+                });
             })
             ->orderBy('due_date', 'asc');
             
-        // Load exams with owner or collaborator check
+        // Load exams with owner or collaborator check (admin/superadmin sees all)
         $examsQuery = Exam::with(['subject', 'teacher', 'collaborators'])
-            ->where(function ($query) {
-                $query->where('teacher_id', Auth::id())
-                      ->orWhereHas('collaborators', function ($q) {
-                          $q->where('users.id', Auth::id());
-                      });
+            ->when(!Auth::user()->isAdmin(), function ($q) {
+                $q->where(function ($query) {
+                    $query->where('teacher_id', Auth::id())
+                          ->orWhereHas('collaborators', function ($cq) {
+                              $cq->where('users.id', Auth::id());
+                          });
+                });
             })
             ->orderBy('due_date', 'asc');
 

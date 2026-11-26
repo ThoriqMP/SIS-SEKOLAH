@@ -21,7 +21,7 @@ class LessonController extends Controller
     {
         $user = Auth::user();
 
-        if (!in_array($user->role, ['student', 'guru', 'admin', 'pimpinan'])) {
+        if (!in_array($user->role, ['student', 'guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             abort(403, 'Akses ditolak.');
         }
 
@@ -101,7 +101,7 @@ class LessonController extends Controller
         $user = Auth::user();
 
         // Izinkan student, guru, admin, dan pimpinan
-        if (!in_array($user->role, ['student', 'guru', 'admin', 'pimpinan'])) {
+        if (!in_array($user->role, ['student', 'guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             abort(403, 'Akses ditolak.');
         }
 
@@ -179,7 +179,7 @@ class LessonController extends Controller
     {
         $user = Auth::user();
 
-        if (!in_array($user->role, ['student', 'guru', 'admin', 'pimpinan'])) {
+        if (!in_array($user->role, ['student', 'guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             return response()->json(['error' => 'Akses ditolak.'], 403);
         }
 
@@ -265,7 +265,7 @@ class LessonController extends Controller
     {
         $user = Auth::user();
 
-        if (!in_array($user->role, ['student', 'guru', 'admin', 'pimpinan'])) {
+        if (!in_array($user->role, ['student', 'guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             return response()->json(['error' => 'Akses ditolak.'], 403);
         }
 
@@ -310,14 +310,14 @@ class LessonController extends Controller
     {
         $user = Auth::user();
 
-        if (!in_array($user->role, ['student', 'guru', 'admin', 'pimpinan'])) {
+        if (!in_array($user->role, ['student', 'guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             return response()->json(['error' => 'Akses ditolak.'], 403);
         }
 
         $comment = LessonComment::findOrFail($commentId);
 
         // Authorization check: Only comment owner or staff (guru/admin/pimpinan) can delete
-        if ($comment->user_id !== $user->id && !in_array($user->role, ['guru', 'admin', 'pimpinan'])) {
+        if ($comment->user_id !== $user->id && !in_array($user->role, ['guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             return response()->json(['error' => 'Anda tidak berwenang menghapus komentar ini.'], 403);
         }
 
@@ -335,14 +335,14 @@ class LessonController extends Controller
     {
         $user = Auth::user();
 
-        if (!in_array($user->role, ['student', 'guru', 'admin', 'pimpinan'])) {
+        if (!in_array($user->role, ['student', 'guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             return response()->json(['error' => 'Akses ditolak.'], 403);
         }
 
         $comments = $lesson->rootComments()->with(['user', 'replies.user'])->get();
 
         $formattedComments = $comments->map(function ($comment) use ($user) {
-            $isOwnerOrStaff = $comment->user_id === $user->id || in_array($user->role, ['guru', 'admin', 'pimpinan']);
+            $isOwnerOrStaff = $comment->user_id === $user->id || in_array($user->role, ['guru', 'teacher', 'admin', 'pimpinan', 'superadmin']);
             return [
                 'id' => $comment->id,
                 'user_name' => $comment->user->name,
@@ -352,7 +352,7 @@ class LessonController extends Controller
                 'parent_id' => $comment->parent_id,
                 'is_owner_or_staff' => $isOwnerOrStaff,
                 'replies' => $comment->replies->map(function ($reply) use ($user) {
-                    $replyIsOwnerOrStaff = $reply->user_id === $user->id || in_array($user->role, ['guru', 'admin', 'pimpinan']);
+                    $replyIsOwnerOrStaff = $reply->user_id === $user->id || in_array($user->role, ['guru', 'teacher', 'admin', 'pimpinan', 'superadmin']);
                     return [
                         'id' => $reply->id,
                         'user_name' => $reply->user->name,
@@ -379,7 +379,7 @@ class LessonController extends Controller
     {
         $user = Auth::user();
 
-        if (!in_array($user->role, ['student', 'guru', 'admin', 'pimpinan'])) {
+        if (!in_array($user->role, ['student', 'guru', 'teacher', 'admin', 'pimpinan', 'superadmin'])) {
             return response()->json(['error' => 'Akses ditolak.'], 403);
         }
 

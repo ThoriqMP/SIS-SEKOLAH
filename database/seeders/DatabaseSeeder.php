@@ -352,30 +352,85 @@ class DatabaseSeeder extends Seeder
 
         // 12. Data Dummy Tugas & Ujian Online
         if (!empty($reportSubjects)) {
-            Assignment::firstOrCreate(
-                ['title' => 'Proyek Sains Terapan: Energi Hijau'],
+            $dummyAssignments = [
                 [
-                    'teacher_id' => $teacher->id,
-                    'report_subject_id' => $reportSubjects[0]->id,
+                    'title' => 'Proyek Sains Terapan: Energi Hijau',
+                    'subject' => $reportSubjects[2]->id ?? $reportSubjects[0]->id,
                     'class' => '5 SD',
-                    'period' => $period,
-                    'description' => 'Buat ringkasan dan foto eksperimen sederhana tentang energi terbarukan.',
-                    'due_date' => now()->addDays(5),
-                ]
-            );
+                    'desc' => 'Buat ringkasan dan foto eksperimen sederhana tentang energi terbarukan.',
+                    'days' => 5,
+                ],
+                [
+                    'title' => 'Latihan Soal Pecahan & Persentase',
+                    'subject' => $reportSubjects[0]->id,
+                    'class' => '5 SD',
+                    'desc' => 'Kerjakan 10 soal cerita pecahan pada modul Ruang Belajar.',
+                    'days' => 3,
+                ],
+                [
+                    'title' => 'Esai Bahasa Indonesia: Literasi Digital',
+                    'subject' => $reportSubjects[1]->id ?? $reportSubjects[0]->id,
+                    'class' => '7 SMP',
+                    'desc' => 'Tulis esai 300 kata tentang etika berinternet di lingkungan sekolah.',
+                    'days' => 6,
+                ],
+            ];
 
-            Exam::firstOrCreate(
-                ['title' => 'Evaluasi Tengah Semester Matematika'],
+            foreach ($dummyAssignments as $da) {
+                Assignment::firstOrCreate(
+                    ['title' => $da['title']],
+                    [
+                        'teacher_id' => $teacher->id,
+                        'report_subject_id' => $da['subject'],
+                        'class' => $da['class'],
+                        'period' => $period,
+                        'description' => $da['desc'],
+                        'due_date' => now()->addDays($da['days']),
+                    ]
+                );
+            }
+
+            $dummyExams = [
                 [
-                    'teacher_id' => $teacher->id,
-                    'report_subject_id' => $reportSubjects[0]->id,
+                    'title' => 'Evaluasi Tengah Semester Matematika',
+                    'subject' => $reportSubjects[0]->id,
                     'class' => '5 SD',
-                    'period' => $period,
                     'type' => 'tengah_semester',
                     'duration' => 60,
-                    'due_date' => now()->addDays(7),
-                ]
-            );
+                    'days' => 7,
+                ],
+                [
+                    'title' => 'Kuis Harian IPA Terpadu',
+                    'subject' => $reportSubjects[2]->id ?? $reportSubjects[0]->id,
+                    'class' => '7 SMP',
+                    'type' => 'harian',
+                    'duration' => 30,
+                    'days' => 4,
+                ],
+                [
+                    'title' => 'Penilaian Akhir Semester Bahasa Inggris',
+                    'subject' => $reportSubjects[3]->id ?? $reportSubjects[0]->id,
+                    'class' => '10 SMA',
+                    'type' => 'akhir_semester',
+                    'duration' => 90,
+                    'days' => 10,
+                ],
+            ];
+
+            foreach ($dummyExams as $de) {
+                Exam::firstOrCreate(
+                    ['title' => $de['title']],
+                    [
+                        'teacher_id' => $teacher->id,
+                        'report_subject_id' => $de['subject'],
+                        'class' => $de['class'],
+                        'period' => $period,
+                        'type' => $de['type'],
+                        'duration' => $de['duration'],
+                        'due_date' => now()->addDays($de['days']),
+                    ]
+                );
+            }
         }
     }
 }
