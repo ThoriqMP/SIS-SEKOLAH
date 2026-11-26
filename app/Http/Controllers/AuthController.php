@@ -25,7 +25,15 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+        try {
+            $attempted = Auth::attempt($credentials, $request->boolean('remember'));
+        } catch (\Throwable $e) {
+            return back()->withErrors([
+                'email' => 'Koneksi database gagal atau tabel users belum dimigrasi: ' . $e->getMessage(),
+            ])->onlyInput('email');
+        }
+
+        if ($attempted) {
             $request->session()->regenerate();
 
             if (Auth::user()->role === 'student') {
