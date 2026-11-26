@@ -160,6 +160,9 @@ Route::prefix('student')->name('student.')->group(function () {
         Route::get('/video-conferences', [\App\Http\Controllers\Student\VideoConferenceController::class, 'index'])->name('video-conferences.index');
         Route::get('/video-conference/{room}', [\App\Http\Controllers\Student\VideoConferenceController::class, 'join'])->name('video-conference.join');
 
+        // Student Attendance
+        Route::get('/absensi', [\App\Http\Controllers\AttendanceController::class, 'studentIndex'])->name('attendances.index');
+
         // WebRTC API fallback
         Route::get('/api/room/ice-servers', function () {
             return response()->json(['iceServers' => []]);
@@ -293,6 +296,10 @@ Route::middleware(['auth', 'staff'])->group(function () {
 
     // Master Siswa (Students)
     Route::resource('students', \App\Http\Controllers\Admin\StudentManagementController::class);
+
+    // Absensi Kehadiran Siswa
+    Route::get('/absensi', [\App\Http\Controllers\AttendanceController::class, 'index'])->name('attendances.index');
+    Route::post('/absensi', [\App\Http\Controllers\AttendanceController::class, 'store'])->name('attendances.store');
 
     // Master Mata Pelajaran (Subjects)
     Route::resource('subjects', SubjectController::class);

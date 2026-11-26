@@ -22,4 +22,18 @@ class ReportHelper
         if ($score >= 60) return 'D';
         return 'E';
     }
+
+    public static function calculatePredicate($score, $kkm = 75): string
+    {
+        if ($score === null || $score === '') {
+            return '-';
+        }
+        $score = (float) $score;
+        $kkm = (float) $kkm;
+
+        if ($score >= 90) return 'A';
+        if ($score >= 80) return 'B';
+        if ($score >= $kkm) return 'C';
+        return 'D';
+    }
 }

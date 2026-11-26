@@ -122,6 +122,10 @@
                             class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('students.*') ? 'bg-purple-50 text-purple-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-users w-4 text-center"></i> Data Siswa
                         </a>
+                        <a href="{{ route('attendances.index') }}"
+                            class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('attendances.*') ? 'bg-purple-50 text-purple-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                            <i class="fa-solid fa-clipboard-user w-4 text-center"></i> Absensi Kehadiran
+                        </a>
                         <a href="{{ route('admin.registrations.index') }}"
                             class="flex items-center gap-3 px-3 py-2 rounded-xl transition {{ request()->routeIs('admin.registrations.*') ? 'bg-purple-50 text-purple-700 font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <i class="fa-solid fa-user-plus w-4 text-center"></i> Pendaftaran PPDB
