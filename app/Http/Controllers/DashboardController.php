@@ -24,8 +24,13 @@ class DashboardController extends Controller
         $canViewFinance = $user && ($user->isSuperadmin() || $user->isPimpinan() || $user->hasPermission('invoices.index'));
 
         // Cache ringkasan metrik global sekolah selama 60 detik untuk memotong overhead DB
-        $totalStudents = Cache::remember('dashboard_total_students_aktif', 60, fn() => Siswa::where('status', 'aktif')->count());
-        $totalServices = Cache::remember('dashboard_total_services', 120, fn() => Layanan::count());
+        try {
+            $totalStudents = Cache::remember('dashboard_total_students_aktif', 60, fn() => Siswa::where('status', 'aktif')->count());
+            $totalServices = Cache::remember('dashboard_total_services', 120, fn() => Layanan::count());
+        } catch (\Throwable $e) {
+            $totalStudents = 0;
+            $totalServices = 0;
+        }
 
         // Data for Teacher Academic Dashboard
         $todayConferences = collect();
@@ -35,38 +40,44 @@ class DashboardController extends Controller
         $recentComments = collect();
 
         if ($isGuru) {
-            // Live or scheduled classes today
-            $todayConferences = VideoConference::where(function($q) use ($user) {
-                    $q->where('teacher_id', $user->id)
-                      ->orWhereJsonContains('class', (int) $user->id)
-                      ->orWhereJsonContains('class', (string) $user->id);
-                })
-                ->where('scheduled_at', '>=', now()->startOfDay())
-                ->where('scheduled_at', '<=', now()->endOfDay()->addHours(2))
-                ->orderBy('scheduled_at', 'asc')
-                ->get();
+            try {
+                // Live or scheduled classes today
+                $todayConferences = VideoConference::where(function($q) use ($user) {
+                        $q->where('teacher_id', $user->id)
+                          ->orWhereJsonContains('class', (int) $user->id)
+                          ->orWhereJsonContains('class', (string) $user->id);
+                    })
+                    ->where('scheduled_at', '>=', now()->startOfDay())
+                    ->where('scheduled_at', '<=', now()->endOfDay()->addHours(2))
+                    ->orderBy('scheduled_at', 'asc')
+                    ->get();
 
-            // Assignments by this teacher
-            $myAssignments = Assignment::with(['subject'])
-                ->where('teacher_id', $user->id)
-                ->withCount('submissions')
-                ->orderByDesc('created_at')
-                ->take(5)
-                ->get();
+                // Assignments by this teacher
+                $myAssignments = Assignment::with(['subject'])
+                    ->where('teacher_id', $user->id)
+                    ->withCount('submissions')
+                    ->orderByDesc('created_at')
+                    ->take(5)
+                    ->get();
 
-            // Count pending submissions (waiting for grading)
-            $pendingGradingCount = AssignmentSubmission::whereHas('assignment', function ($q) use ($user) {
-                $q->where('teacher_id', $user->id);
-            })->whereNull('score')->count();
+                // Count pending submissions (waiting for grading)
+                $pendingGradingCount = AssignmentSubmission::whereHas('assignment', function ($q) use ($user) {
+                    $q->where('teacher_id', $user->id);
+                })->whereNull('score')->count();
 
-            // Lessons count (cached 60s)
-            $totalLessons = Cache::remember('dashboard_total_lessons', 60, fn() => Lesson::count());
-
-            // Recent comments in Ruang Belajar
-            $recentComments = LessonComment::with(['user', 'lesson.course'])
-                ->latest()
-                ->take(5)
-                ->get();
+                // Count lessons & recent comments
+                $totalLessons = Lesson::count();
+                $recentComments = LessonComment::with(['user', 'lesson'])
+                    ->latest()
+                    ->take(5)
+                    ->get();
+            } catch (\Throwable $e) {
+                $todayConferences = collect();
+                $myAssignments = collect();
+                $pendingGradingCount = 0;
+                $totalLessons = 0;
+                $recentComments = collect();
+            }
         }
 
         // Financial Data (Only calculated if authorized)
@@ -87,7 +98,8 @@ class DashboardController extends Controller
         $month = $request->input('month');
 
         if ($canViewFinance) {
-            $totalInvoices = Invoice::count();
+            try {
+                $totalInvoices = Invoice::count();
 
             // Filtered Stats Query: Agregasi 1x query untuk semua status invoice (menggantikan 6 query terpisah)
             $invoiceQuery = Invoice::query()->whereYear('jatuh_tempo', $year);
@@ -171,6 +183,9 @@ class DashboardController extends Controller
                 ->orderByDesc('total')
                 ->take(5)
                 ->get();
+            } catch (\Throwable $e) {
+                // Fallback ke nilai default 0 / empty collection jika tabel belum dibuat
+            }
         }
 
         return view('dashboard', compact(

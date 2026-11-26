@@ -76,51 +76,64 @@ class StudentPortalController extends Controller
 
     public function dashboard()
     {
-        $student = Auth::user()->siswa;
-        if (!$student) {
-            return redirect('/')->with('error', 'Profil siswa tidak ditemukan.');
+        $user = Auth::user();
+        try {
+            $student = $user->siswa;
+        } catch (\Throwable $e) {
+            $student = null;
         }
 
-        $latestInvoice = Invoice::where('id_siswa', $student->id)
-            ->where('status', '!=', 'draft')
-            ->latest()
-            ->first();
-        
-        // Fetch all reports to calculate overall stats and trends
-        $allReports = StudentReport::with(['student', 'category', 'grades', 'probingActivities'])
-            ->where('siswa_id', $student->id)
-            ->where('is_draft', false)
-            ->get();
+        if (!$student) {
+            $student = new \App\Models\Siswa([
+                'nama_siswa' => $user->name,
+                'nis' => '-',
+                'class' => 'Umum',
+            ]);
+        }
 
-        // Calculate Average Score (IPK level)
-        $academicReports = $allReports->filter(fn($r) => $r->category->name === 'Akademik');
-        $averageScore = $academicReports->avg(function($r) {
-            return $r->grades->avg('score');
-        });
+        try {
+            $latestInvoice = $student->exists ? Invoice::where('id_siswa', $student->id)
+                ->where('status', '!=', 'draft')
+                ->latest()
+                ->first() : null;
 
-        // Latest reports for the list
-        $latestReports = $allReports->sortByDesc('created_at')->take(4);
+            $allReports = $student->exists ? StudentReport::with(['student', 'category', 'grades', 'probingActivities'])
+                ->where('siswa_id', $student->id)
+                ->where('is_draft', false)
+                ->get() : collect();
 
-        // Fetch latest discussions for courses matching level & grade
-        // Grouped by module/lesson, showing only the single latest comment per module.
-        $level = Auth::user()->educationLevel() ?? 'SMA';
-        $grade = Auth::user()->studentGrade();
+            $academicReports = $allReports->filter(fn($r) => ($r->category->name ?? '') === 'Akademik');
+            $averageScore = $academicReports->avg(function($r) {
+                return $r->grades->avg('score');
+            });
+            $latestReports = $allReports->sortByDesc('created_at')->take(4);
 
-        $latestCommentIds = \App\Models\LessonComment::whereHas('lesson.course', function ($query) use ($level, $grade) {
-                $query->where('education_level', $level)
-                      ->when($grade !== null, function ($q) use ($grade) {
-                          $q->where('grade', $grade);
-                      });
-            })
-            ->selectRaw('MAX(id) as id')
-            ->groupBy('lesson_id')
-            ->pluck('id');
+            $level = $user->educationLevel() ?? 'SMA';
+            $grade = $user->studentGrade();
 
-        $latestDiscussions = \App\Models\LessonComment::whereIn('id', $latestCommentIds)
-            ->with(['user', 'lesson'])
-            ->latest()
-            ->take(5)
-            ->get();
+            $latestCommentIds = \App\Models\LessonComment::whereHas('lesson.course', function ($query) use ($level, $grade) {
+                    $query->where('education_level', $level)
+                          ->when($grade !== null, function ($q) use ($grade) {
+                              $q->where('grade', $grade);
+                          });
+                })
+                ->selectRaw('MAX(id) as id')
+                ->groupBy('lesson_id')
+                ->pluck('id');
+
+            $latestDiscussions = \App\Models\LessonComment::whereIn('id', $latestCommentIds)
+                ->with(['user', 'lesson'])
+                ->latest()
+                ->take(5)
+                ->get();
+        } catch (\Throwable $e) {
+            $latestInvoice = null;
+            $allReports = collect();
+            $academicReports = collect();
+            $averageScore = null;
+            $latestReports = collect();
+            $latestDiscussions = collect();
+        }
 
         return view('student.dashboard', compact('student', 'latestInvoice', 'latestReports', 'averageScore', 'academicReports', 'allReports', 'latestDiscussions'));
     }

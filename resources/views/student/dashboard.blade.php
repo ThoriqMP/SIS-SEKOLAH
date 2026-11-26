@@ -97,7 +97,13 @@
         $latestAcademic = $academicReports->sortByDesc('created_at')->first();
         $avgLatest = $latestAcademic ? $latestAcademic->grades->avg('score') : null;
         $predicate = $avgLatest !== null ? \App\Helpers\ReportHelper::calculatePredicate($avgLatest) : '-';
-        $totalSurahs = \App\Models\DiniyahReport::whereIn('student_report_id', $latestReports->pluck('id'))->count();
+        try {
+            $totalSurahs = $latestReports->isNotEmpty()
+                ? \App\Models\DiniyahReport::whereIn('student_report_id', $latestReports->pluck('id'))->count()
+                : 0;
+        } catch (\Throwable $e) {
+            $totalSurahs = 0;
+        }
     @endphp
 
     <div class="mb-3 sm:mb-10" id="tour-potensi">
