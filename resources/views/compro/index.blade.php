@@ -36,31 +36,86 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Realistic iPhone 15 Pro Frame */
+        /* Realistic iPhone 15/16 Pro Titanium Frame */
         .iphone-frame {
-            background: linear-gradient(145deg, #1e293b 0%, #090d16 100%);
-            border-radius: 42px;
+            background: linear-gradient(145deg, #0b0d12 0%, #020305 100%);
+            border-radius: 46px;
             padding: 9px;
+            border: 2.5px solid #475569;
             box-shadow:
-                0 30px 60px -15px rgba(15, 23, 42, 0.35),
-                0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-                0 0 0 2px #334155;
+                0 35px 70px -15px rgba(15, 23, 42, 0.42),
+                0 0 0 1px rgba(255, 255, 255, 0.25) inset,
+                0 0 0 1px #1e293b;
             position: relative;
+        }
+        /* Physical Side Buttons */
+        .iphone-frame::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 84px;
+            width: 3px;
+            height: 22px;
+            background: linear-gradient(180deg, #64748b, #334155);
+            border-radius: 3px 0 0 3px;
+            box-shadow:
+                0 34px 0 0 #475569,
+                0 34px 0 0 #475569,
+                0 68px 0 0 #475569;
+        }
+        .iphone-frame::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 112px;
+            width: 3px;
+            height: 52px;
+            background: linear-gradient(180deg, #64748b, #334155);
+            border-radius: 0 3px 3px 0;
         }
         .iphone-screen {
             background: #f8fafc;
-            border-radius: 34px;
+            border-radius: 36px;
             overflow: hidden;
             position: relative;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+        }
+        .iphone-statusbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px 6px;
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.02em;
         }
         .iphone-island {
-            width: 82px;
-            height: 20px;
-            background: #090d16;
+            width: 72px;
+            height: 19px;
+            background: #040507;
             border-radius: 9999px;
-            margin: 8px auto 0;
             position: relative;
-            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 6px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+        }
+        .iphone-island::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 9999px;
+            background: radial-gradient(circle at 35% 35%, #3b82f6 0%, #1e1b4b 45%, #020617 100%);
+            border: 1px solid #1e293b;
+        }
+        .iphone-home-bar {
+            width: 88px;
+            height: 3.5px;
+            background: rgba(15, 23, 42, 0.78);
+            border-radius: 9999px;
+            margin: 6px auto 2px;
         }
 
         /* Realistic MacBook Pro Frame */
@@ -205,13 +260,21 @@
 
         {{-- Hero Multi-iPhone Showcase (Authentic Student Blade UIs) --}}
         <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-12 relative z-10">
-            <div class="flex items-end justify-center gap-4 sm:gap-6">
+            <div class="flex items-end justify-center">
 
                 {{-- Left iPhone: Authentic student/activities/index.blade.php --}}
-                <div class="hidden md:block w-[240px] lg:w-[260px] -mb-14 transform -rotate-2 opacity-95">
+                <div class="hidden md:block w-[245px] lg:w-[265px] -mb-14 -mr-6 z-10 transform -rotate-3 translate-y-3 opacity-95">
                     <div class="iphone-frame">
                         <div class="iphone-screen h-[360px] bg-slate-50 p-3 flex flex-col">
-                            <div class="iphone-island mb-3"></div>
+                            <div class="iphone-statusbar mb-1">
+                                <span>9:41</span>
+                                <div class="iphone-island"></div>
+                                <div class="flex items-center gap-1 text-[8.5px]">
+                                    <i class="fa-solid fa-signal"></i>
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <i class="fa-solid fa-battery-full text-[10px]"></i>
+                                </div>
+                            </div>
                             <div class="bg-gradient-to-r from-indigo-700 to-purple-700 rounded-2xl p-3 text-white mb-2.5">
                                 <span class="text-[8px] font-extrabold uppercase tracking-wider text-indigo-200">Aktivitas Belajar</span>
                                 <p class="text-xs font-extrabold mt-0.5">Tugas & Ujian Online</p>
@@ -249,7 +312,15 @@
                 <div class="w-[290px] sm:w-[320px] -mb-10 z-20">
                     <div class="iphone-frame">
                         <div class="iphone-screen h-[430px] bg-gradient-to-br from-slate-50 via-slate-50 to-purple-50/30 p-3.5 flex flex-col">
-                            <div class="iphone-island mb-3"></div>
+                            <div class="iphone-statusbar mb-1">
+                                <span>9:41</span>
+                                <div class="iphone-island"></div>
+                                <div class="flex items-center gap-1 text-[8.5px]">
+                                    <i class="fa-solid fa-signal"></i>
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <i class="fa-solid fa-battery-full text-[10px]"></i>
+                                </div>
+                            </div>
 
                             {{-- Authentic Mobile Hero Card from student/dashboard.blade.php --}}
                             <div class="bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-800 rounded-2xl p-3.5 text-white shadow-lg shadow-purple-950/20 relative overflow-hidden text-left">
@@ -317,10 +388,18 @@
                 </div>
 
                 {{-- Right iPhone: Authentic student/invoices/index.blade.php --}}
-                <div class="hidden md:block w-[240px] lg:w-[260px] -mb-14 transform rotate-2 opacity-95">
+                <div class="hidden md:block w-[245px] lg:w-[265px] -mb-14 -ml-6 z-10 transform rotate-3 translate-y-3 opacity-95">
                     <div class="iphone-frame">
                         <div class="iphone-screen h-[360px] bg-slate-50 p-3 flex flex-col text-left">
-                            <div class="iphone-island mb-3"></div>
+                            <div class="iphone-statusbar mb-1">
+                                <span>9:41</span>
+                                <div class="iphone-island"></div>
+                                <div class="flex items-center gap-1 text-[8.5px]">
+                                    <i class="fa-solid fa-signal"></i>
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <i class="fa-solid fa-battery-full text-[10px]"></i>
+                                </div>
+                            </div>
                             <div class="flex items-center justify-between mb-2.5">
                                 <div>
                                     <span class="text-[8px] font-extrabold uppercase text-purple-600">Keuangan Siswa</span>
@@ -406,7 +485,15 @@
                     <div class="w-full max-w-[230px] mx-auto -mb-10">
                         <div class="iphone-frame">
                             <div class="iphone-screen h-[290px] bg-white p-3 text-left">
-                                <div class="iphone-island mb-2.5"></div>
+                                <div class="iphone-statusbar mb-1">
+                                    <span>9:41</span>
+                                    <div class="iphone-island"></div>
+                                    <div class="flex items-center gap-1 text-[8.5px]">
+                                        <i class="fa-solid fa-signal"></i>
+                                        <i class="fa-solid fa-wifi"></i>
+                                        <i class="fa-solid fa-battery-full text-[10px]"></i>
+                                    </div>
+                                </div>
                                 <div class="bg-purple-50 border border-purple-100 rounded-xl p-2.5 mb-2">
                                     <span class="text-[8px] font-extrabold uppercase text-purple-600">Kursus Aktif</span>
                                     <p class="text-[11px] font-extrabold text-slate-900 mt-0.5">Matematika & Logika Terapan</p>
@@ -477,7 +564,15 @@
                     <div class="max-w-[270px] mx-auto -mb-10">
                         <div class="iphone-frame">
                             <div class="iphone-screen h-[400px] bg-white p-4 text-left">
-                                <div class="iphone-island mb-3"></div>
+                                <div class="iphone-statusbar mb-1">
+                                <span>9:41</span>
+                                <div class="iphone-island"></div>
+                                <div class="flex items-center gap-1 text-[8.5px]">
+                                    <i class="fa-solid fa-signal"></i>
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <i class="fa-solid fa-battery-full text-[10px]"></i>
+                                </div>
+                            </div>
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs font-extrabold text-slate-900">Hasil Rapor Semester</span>
                                     <span class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[9px] font-bold">Final</span>
@@ -761,7 +856,15 @@
                     <div class="w-[230px] -mb-14">
                         <div class="iphone-frame">
                             <div class="iphone-screen h-[260px] bg-white p-3 text-left">
-                                <div class="iphone-island mb-2.5"></div>
+                                <div class="iphone-statusbar mb-1">
+                                    <span>9:41</span>
+                                    <div class="iphone-island"></div>
+                                    <div class="flex items-center gap-1 text-[8.5px]">
+                                        <i class="fa-solid fa-signal"></i>
+                                        <i class="fa-solid fa-wifi"></i>
+                                        <i class="fa-solid fa-battery-full text-[10px]"></i>
+                                    </div>
+                                </div>
                                 <div class="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-xl p-3 text-white mb-2">
                                     <span class="text-[8px] font-bold uppercase text-purple-200">SIS SEKOLAH</span>
                                     <p class="text-xs font-extrabold mt-0.5">Portal Akademik</p>
