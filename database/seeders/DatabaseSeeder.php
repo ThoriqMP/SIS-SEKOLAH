@@ -322,11 +322,110 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // 11. Data Dummy Ruang Belajar (Kursus & Materi untuk SD, SMP, SMA)
+        // 11. Data Dummy Ruang Belajar (Kursus & Modul Interaktif SD, SMP, SMA/MA)
         $coursesData = [
-            ['title' => 'Matematika Kreatif Kelas 5', 'education_level' => 'SD', 'grade' => '5', 'lesson' => 'Konsep Pecahan & Desimal'],
-            ['title' => 'IPA & Sains Terapan', 'education_level' => 'SMP', 'grade' => '7', 'lesson' => 'Ekosistem & Energi Terbarukan'],
-            ['title' => "Fikih & Al-Qur'an Hadits MA", 'education_level' => 'SMA', 'grade' => '10', 'lesson' => 'Kaidah Dasar Muamalah'],
+            [
+                'title' => 'Matematika Kreatif Kelas 5',
+                'education_level' => 'SD',
+                'grade' => '5',
+                'lesson' => 'Konsep Pecahan & Desimal',
+                'module_data' => [
+                    'mindmap' => [
+                        'center' => 'Konsep Pecahan & Desimal',
+                        'branches' => [
+                            ['title' => 'Pengertian Pecahan', 'color' => 'purple', 'items' => ['Pembilang (atas) & Penyebut (bawah)', 'Bagian dari keseluruhan (a/b, b != 0)']],
+                            ['title' => 'Bentuk Desimal', 'color' => 'indigo', 'items' => ['Berbasis kelipatan 10 (persepuluh, perseratus)', 'Contoh: 1/2 = 0,5 dan 1/4 = 0,25']],
+                            ['title' => 'Operasi Hitung', 'color' => 'emerald', 'items' => ['Samakan penyebut untuk penjumlahan', 'Kalikan langsung pembilang & penyebut']],
+                            ['title' => 'Penerapan Harian', 'color' => 'amber', 'items' => ['Membagi pizza atau kue sama rata', 'Menghitung diskon belanja dalam persen']],
+                        ],
+                    ],
+                    'explanation' => [
+                        'summary' => 'Pecahan menyatakan bagian dari suatu keseluruhan yang sama besar, ditulis dalam bentuk a/b di mana a adalah pembilang dan b adalah penyebut. Bilangan desimal adalah bentuk lain dari pecahan yang penyebutnya merupakan kelipatan 10 (10, 100, 1000, dst.).',
+                        'key_points' => [
+                            'Pecahan senilai diperoleh dengan mengalikan atau membagi pembilang dan penyebut dengan bilangan yang sama.',
+                            'Untuk mengubah pecahan ke desimal, bagi pembilang dengan penyebut atau ubah penyebut menjadi 10, 100, atau 1000.',
+                            'Penjumlahan pecahan berpenyebut berbeda harus disamakan penyebutnya terlebih dahulu menggunakan KPK.',
+                        ],
+                        'formula_or_rule' => 'a/b + c/d = (a×d + b×c) / (b×d)',
+                    ],
+                    'examples' => [
+                        [
+                            'question' => 'Ubahlah pecahan 3/4 menjadi bentuk desimal!',
+                            'answer' => '0,75',
+                            'explanation' => 'Kalikan pembilang dan penyebut dengan 25 agar penyebut menjadi 100: (3×25)/(4×25) = 75/100 = 0,75.',
+                        ],
+                        [
+                            'question' => 'Hitung hasil dari 1/2 + 1/4!',
+                            'answer' => '3/4 (atau 0,75)',
+                            'explanation' => 'Samakan penyebut menjadi 4: 1/2 = 2/4. Maka 2/4 + 1/4 = 3/4.',
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'title' => 'IPA & Sains Terapan',
+                'education_level' => 'SMP',
+                'grade' => '7',
+                'lesson' => 'Ekosistem & Energi Terbarukan',
+                'module_data' => [
+                    'mindmap' => [
+                        'center' => 'Ekosistem & Energi Terbarukan',
+                        'branches' => [
+                            ['title' => 'Komponen Ekosistem', 'color' => 'emerald', 'items' => ['Biotik (makhluk hidup)', 'Abiotik (cahaya, air, udara, tanah)']],
+                            ['title' => 'Rantai Makanan', 'color' => 'amber', 'items' => ['Produsen (tumbuhan hijau)', 'Konsumen & Pengurai (dekomposer)']],
+                            ['title' => 'Energi Terbarukan', 'color' => 'purple', 'items' => ['Energi Surya (Panel PV)', 'Energi Angin & Air (PLTA)']],
+                            ['title' => 'Dampak Lingkungan', 'color' => 'indigo', 'items' => ['Mengurangi emisi karbon', 'Menjaga keseimbangan alam']],
+                        ],
+                    ],
+                    'explanation' => [
+                        'summary' => 'Ekosistem adalah interaksi timbal balik antara makhluk hidup (biotik) dan lingkungannya (abiotik). Pemanfaatan energi terbarukan membantu menjaga kelestarian ekosistem dengan menggantikan bahan bakar fosil yang menghasilkan polusi.',
+                        'key_points' => [
+                            'Produsen menghasilkan energi melalui fotosintesis dengan bantuan cahaya matahari.',
+                            'Energi terbarukan berasal dari sumber alam yang tidak habis pakai seperti matahari, angin, dan air.',
+                        ],
+                        'formula_or_rule' => 'Matahari -> Produsen -> Konsumen I -> Konsumen II -> Pengurai',
+                    ],
+                    'examples' => [
+                        [
+                            'question' => 'Sebutkan 3 contoh komponen abiotik yang memengaruhi pertumbuhan tanaman!',
+                            'answer' => 'Cahaya matahari, air, dan unsur hara tanah.',
+                            'explanation' => 'Ketiganya merupakan komponen tak hidup (abiotik) yang dibutuhkan untuk fotosintesis.',
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'title' => "Fikih & Al-Qur'an Hadits MA",
+                'education_level' => 'SMA',
+                'grade' => '10',
+                'lesson' => 'Kaidah Dasar Muamalah',
+                'module_data' => [
+                    'mindmap' => [
+                        'center' => 'Kaidah Dasar Muamalah',
+                        'branches' => [
+                            ['title' => 'Prinsip Utama', 'color' => 'purple', 'items' => ['Hukum asal muamalah adalah mubah (boleh)', 'Suka sama suka (Antaradhin)']],
+                            ['title' => 'Larangan Transaksi', 'color' => 'amber', 'items' => ['Riba (tambahan yang batil)', 'Gharar (ketidakjelasan) & Maysir (judi)']],
+                            ['title' => 'Akad Populer', 'color' => 'emerald', 'items' => ['Murabahah (jual beli margin jelas)', 'Mudharabah & Musyarakah (bagi hasil)']],
+                            ['title' => 'Etika Bisnis Islam', 'color' => 'indigo', 'items' => ['Jujur dalam timbangan & kualitas', 'Menepati janji & perjanjian tertulis']],
+                        ],
+                    ],
+                    'explanation' => [
+                        'summary' => 'Muamalah mengatur hubungan antarmanusia dalam bidang ekonomi, jual beli, kerja sama, dan transaksi sosial. Kaidah fikih menegaskan bahwa hukum asal seluruh akad muamalah adalah boleh selama tidak ada dalil yang melarangnya.',
+                        'key_points' => [
+                            'Transaksi wajib bebas dari unsur Riba, Gharar, dan Maysir.',
+                            'Setiap akad harus jelas objeknya, harganya, dan disepakati kedua pihak.',
+                        ],
+                        'formula_or_rule' => 'Al-ashlu fil mu’amalah al-ibahah illa an yadulla dalilun ‘ala tahrimiha',
+                    ],
+                    'examples' => [
+                        [
+                            'question' => 'Apa perbedaan utama antara akad Murabahah dan Mudharabah?',
+                            'answer' => 'Murabahah adalah akad jual beli dengan margin transparan, sedangkan Mudharabah adalah akad kerja sama bagi hasil modal dan keahlian.',
+                            'explanation' => 'Pada Murabahah penjual menyebutkan harga pokok dan keuntungan; pada Mudharabah shahibul maal menyerahkan modal kepada mudharib.',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         foreach ($coursesData as $cData) {
@@ -341,11 +440,14 @@ class DatabaseSeeder extends Seeder
                 ]
             );
 
-            Lesson::firstOrCreate(
+            Lesson::updateOrCreate(
                 ['course_id' => $course->id, 'title' => $cData['lesson']],
                 [
-                    'content' => 'Materi pengantar dan latihan soal interaktif untuk topik ' . $cData['lesson'] . '.',
+                    'type' => 'interactive',
+                    'order_position' => 1,
+                    'content' => $cData['module_data']['explanation']['summary'],
                     'order' => 1,
+                    'module_data' => $cData['module_data'],
                 ]
             );
         }

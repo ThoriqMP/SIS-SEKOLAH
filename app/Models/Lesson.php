@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
-    protected $fillable = ['course_id', 'title', 'type', 'gdrive_url', 'order_position'];
+    protected $fillable = ['course_id', 'title', 'type', 'gdrive_url', 'order_position', 'content', 'order', 'module_data'];
+
+    protected $casts = [
+        'module_data' => 'array',
+    ];
 
     /**
      * Relasi ke kursus (course)

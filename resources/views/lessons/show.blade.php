@@ -76,6 +76,8 @@
 
     <!-- Laravel Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
         [x-cloak] { display: none !important; }
@@ -367,18 +369,178 @@
             </aside>
 
             <!-- Theater Canvas (Main Viewport) -->
-            <main id="theater-canvas" class="flex-1 flex flex-col relative overflow-hidden {{ $theme['bg'] }} transition-all duration-300 z-10">
-                
-                <!-- Skeleton Loader overlay -->
-                <div id="skeleton-screen" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-white/90 transition-opacity duration-550 backdrop-blur-md">
-                    <div class="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin {{ $isSD ? 'border-amber-500' : ($isSMP ? 'border-indigo-600' : 'border-purple-600') }} mb-4"></div>
-                    <p class="text-xs font-black uppercase tracking-widest {{ $isSD ? 'text-amber-800' : ($isSMP ? 'text-indigo-600' : 'text-purple-600') }} animate-pulse">{{ __('messages.connecting_to_drive') }}</p>
-                </div>
+            <main id="theater-canvas" class="flex-1 flex flex-col relative overflow-y-auto {{ $theme['bg'] }} transition-all duration-300 z-10">
+                @php
+                    $moduleData = is_array($lesson->module_data) ? $lesson->module_data : null;
+                    $useInteractive = $lesson->type === 'interactive' || !empty($moduleData) || empty($lesson->gdrive_url);
+                    if ($useInteractive && empty($moduleData)) {
+                        $moduleData = [
+                            'mindmap' => [
+                                'center' => $lesson->title,
+                                'branches' => [
+                                    ['title' => 'Konsep Dasar', 'color' => 'purple', 'items' => ['Definisi & ruang lingkup ' . $lesson->title, 'Pemahaman awal konsep']],
+                                    ['title' => 'Poin & Kaidah Inti', 'color' => 'indigo', 'items' => ['Aturan utama materi', 'Langkah penyelesaian runtut']],
+                                    ['title' => 'Penerapan Nyata', 'color' => 'emerald', 'items' => ['Studi kasus sehari-hari', 'Latihan kontekstual']],
+                                    ['title' => 'Ringkasan', 'color' => 'amber', 'items' => ['Poin kunci yang wajib diingat', 'Persiapan evaluasi']],
+                                ],
+                            ],
+                            'explanation' => [
+                                'summary' => $lesson->content ?: ($lesson->title . ' adalah materi pembelajaran terstruktur yang dirancang untuk membantu siswa memahami konsep inti secara mendalam dan aplikatif.'),
+                                'key_points' => [
+                                    'Pahami konsep dasar ' . $lesson->title . ' terlebih dahulu.',
+                                    'Hubungkan materi dengan contoh nyata agar mudah diingat.',
+                                    'Kerjakan contoh soal dan cek pembahasannya di tab Contoh Soal.',
+                                ],
+                                'formula_or_rule' => 'Pahami Konsep -> Analisis Contoh -> Latihan Mandiri',
+                            ],
+                            'examples' => [
+                                [
+                                    'question' => 'Jelaskan inti pembelajaran dari materi "' . $lesson->title . '"!',
+                                    'answer' => 'Menguasai konsep dasar serta mampu menerapkannya dalam pemecahan masalah.',
+                                    'explanation' => 'Mulailah dengan memetakan cabang Mind Map lalu pelajari poin inti di tab Penjelasan.',
+                                ],
+                            ],
+                        ];
+                    }
+                @endphp
 
-                <!-- Google Drive Iframe Container -->
-                <div class="flex-1 w-full h-full relative">
-                    <iframe id="lesson-iframe" src="{{ $lesson->embed_url }}" class="absolute inset-0 w-full h-full border-0 bg-slate-100" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
+                @if ($useInteractive)
+                    <div x-data="{ activeTab: 'mindmap' }" class="flex-1 p-4 sm:p-6 lg:p-8 max-w-5xl w-full mx-auto pb-28 space-y-6">
+                        {{-- Interactive Mode Tabs --}}
+                        <div class="flex flex-wrap items-center justify-between gap-3 bg-white/90 backdrop-blur-md p-2 rounded-2xl border border-slate-200/80 shadow-xs">
+                            <div class="flex flex-wrap gap-1.5">
+                                <button type="button" @click="activeTab = 'mindmap'"
+                                    :class="activeTab === 'mindmap' ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20' : 'text-slate-600 hover:bg-slate-100'"
+                                    class="px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center gap-2">
+                                    <i class="fa-solid fa-diagram-project"></i> Mind Map
+                                </button>
+                                <button type="button" @click="activeTab = 'explanation'"
+                                    :class="activeTab === 'explanation' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'text-slate-600 hover:bg-slate-100'"
+                                    class="px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center gap-2">
+                                    <i class="fa-solid fa-book-open"></i> Penjelasan Materi
+                                </button>
+                                <button type="button" @click="activeTab = 'examples'"
+                                    :class="activeTab === 'examples' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20' : 'text-slate-600 hover:bg-slate-100'"
+                                    class="px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center gap-2">
+                                    <i class="fa-solid fa-list-check"></i> Contoh Soal ({{ count($moduleData['examples'] ?? []) }})
+                                </button>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-[10px] font-extrabold uppercase tracking-wider">
+                                Modul Interaktif
+                            </span>
+                        </div>
+
+                        {{-- TAB 1: MIND MAP --}}
+                        <div x-show="activeTab === 'mindmap'" class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-8">
+                            <div class="text-center">
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-600">Peta Konsep Visual</span>
+                                <div class="mt-3 inline-flex items-center justify-center px-8 py-4 rounded-3xl bg-gradient-to-r from-[#6d28d9] to-[#4f46e5] text-white font-extrabold text-base sm:text-xl shadow-xl shadow-purple-600/25">
+                                    {{ $moduleData['mindmap']['center'] ?? $lesson->title }}
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 relative">
+                                @foreach (($moduleData['mindmap']['branches'] ?? []) as $branch)
+                                    @php
+                                        $color = $branch['color'] ?? 'purple';
+                                        $palette = match($color) {
+                                            'indigo' => ['bg' => 'bg-indigo-50/70', 'border' => 'border-indigo-200', 'badge' => 'bg-indigo-600', 'dot' => 'bg-indigo-500'],
+                                            'emerald' => ['bg' => 'bg-emerald-50/70', 'border' => 'border-emerald-200', 'badge' => 'bg-emerald-600', 'dot' => 'bg-emerald-500'],
+                                            'amber' => ['bg' => 'bg-amber-50/70', 'border' => 'border-amber-200', 'badge' => 'bg-amber-500', 'dot' => 'bg-amber-500'],
+                                            default => ['bg' => 'bg-purple-50/70', 'border' => 'border-purple-200', 'badge' => 'bg-purple-600', 'dot' => 'bg-purple-500'],
+                                        };
+                                    @endphp
+                                    <div class="rounded-2xl p-5 border {{ $palette['bg'] }} {{ $palette['border'] }} hover:shadow-md transition">
+                                        <div class="flex items-center gap-2.5 mb-3">
+                                            <span class="w-3 h-3 rounded-full {{ $palette['badge'] }}"></span>
+                                            <h3 class="text-sm font-extrabold text-slate-900">{{ $branch['title'] ?? 'Cabang' }}</h3>
+                                        </div>
+                                        <ul class="space-y-2">
+                                            @foreach (($branch['items'] ?? []) as $item)
+                                                @if (trim((string) $item) !== '')
+                                                    <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 bg-white/90 px-3.5 py-2 rounded-xl border border-white shadow-2xs">
+                                                        <span class="w-1.5 h-1.5 rounded-full {{ $palette['dot'] }} mt-1.5 shrink-0"></span>
+                                                        <span>{{ $item }}</span>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        {{-- TAB 2: PENJELASAN MATERI --}}
+                        <div x-show="activeTab === 'explanation'" x-cloak class="space-y-5">
+                            <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-4">
+                                <span class="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-[10px] font-extrabold uppercase tracking-wider">Penjelasan Utama</span>
+                                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">{{ $lesson->title }}</h2>
+                                <p class="text-sm sm:text-base text-slate-700 leading-relaxed whitespace-pre-line">
+                                    {{ $moduleData['explanation']['summary'] ?? '' }}
+                                </p>
+                            </div>
+
+                            @if (!empty($moduleData['explanation']['key_points']))
+                                <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm">
+                                    <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-4">Poin-Poin Penting</h3>
+                                    <div class="space-y-3">
+                                        @foreach ($moduleData['explanation']['key_points'] as $idx => $pt)
+                                            @if (trim((string) $pt) !== '')
+                                                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                                                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0">{{ $idx + 1 }}</span>
+                                                    <p class="text-xs sm:text-sm text-slate-700 font-medium pt-0.5">{{ $pt }}</p>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if (!empty($moduleData['explanation']['formula_or_rule']))
+                                <div class="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-3xl p-6 text-white shadow-lg">
+                                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-purple-200">Rumus / Kaidah Kunci</span>
+                                    <p class="text-base sm:text-lg font-extrabold mt-1 font-mono">{{ $moduleData['explanation']['formula_or_rule'] }}</p>
+                                </div>
+                            @endif
+                        </div>
+
+                        {{-- TAB 3: CONTOH SOAL & PEMBAHASAN --}}
+                        <div x-show="activeTab === 'examples'" x-cloak class="space-y-4">
+                            @foreach (($moduleData['examples'] ?? []) as $eIdx => $ex)
+                                <div x-data="{ showAnswer: false }" class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-extrabold">Contoh Soal #{{ $eIdx + 1 }}</span>
+                                        <button type="button" @click="showAnswer = !showAnswer"
+                                            class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+                                            <span x-text="showAnswer ? 'Sembunyikan Pembahasan' : 'Lihat Kunci & Pembahasan'"></span>
+                                        </button>
+                                    </div>
+                                    <p class="text-sm sm:text-base font-bold text-slate-900 leading-relaxed">{{ $ex['question'] ?? '' }}</p>
+
+                                    <div x-show="showAnswer" x-cloak class="p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200 space-y-2">
+                                        <p class="text-xs font-extrabold text-emerald-800">
+                                            <i class="fa-solid fa-circle-check mr-1"></i> Jawaban: {{ $ex['answer'] ?? '-' }}
+                                        </p>
+                                        @if (!empty($ex['explanation']))
+                                            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">{{ $ex['explanation'] }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @else
+                    <!-- Skeleton Loader overlay -->
+                    <div id="skeleton-screen" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-white/90 transition-opacity duration-550 backdrop-blur-md">
+                        <div class="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin {{ $isSD ? 'border-amber-500' : ($isSMP ? 'border-indigo-600' : 'border-purple-600') }} mb-4"></div>
+                        <p class="text-xs font-black uppercase tracking-widest {{ $isSD ? 'text-amber-800' : ($isSMP ? 'text-indigo-600' : 'text-purple-600') }} animate-pulse">{{ __('messages.connecting_to_drive') }}</p>
+                    </div>
+
+                    <!-- External Media Iframe Container -->
+                    <div class="flex-1 w-full h-full relative">
+                        <iframe id="lesson-iframe" src="{{ $lesson->embed_url }}" class="absolute inset-0 w-full h-full border-0 bg-slate-100" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                @endif
 
                 <!-- Floating Action Dock -->
                 <footer class="h-20 flex items-center justify-between px-6 border-t backdrop-blur-md z-20 {{ $theme['dock_bg'] }}">

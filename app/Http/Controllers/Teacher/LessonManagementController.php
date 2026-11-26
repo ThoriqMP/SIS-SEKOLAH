@@ -149,16 +149,26 @@ class LessonManagementController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'type' => 'required|in:video,pdf,docx',
-            'gdrive_url' => 'required|string|url',
+            'type' => 'required|in:interactive,video,pdf,docx',
+            'gdrive_url' => 'nullable|string',
             'order_position' => 'required|integer|min:0',
+            'module_data_json' => 'nullable|string',
         ]);
+
+        $moduleData = null;
+        if ($request->filled('module_data_json')) {
+            $decoded = json_decode($request->input('module_data_json'), true);
+            if (is_array($decoded)) {
+                $moduleData = $decoded;
+            }
+        }
 
         $course->lessons()->create([
             'title' => $request->title,
             'type' => $request->type,
             'gdrive_url' => $request->gdrive_url,
             'order_position' => $request->order_position,
+            'module_data' => $moduleData,
         ]);
 
         return redirect()
@@ -181,16 +191,26 @@ class LessonManagementController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'type' => 'required|in:video,pdf,docx',
-            'gdrive_url' => 'required|string|url',
+            'type' => 'required|in:interactive,video,pdf,docx',
+            'gdrive_url' => 'nullable|string',
             'order_position' => 'required|integer|min:0',
+            'module_data_json' => 'nullable|string',
         ]);
+
+        $moduleData = $lesson->module_data;
+        if ($request->filled('module_data_json')) {
+            $decoded = json_decode($request->input('module_data_json'), true);
+            if (is_array($decoded)) {
+                $moduleData = $decoded;
+            }
+        }
 
         $lesson->update([
             'title' => $request->title,
             'type' => $request->type,
             'gdrive_url' => $request->gdrive_url,
             'order_position' => $request->order_position,
+            'module_data' => $moduleData,
         ]);
 
         return redirect()
