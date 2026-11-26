@@ -211,6 +211,7 @@
     @yield('content')
 @endif
 
+@include('components.demo-notice-modal')
 @stack('scripts')
 </body>
 </html>

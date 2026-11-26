@@ -968,5 +968,7 @@
         <span class="hidden sm:inline">Konsultasi Sistem</span>
     </a>
 
+    @include('components.demo-notice-modal')
+
 </body>
 </html>
