@@ -54,7 +54,7 @@
                 <a href="{{ route('teacher.activities.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
                     📝 Tugas & Ujian
                 </a>
-                <a href="{{ route('teacher.ruang-belajar.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
+                <a href="{{ route('teacher.lessons.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
                     📚 Ruang Belajar
                 </a>
                 <a href="{{ route('attendances.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-500/30 border border-white/10 text-xs font-semibold text-white transition">
@@ -173,7 +173,7 @@
                 </a>
 
                 {{-- Ruang Belajar --}}
-                <a href="{{ route('teacher.ruang-belajar.index') }}"
+                <a href="{{ route('teacher.lessons.index') }}"
                    class="group relative overflow-hidden bg-white hover:bg-teal-600 border border-slate-200/80 rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 shadow-sm hover:shadow-teal-500/25 hover:shadow-lg hover:border-transparent">
                     <div class="w-10 h-10 rounded-xl bg-teal-100 group-hover:bg-white/20 text-teal-600 group-hover:text-white flex items-center justify-center transition text-lg">📚</div>
                     <div>

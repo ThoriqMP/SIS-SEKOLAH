@@ -272,22 +272,24 @@ class DatabaseSeeder extends Seeder
         $attStatuses = ['hadir', 'hadir', 'izin', 'hadir', 'sakit'];
 
         foreach ($students as $idx => $s) {
-            Attendance::firstOrCreate(
-                ['siswa_id' => $s->id, 'date' => $today],
-                [
+            if (!Attendance::where('siswa_id', $s->id)->whereDate('date', $today)->exists()) {
+                Attendance::create([
+                    'siswa_id' => $s->id,
+                    'date' => $today,
                     'status' => $attStatuses[$idx] ?? 'hadir',
                     'notes' => ($attStatuses[$idx] ?? 'hadir') === 'izin' ? 'Izin acara keluarga' : (($attStatuses[$idx] ?? 'hadir') === 'sakit' ? 'Demam ringan' : null),
                     'recorded_by' => $teacher->id,
-                ]
-            );
-            Attendance::firstOrCreate(
-                ['siswa_id' => $s->id, 'date' => $yesterday],
-                [
+                ]);
+            }
+            if (!Attendance::where('siswa_id', $s->id)->whereDate('date', $yesterday)->exists()) {
+                Attendance::create([
+                    'siswa_id' => $s->id,
+                    'date' => $yesterday,
                     'status' => 'hadir',
                     'notes' => null,
                     'recorded_by' => $teacher->id,
-                ]
-            );
+                ]);
+            }
         }
 
         // 10. Data Dummy Ruangan WebRTC (Video Conference)
