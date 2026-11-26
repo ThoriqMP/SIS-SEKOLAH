@@ -4,10 +4,14 @@ namespace Database\Seeders;
 
 use App\Helpers\ReportHelper;
 use App\Models\AcademicYear;
+use App\Models\Assignment;
 use App\Models\Attendance;
+use App\Models\Course;
+use App\Models\Exam;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Layanan;
+use App\Models\Lesson;
 use App\Models\ProfilSekolah;
 use App\Models\ReportCategory;
 use App\Models\ReportGrade;
@@ -314,6 +318,62 @@ class DatabaseSeeder extends Seeder
                     'class' => [(int) $studentUser->id],
                     'scheduled_at' => $room['scheduled_at'],
                     'is_active' => DB::raw('true'),
+                ]
+            );
+        }
+
+        // 11. Data Dummy Ruang Belajar (Kursus & Materi untuk SD, SMP, SMA)
+        $coursesData = [
+            ['title' => 'Matematika Kreatif Kelas 5', 'education_level' => 'SD', 'grade' => '5', 'lesson' => 'Konsep Pecahan & Desimal'],
+            ['title' => 'IPA & Sains Terapan', 'education_level' => 'SMP', 'grade' => '7', 'lesson' => 'Ekosistem & Energi Terbarukan'],
+            ['title' => "Fikih & Al-Qur'an Hadits MA", 'education_level' => 'SMA', 'grade' => '10', 'lesson' => 'Kaidah Dasar Muamalah'],
+        ];
+
+        foreach ($coursesData as $cData) {
+            $course = Course::firstOrCreate(
+                ['title' => $cData['title']],
+                [
+                    'description' => 'Modul pembelajaran interaktif untuk jenjang ' . $cData['education_level'],
+                    'education_level' => $cData['education_level'],
+                    'grade' => $cData['grade'],
+                    'teacher_id' => $teacher->id,
+                    'is_published' => DB::raw('true'),
+                ]
+            );
+
+            Lesson::firstOrCreate(
+                ['course_id' => $course->id, 'title' => $cData['lesson']],
+                [
+                    'content' => 'Materi pengantar dan latihan soal interaktif untuk topik ' . $cData['lesson'] . '.',
+                    'order' => 1,
+                ]
+            );
+        }
+
+        // 12. Data Dummy Tugas & Ujian Online
+        if (!empty($reportSubjects)) {
+            Assignment::firstOrCreate(
+                ['title' => 'Proyek Sains Terapan: Energi Hijau'],
+                [
+                    'teacher_id' => $teacher->id,
+                    'report_subject_id' => $reportSubjects[0]->id,
+                    'class' => '5 SD',
+                    'period' => $period,
+                    'description' => 'Buat ringkasan dan foto eksperimen sederhana tentang energi terbarukan.',
+                    'due_date' => now()->addDays(5),
+                ]
+            );
+
+            Exam::firstOrCreate(
+                ['title' => 'Evaluasi Tengah Semester Matematika'],
+                [
+                    'teacher_id' => $teacher->id,
+                    'report_subject_id' => $reportSubjects[0]->id,
+                    'class' => '5 SD',
+                    'period' => $period,
+                    'type' => 'tengah_semester',
+                    'duration' => 60,
+                    'due_date' => now()->addDays(7),
                 ]
             );
         }

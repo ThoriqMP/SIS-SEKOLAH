@@ -30,4 +30,9 @@ class Course extends Model
     {
         return $this->hasOne(CourseBadge::class);
     }
+
+    public function badges()
+    {
+        return $this->hasMany(CourseBadge::class);
+    }
 }
