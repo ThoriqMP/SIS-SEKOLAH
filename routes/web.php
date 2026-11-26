@@ -27,6 +27,35 @@ Route::get('/lang/{locale}', function ($locale) {
     return redirect()->back();
 })->name('lang.switch');
 
+// Database Setup & Migration Endpoint (Dilindungi APP_KEY)
+Route::get('/setup-database', function (\Illuminate\Http\Request $request) {
+    $expectedKey = (string) config('app.key');
+    $providedKey = (string) $request->query('key');
+
+    if ($expectedKey === '' || !hash_equals($expectedKey, $providedKey)) {
+        abort(403, 'Akses ditolak: key tidak valid.');
+    }
+
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $migrateOut = \Illuminate\Support\Facades\Artisan::output();
+
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        $seedOut = \Illuminate\Support\Facades\Artisan::output();
+
+        return response()->json([
+            'status' => 'success',
+            'migrate' => trim($migrateOut),
+            'seed' => trim($seedOut),
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+        ], 500);
+    }
+})->name('setup.database');
+
 
 // =========================================================================
 // 1. PUBLIC ROUTES (Company Profile & Pendaftaran Online)
