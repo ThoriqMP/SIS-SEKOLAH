@@ -197,6 +197,7 @@
                 <a href="#dashboard-macbook" class="hover:text-purple-700 transition">Admin &amp; Guru</a>
                 <a href="#testimoni" class="hover:text-purple-700 transition">Testimoni</a>
                 <a href="{{ route('registration.create') }}" class="hover:text-purple-700 transition">PPDB</a>
+                <a href="https://thoriqpasya.my.id" target="_blank" rel="noopener noreferrer" class="hover:text-purple-700 transition">Tentang Developer</a>
             </div>
 
             {{-- Right Actions --}}
@@ -223,6 +224,7 @@
             <a href="#dashboard-macbook" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Admin &amp; Guru</a>
             <a href="#testimoni" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Testimoni</a>
             <a href="{{ route('registration.create') }}" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">PPDB</a>
+            <a href="https://thoriqpasya.my.id" target="_blank" rel="noopener noreferrer" @click="mobileMenu = false" class="block py-2 text-sm font-bold text-slate-700">Tentang Developer</a>
             <div class="pt-3 border-t border-slate-100 grid grid-cols-2 gap-2">
                 <a href="{{ route('student.login') }}" class="text-center py-2.5 rounded-xl text-xs font-bold text-purple-700 bg-purple-50 border border-purple-200">Portal Siswa</a>
                 <a href="{{ route('login') }}" class="text-center py-2.5 rounded-xl text-xs font-bold text-white bg-purple-700">Portal Guru</a>
@@ -925,6 +927,7 @@
                     <a href="#hasil-belajar" class="block hover:text-white transition">Rapor &amp; Nilai</a>
                     <a href="#dashboard-macbook" class="block hover:text-white transition">Dashboard Guru &amp; Admin</a>
                     <a href="#testimoni" class="block hover:text-white transition">Testimoni</a>
+                    <a href="https://thoriqpasya.my.id" target="_blank" rel="noopener noreferrer" class="block hover:text-white transition">Tentang Developer</a>
                 </div>
 
                 <div class="md:col-span-4 space-y-2.5 text-xs">
