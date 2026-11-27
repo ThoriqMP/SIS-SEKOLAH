@@ -45,7 +45,7 @@ class DashboardController extends Controller
             // Siswa berprestasi: laporan dengan rata-rata nilai >= 90
             $studentsWithHighScore = Cache::remember('dashboard_high_score', 120, function () {
                 return StudentReport::with('grades')
-                    ->where('is_draft', false)
+                    ->where('is_draft', DB::raw('false'))
                     ->get()
                     ->filter(fn($r) => $r->grades->avg('score') >= 90)
                     ->unique('siswa_id')

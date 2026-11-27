@@ -19,7 +19,7 @@ class VideoConferenceController extends Controller
                       ->orWhereJsonContains('class', $user->id)
                       ->orWhere('class', 'like', '%"' . $user->id . '"%');
             })
-            ->where('is_active', true)
+            ->where('is_active', \Illuminate\Support\Facades\DB::raw('true'))
             ->orderBy('scheduled_at', 'asc')
             ->get();
 

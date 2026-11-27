@@ -50,7 +50,7 @@ class LessonController extends Controller
                 if ($lessonsCount > 0) {
                     $completedCount = LessonProgress::where('student_id', $user->id)
                         ->whereIn('lesson_id', $course->lessons->pluck('id'))
-                        ->where('is_completed', true)
+                        ->where('is_completed', \Illuminate\Support\Facades\DB::raw('true'))
                         ->count();
                     $course->progress_percentage = ($completedCount / $lessonsCount) * 100;
                     $course->completed_count = $completedCount;
@@ -59,7 +59,7 @@ class LessonController extends Controller
                     $firstUncompletedLesson = null;
                     $completedLessonIds = LessonProgress::where('student_id', $user->id)
                         ->whereIn('lesson_id', $course->lessons->pluck('id'))
-                        ->where('is_completed', true)
+                        ->where('is_completed', \Illuminate\Support\Facades\DB::raw('true'))
                         ->pluck('lesson_id')
                         ->toArray();
                         
@@ -112,7 +112,7 @@ class LessonController extends Controller
             // Ambil daftar materi yang sudah diselesaikan siswa dalam kursus ini
             $progressList = LessonProgress::where('student_id', $user->id)
                 ->whereIn('lesson_id', $lessons->pluck('id'))
-                ->where('is_completed', true)
+                ->where('is_completed', \Illuminate\Support\Facades\DB::raw('true'))
                 ->pluck('lesson_id')
                 ->toArray();
 
@@ -221,7 +221,7 @@ class LessonController extends Controller
         
         $completedLessonsCount = LessonProgress::where('student_id', $user->id)
             ->whereIn('lesson_id', $lessons->pluck('id'))
-            ->where('is_completed', true)
+            ->where('is_completed', \Illuminate\Support\Facades\DB::raw('true'))
             ->count();
 
         $progressPercentage = $totalLessons > 0 ? ($completedLessonsCount / $totalLessons) * 100 : 0;

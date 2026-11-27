@@ -39,9 +39,13 @@ class Course extends Model
     /**
      * Check if any lesson in this course has comments unread by the given user.
      */
-    public function hasUnreadCommentsForUser($userId): bool
+    public function hasUnreadCommentsForUser($user): bool
     {
         try {
+            $userId = $user instanceof \App\Models\User ? $user->id : (int) $user;
+            if (!$userId) {
+                return false;
+            }
             $lessonIds = $this->lessons()->pluck('id');
             if ($lessonIds->isEmpty()) {
                 return false;

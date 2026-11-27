@@ -99,7 +99,7 @@ class StudentPortalController extends Controller
 
             $allReports = $student->exists ? StudentReport::with(['student', 'category', 'grades', 'probingActivities'])
                 ->where('siswa_id', $student->id)
-                ->where('is_draft', false)
+                ->where('is_draft', \Illuminate\Support\Facades\DB::raw('false'))
                 ->get() : collect();
 
             $academicReports = $allReports->filter(fn($r) => ($r->category->name ?? '') === 'Akademik');
@@ -217,7 +217,7 @@ class StudentPortalController extends Controller
         
         $allReports = StudentReport::with(['student', 'category', 'grades.subject', 'diniyahReports', 'ibadahReport', 'probingActivities'])
             ->where('siswa_id', $student->id)
-            ->where('is_draft', false)
+            ->where('is_draft', \Illuminate\Support\Facades\DB::raw('false'))
             ->orderBy('created_at', 'asc') // Order by date for trends
             ->get();
 
